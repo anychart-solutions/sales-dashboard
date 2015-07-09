@@ -1,0 +1,85 @@
+body{
+    color: #242527;
+}
+
+.title {
+    font-size: 20px;
+    display: inline-block;
+    color: #242527;
+    padding-bottom: 0;
+}
+.subtitle {
+    font-size: 15px;
+    color: #545f69;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+.chart {
+    display: block;
+    width: 100%;
+    padding-bottom: 20px;
+}
+a {
+    cursor: pointer;
+    color: #545f69;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #b7cbe2;
+    background: none;
+    border: none;
+}
+a:hover .fa{
+    text-decoration: none;
+    color: #b7cbe2;
+}
+
+#panel{
+    position: absolute;
+    top: 0;
+    left: -300px;
+    height: 100%;
+    width: 300px;
+    background: #545f69;
+    color: #fff;
+    z-index: 100;
+}
+.chart-name{
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 15px;
+    font-size: 16px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.chart-name span.text-muted{
+    font-size: 13px
+}
+ul.layout-horizontal{
+    margin: 20px auto 10px;
+    text-align: center;
+}
+ul.layout-horizontal li{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+ul.layout-vertical{
+    margin: 10px auto;
+}
+ul.layout-vertical li{
+    display: block;
+    text-align: right;
+    margin-bottom: 10px;
+}
+ul.layout-vertical li.active a, ul.list-unstyled li.active a{
+    background: #545f69;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.tab-content{
+    border: 1px solid #dedede;
+}

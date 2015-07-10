@@ -115,9 +115,25 @@ var generateData = function(min, max, len, sort_needed, names){
 
 var makeRevenueChartData = function(period){
     var result = [];
-    if (period == 'YTD') {
-        for (var i = 0; i < 12; i++){
+    if (period == 'all') {
+        for (var i = 0; i < YEARS.length; i++){
+            result.push([YEARS[i], generateNumber(300000, 600000), generateNumber(430, 520)]);
+        }
+    } else if (period == 'YTD') {
+        for (i = 0; i < 12; i++){
             result.push([MONTHS[i], generateNumber(300000, 600000), generateNumber(430, 520)]);
+        }
+    } else if (period == 'QTD') {
+        for (i = 0; i < 4; i++){
+            result.push([MONTHS[i], generateNumber(300000, 600000), generateNumber(430, 520)]);
+        }
+    } else if (period == 'MTD') {
+        for (i = 0; i < 31; i++){
+            result.push([i, generateNumber(300000, 600000), generateNumber(430, 520)]);
+        }
+    } else if (period == 'WTD') {
+        for (i = 0; i < WEEK_DAYS.length; i++){
+            result.push([WEEK_DAYS[i], generateNumber(300000, 600000), generateNumber(430, 520)]);
         }
     }
     return result

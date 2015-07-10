@@ -300,8 +300,10 @@ function keyMetrics(keys_data) {
 
     table.getRow(0).height(35);
     table.getCol(1).width(20);
+    table.getCol(3).hAlign('center');
+    table.getCol(4).hAlign('center');
     table.getCol(2).width(70);
-    table.getCol(4).width(70);
+    table.getCol(4).width(80);
     table.container(stage).draw();
 }
 

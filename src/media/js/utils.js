@@ -14,12 +14,10 @@ var generalData, productsData, generatedData;
 
 
 function changeTab(tab_name){
-    $('.nav-tabs li').removeClass('active');
+    $('.mdl-navigation a').removeClass('active');
+    $('.mdl-navigation a.' + tab_name).addClass('active');
     $('.tab-pane').removeClass('active');
     $('#' + tab_name).addClass('active');
-    $('a.' + tab_name).tab('show');
-    $('a.' + tab_name).parent().addClass('active');
-    $('#panel').animate({left: -300}, 500);
 
     if (tab_name == 'general'){
         keyMetrics(generalData['key_metrics']);
@@ -29,7 +27,9 @@ function changeTab(tab_name){
         drawBar(generalData['five_best']['products'], 'top-5-products');
     }
     else if (tab_name == 'products'){
-        //revenueChart(productsData['category_chart'], 'revenue-chart-by-category');
+        revenueChart(productsData['category_chart'], 'category-chart');
+        revenueChart(productsData['category_chart'], 'products-chart');
+        revenueChart(productsData['category_chart'], 'category-map-chart');
     }
 }
 
@@ -37,13 +37,10 @@ function changeTab(tab_name){
 
 function changeData(filter){
     console.log(filter);
-    $('.filters li').removeClass('active');
-    $('.filters li .fa').removeClass('fa-dot-circle-o').addClass('fa-circle-o');
-    $('.filters li.' + filter).addClass('active');
-    $('.filters li.' + filter + ' .fa').removeClass('fa-circle-o').addClass('fa-dot-circle-o');
     generalData = generatedData[filter];
     changeTab($('.tab-pane.active').attr('id'));
 }
+
 
 $(function(){
     generatedData = generateDataForAll();

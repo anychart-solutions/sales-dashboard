@@ -1,6 +1,6 @@
 var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var YEARS = ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014'];
-var WEEK_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var WEEK_DAYS = ['Su.', 'Mo.', 'Tu.', 'We.', 'Th.', 'Fr.', 'Sa.'];
 
 var REGION_NAMES = ['Alsace', 'Aquitaine', 'Auvergne', 'Brittany', 'Burgundy', 'Centre-Val de Loire', 'Champagne-Ardenne', 'Franche-Comté', 'Île-de-France', 'Languedoc-Roussillon', 'Limousin', 'Lorraine', 'Lower Normandy', 'Midi-Pyrénées', 'Nord-Pas-de-Calais', 'Pays de la Loire', 'Picardy', 'Poitou-Charentes', 'Provence-Alpes-Côte d\'Azur', 'Rhône-Alpes', 'Upper Normandy', 'Corsica', 'French Guiana', 'Guadeloupe', 'Martinique', 'Mayotte', 'Reunion'];
 var PEOPLE = ['Katherine Bailey', 'Joyce Owens', 'Nancy Gordon', 'Harold Sanchez', 'Jesse Cooper', 'Ann Bradley', 'Matthew Phillips', 'Jose Hart', 'Frances Chapman', 'Jerry Clark', 'Rose Montgomery', 'Roger Williamson', 'Norma Duncan', 'Frances Henderson', 'Melissa Riley', 'Ralph Butler', 'Marilyn Wood', 'Katherine Dean', 'Russell Thomas', 'Elizabeth Hudson', 'Willie Hansen', 'Dorothy Meyer', 'Judy Howell', 'Phillip Weaver', 'Arthur Boyd', 'Douglas Lopez', 'Sara Larson', 'Jimmy Hawkins', 'Juan Carpenter', 'Debra White', 'Billy Oliver', 'Angela Long', 'Beverly Gutierrez'];

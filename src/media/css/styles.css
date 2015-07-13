@@ -1,7 +1,7 @@
-body{
-    color: #242527;
-}
+/*todo: comment next styles before release*/
+.anychart-credits { display: none; }
 
+a{color: #757575;}
 .title {
     font-size: 20px;
     display: inline-block;
@@ -14,120 +14,59 @@ body{
     display: inline-block;
     padding-bottom: 15px;
 }
-.chart {
+
+.tab-pane{
+    display: none;
+}
+.tab-pane.active{
     display: block;
-    width: 100%;
-    padding-bottom: 20px;
-}
-a {
-    cursor: pointer;
-    color: #545f69;
-    font-family: 'Source Sans Pro', sans-serif;
 }
 
-a:hover{
-    text-decoration: none;
-    color: #b7cbe2;
-    background: none;
-    border: none;
-}
-a:hover .fa{
-    text-decoration: none;
-    color: #b7cbe2;
-}
-
-#panel{
-    position: absolute;
-    top: 0;
-    left: -300px;
-    height: 100%;
-    width: 300px;
-    background: #545f69;
-    color: #fff;
-    z-index: 100;
-}
-.panel-dismiss{
-    position: absolute;
-    top: 20px;
-    right: 10px;
-}
-.chart-name{
-    text-align: center;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    padding-top: 15px;
-    font-size: 16px;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-.chart-name span.text-muted{
-    font-size: 13px;
-    line-height: 15px;
-}
-ul.layout-horizontal{
-    margin: 5px auto 10px;
-    text-align: center;
-}
-ul.layout-horizontal li{
-    display: inline-block;
-    margin-right: 20px;
-}
-
-
-ul.layout-vertical{
-    margin: 10px auto;
-}
-ul.layout-vertical li{
-    display: block;
-    text-align: right;
-    margin-bottom: 10px;
-}
-ul.layout-vertical li.active a, ul.list-unstyled li.active a{
-    background: #545f69;
-    color: #fff;
-    padding: 3px 10px;
-    border-radius: 5px;
-}
-
-#panel ul.layout-vertical{
-    margin: 30px auto;
-}
-#panel ul.layout-vertical li{
-    display: block;
-    text-align: left;
-    margin-bottom: 10px;
-    margin-left: 40px;
-}
-#panel ul.layout-vertical li a{
-    color: #fff;
-}
-#panel ul.layout-vertical li.active a, #panel ul.list-unstyled li.active a{
-    background: #fff;
-    color: #545f69;
-    padding: 3px 10px;
-    border-radius: 5px;
-}
-#panel .divider{
-   border-bottom: 1px solid #767F87;
-}
-.tab-content{
-    border: 1px solid #dedede;
-}
-p.middle-title{
+ul.period-selector {
+    list-style: none;
     text-align: center;
     margin: 0;
-    padding: 15px 0 10px 0;
+    width: 100%;
+
 }
-p.middle-title span{
+ul.period-selector li{
+    padding: 0 40px;
+    margin: 0;
+    display: inline-block;
+}
+
+.period-selector p {
+    padding: 10px 40px;
+    margin: 0;
+}
+.demo-charts{
+    padding: 20px 30px 20px 30px;
+}
+.chart{
+    width: 100%;
+}
+.demo-charts h2{
+    text-align: center;
+    font-size: 18px;
+    line-height: 20px;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
-.fa.fa-bars, .fa.fa-chevron-left{
-    font-size: 30px;
-    z-index: 300;
+.demo-charts h2 span{
+    font-size: 14px;
+    color: #929292
 }
-@media (min-width: 1200px) {
-     ul.layout-horizontal{
-         margin: 20px auto 10px;
-         text-align: center;
-     }
+.demo-charts h2 a{
+    cursor: pointer;
+    color: #A8A8A8;
+}
+.demo-charts h2 a:hover{
+    text-decoration: underline;
+}
+.light-text{
+    color: #A8A8A8;
+}
+.label-chart{
+    padding-top: 10px;
 }

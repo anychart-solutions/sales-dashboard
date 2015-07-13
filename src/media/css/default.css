@@ -1,0 +1,204 @@
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+html, body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+
+.demo-layout .mdl-layout__header .mdl-layout__drawer-button {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.mdl-layout__drawer .avatar {
+    margin-bottom: 16px;
+}
+
+.demo-drawer {
+    border: none;
+}
+
+.demo-drawer .mdl-menu .mdl-menu__item {
+    display: -webkit-box;
+    display: -webkit-flex;
+
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.demo-drawer-header {
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 16px;
+}
+
+.demo-avatar-dropdown {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.demo-navigation {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.demo-layout .demo-navigation .mdl-navigation__link {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.demo-layout .demo-navigation .mdl-navigation__link.active {
+    background-color: #607d8b;
+    color: #fff;
+}
+
+.demo-navigation .mdl-navigation__link .material-icons {
+    font-size: 18px;
+    /*color: rgba(255, 255, 255, 0.56);*/
+    margin-right: 10px;
+}
+
+.mdl-radio {
+    font-size: 13px;
+    line-height: 20px;
+    color: #757575;
+
+}
+
+
+.demo-content {
+    max-width: 1280px;
+}
+
+.demo-charts {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.demo-graphs {
+    padding: 16px 32px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    min-width: 200px;
+}
+
+.demo-cards .demo-separator {
+    height: 32px;
+}
+
+.demo-cards .mdl-card__title.mdl-card__title {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.demo-cards ul {
+    padding: 0;
+}
+
+.demo-cards h3 {
+    font-size: 1em;
+}
+
+.demo-updates .mdl-card__title {
+    min-height: 200px;
+    background-position: 90% 100%;
+    background-repeat: no-repeat;
+}
+
+.demo-cards .mdl-card__actions a {
+    text-decoration: none;
+}
+
+.demo-options h3 {
+    margin: 0;
+}
+
+.demo-options ul {
+    margin: 0;
+    list-style-type: none;
+}
+
+.demo-options li {
+    margin: 4px 0;
+}
+
+.demo-options .mdl-card__actions {
+    height: 64px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-sizing: border-box;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}

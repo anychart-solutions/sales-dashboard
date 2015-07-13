@@ -1,144 +1,116 @@
 <!doctype html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title> Sales Dashboard </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title> Sales Dashboard in Material Design</title>
     <script src="src/media/vendors/jquery/jquery-2.1.3.min.js"></script>
-    <script src="src/media/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css"  href="src/media/vendors/font-awesome-4.3.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css"  href="src/media/vendors/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.blue_grey-light_blue.min.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css"  href="src/media/css/default.css"/>
     <link rel="stylesheet" type="text/css"  href="src/media/css/styles.css"/>
-    <!--todo: comment next styles before release-->
-    <style>
-        .anychart-credits{
-            display: none;
-        }
-    </style>
-
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row full-height">
-        <div class="visible-sm visible-xs" id="panel">
-            <a class="pull-right panel-dismiss" onclick="$('#panel').animate({left: -300}, 500)"> <i class="fa fa-chevron-left" style="color: #fff"></i></a>
-            <ul class="list-unstyled layout-vertical">
-                <li class=""><a onclick="changeTab('general')" class="general">General info</a></li>
-                <li class="active"><a onclick="changeTab('products')" class="products">Sales by products</a></li>
-                <li><a onclick="changeTab('sales-team')"  class="sales-team">Sales team rates</a></li>
-                <li><a onclick="changeTab('regions')" class="regions">Sales by regions</a></li>
-                <li><a onclick="changeTab('seasons')" class="seasons">Sales by seasons</a></li>
-            </ul>
-            <div class="divider"></div>
-            <ul class="list-unstyled layout-vertical filters">
-                <li class="WTD"><a onclick="changeData('WTD')"><i class="fa fa-circle-o"></i> Last Week</a></li>
-                <li class="MTD"><a onclick="changeData('MTD')"><i class="fa fa-circle-o"></i> Last Month</a></li>
-                <li class="QTD"><a onclick="changeData('QTD')"> <i class="fa fa-circle-o"></i> Last Quarter</a></li>
-                <li class="YTD active"><a onclick="changeData('YTD')"><i class="fa fa-dot-circle-o"></i> Last year</a></li>
-                <li class="all"><a onclick="changeData('all')"><i class="fa fa-circle-o"></i> All time</a></li>
-            </ul>
-        </div>
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header ">
+    <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">Sales Dashboard in Material Design, <span class="light-text">"Wine Sales in France"</span></span>
+            <div class="mdl-layout-spacer"></div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon  mdl-button--mini-fab mdl-button--colored" id="menu-list">
+                <i class="material-icons">more_vert</i>
+            </button>
 
-        <div class="col-xs-12 visible-sm visible-xs">
-            <p class="middle-title"> <a class="pull-left" onclick="$('#panel').animate({left: 0}, 500)"> <i class="fa fa-bars"></i></a>
-                <span class="title"> "Wines of France"</span> <span class="subtitle"> ACME corp. sales dashboard</span>
-        </div>
-        <div class="col-md-12 visible-md">
-            <p class="middle-title"><span class="title">"Wines of France"</span> <span class="subtitle"> ACME corp. sales dashboard</span>
-            <ul class="list-unstyled layout-horizontal">
-                <li class=""><a onclick="changeTab('general')" class="general">General info</a></li>
-                <li class="active"><a onclick="changeTab('products')" class="products">Sales by products</a></li>
-                <li><a onclick="changeTab('sales-team')"  class="sales-team">Sales team rates</a></li>
-                <li><a onclick="changeTab('regions')" class="regions">Sales by regions</a></li>
-                <li><a onclick="changeTab('seasons')" class="seasons">Sales by seasons</a></li>
+            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="menu-list">
+                <li class="mdl-menu__item"><a>About this dashboard</a></li>
+                <li class="mdl-menu__item"><a>Contact support</a></li>
             </ul>
         </div>
-        <div class="col-md-12 visible-md visible-lg col-lg-10 col-lg-offset-2">
-            <ul class="list-unstyled layout-horizontal filters">
-                <li class="WTD"><a onclick="changeData('WTD')"><i class="fa fa-circle-o"></i> Last Week</a></li>
-                <li class="MTD"><a onclick="changeData('MTD')"><i class="fa fa-circle-o"></i> Last Month</a></li>
-                <li class="QTD"><a onclick="changeData('QTD')"> <i class="fa fa-circle-o"></i> Last Quarter</a></li>
-                <li class="YTD active"><a onclick="changeData('YTD')"><i class="fa fa-dot-circle-o"></i> Last year</a></li>
-                <li class="all"><a onclick="changeData('all')"><i class="fa fa-circle-o"></i> All time</a></li>
-            </ul>
-        </div>
-        <div class="visible-lg col-lg-2 ">
-            <ul class="list-unstyled layout-vertical">
-                <li> <span class="title">"Wines of France"</span><br/> <span class="subtitle"> ACME corp. sales dashboard</span></li>
-                <li class=""><a onclick="changeTab('general')" class="general">General info</a></li>
-                <li class="active"><a onclick="changeTab('products')" class="products">Sales by products</a></li>
-                <li><a onclick="changeTab('sales-team')"  class="sales-team">Sales team rates</a></li>
-                <li><a onclick="changeTab('regions')" class="regions">Sales by regions</a></li>
-                <li><a onclick="changeTab('seasons')" class="seasons">Sales by seasons</a></li>
-            </ul>
-        </div>
-
-        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-10">
-            <div class="tab-content">
-                <div class="tab-pane" id="general">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="col-xs-12 chart-name">Revenue dynamic</div>
-                            <div class="col-xs-12"><div class="chart" id="revenue-chart" data-height="350"></div></div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="col-xs-12 chart-name">Key metrics</div>
-                            <div class="col-xs-12"><div class="chart" id="key-metric-chart" data-height="350"></div></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="col-xs-12 chart-name">Top 5 from sales team (<a onclick="changeTab('sales-team')">more</a>) </div>
-                            <div class="col-xs-12"><div class="chart" id="top-5-sales" data-height="200"></div></div>
-                        </div>
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="col-xs-12 chart-name">Top 5 regions (<a onclick="changeTab('regions')">more</a>) </i></a></div>
-                            <div class="col-xs-12"><div class="chart" id="top-5-regions" data-height="200"></div></div>
-                        </div>
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="col-xs-12 chart-name">Top 5 products (<a onclick="changeTab('products')">more</a>) </div>
-                            <div class="col-xs-12"><div class="chart" id="top-5-products" data-height="200"></div></div>
-                        </div>
-                    </div>
+    </header>
+    <div class="demo-drawer mdl-layout__drawer">
+        <nav class="demo-navigation mdl-navigation">
+            <a class="mdl-navigation__link general active" onclick="changeTab('general')"><i class="material-icons">party_mode</i> General info</a>
+            <a class="mdl-navigation__link products" onclick="changeTab('products')"><i class="material-icons">shopping_cart</i> Sales by products</a>
+            <a class="mdl-navigation__link sales-team" onclick="changeTab('sales-team')"><i class="material-icons">people</i> Sales team rates</a>
+            <a class="mdl-navigation__link regions" onclick="changeTab('regions')"><i class="material-icons">public</i> Sales by regions</a>
+            <hr/>
+            <div class="period-selector">
+                 <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="WTD" onclick="changeData('WTD')"/>
+                    <span class="mdl-radio__label">WTD</span>
+                </label>
+                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                    <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="MTD" onclick="changeData('MTD')"/>
+                    <span class="mdl-radio__label">MTD</span>
+                </label>
+                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                    <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="QTD" onclick="changeData('QTD')"/>
+                    <span class="mdl-radio__label">QTD</span>
+                </label>
+                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+                    <input type="radio" id="option-4" class="mdl-radio__button" name="options" value="YTD" checked onclick="changeData('YTD')"/>
+                    <span class="mdl-radio__label">YTD</span>
+                </label>
+                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-5">
+                    <input type="radio" id="option-5" class="mdl-radio__button" name="options" value="all" onclick="changeData('all')"/>
+                    <span class="mdl-radio__label">All time</span>
+                </label>
+            </div>
+        </nav>
+    </div>
+    <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="tab-pane active" id="general">
+            <div class="mdl-grid demo-content">
+                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
+                    <h2>Revenue Dynamic</h2>
+                    <div id="revenue-chart" class="chart" data-height="300"></div>
                 </div>
-                <div class="tab-pane active" id="products">
-                    <div class="row">
-                        <div class="col-sm-7 col-xs-12">
-                            <div class="col-xs-12 chart-name">Product categories by revenue <br/><span class="text-muted">(In this sample products were divided in categories by the region they were produced)</span></div>
-                            <div class="col-xs-12"><div class="chart" id="revenue-chart-by-category" data-height="300"></div></div>
-                        </div>
-                        <div class="col-sm-5 col-xs-12">
-                            <div class="col-xs-12 chart-name">Most popular products in category</div>
-                            <div class="col-xs-12"><div class="chart" id="products-in-category" data-height="700"></div></div>
-                        </div>
-                        <div class="col-sm-7 col-xs-12">
-                            <div class="col-xs-12 chart-name">Products popularity by regions</div>
-                            <div class="col-xs-12"><div class="chart" id="products-popularity-regions" data-height="300"></div></div>
-                        </div>
-
-                    </div>
-
+                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
+                    <h2>Key Metrics</h2>
+                    <div id="key-metric-chart" class="chart" data-height="300"></div>
                 </div>
-                <div class="tab-pane" id="sales-team">
-                    <div class="row">
 
-                    </div>
+
+                <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
+                    <h2>Top 5 from Sales Team <span> (<a onclick="changeTab('sales-team')">more</a>)</span> </h2>
+                    <div id="top-5-sales"  data-height="200" class="chart label-chart"></div>
                 </div>
-                <div class="tab-pane" id="regions">
-                    <div class="row">
-
-                    </div>
+                <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
+                    <h2>Top 5 from Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
+                    <div id="top-5-regions"  data-height="200" class="chart label-chart"></div>
                 </div>
-                <div class="tab-pane" id="seasons">
-                    <div class="row">
-
-                    </div>
+                <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
+                    <h2>Top 5 from Products <span>(<a onclick="changeTab('products')">more</a>) </span></h2>
+                    <div id="top-5-products"  data-height="200" class="chart label-chart"></div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="tab-pane" id="products">
+            <div class="mdl-grid demo-content">
+                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
+                    <h2>Product categories by revenue <br/><span class="text-muted">(In this sample products were divided in categories by the region they were produced)</span></h2>
+                    <div id="category-chart" class="chart" data-height="250"></div>
+                </div>
+                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
+                    <h2>Most popular products in category</h2>
+                    <div id="products-chart" class="chart" data-height="600"></div>
+                </div>
+
+                <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop">
+                    <h2>Products popularity by regions <span> (<a onclick="changeTab('sales-team')">more</a>)</span> </h2>
+                    <div id="category-map-chart"  data-height="300" class="chart label-chart"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="tab-pane" id="regions"></div>
+        <div class="tab-pane" id="sales-team"></div>
+
+    </main>
 </div>
+
 </body>
-<script src="src/media/vendors/anychart/anychart-bundle.min.js"></script>
+<script src="http://demos.anychart.dev/demos/themes/1/anychart-bundle.min.js"></script>
+<!--<script src="src/media/vendors/anychart/anychart-bundle.min.js"></script>-->
 <script src="src/media/js/utils.js"></script>
 <script src="src/media/js/charts_view_settings.js"></script>
 <script src="src/media/js/data.js"></script>

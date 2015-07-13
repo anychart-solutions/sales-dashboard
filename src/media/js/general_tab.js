@@ -5,9 +5,8 @@ function revenueChart(data, container_id) {
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var chart = anychart.column();
-    setupChart(chart, 'column');
     chart.background(null);
-
+    chart.palette(palette);
     chart.container(container_id);
     var data_set = anychart.data.set(data);
     var s1 = anychart.scales.linear();
@@ -16,24 +15,21 @@ function revenueChart(data, container_id) {
     chart.title(null);
     chart.yAxis().orientation('left').title(null);
     chart.xAxis().title(null);
-    setupXAxis(chart, null, null, null, null, [10,0,0,0], false);
-    setupYAxis(chart, null, colorAxisLines, 6, null, [0,5,0,0], false);
-    setupYAxis(chart, 1, colorAxisLines, 6, null, [0,0,0,5], false);
-
     chart.yAxis().scale(s1);
     chart.yAxis(1).scale(s2).orientation('right');
 
     chart.yAxis().labels().textFormatter(function(){
         return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
     });
+    chart.yAxis(1).labels().padding(0,0,0,5);
 
     var series = chart.column(data_set.mapAs({value: [1], x: [0]}));
     series.yScale(s1);
-    setupSeries(series, true, 'Revenue, $', 'like_bar');
+    series.name('Revenue, $');
 
     var series2 = chart.line(data_set.mapAs({value: [2], x: [0]}));
     series2.yScale(s2);
-    setupSeries(series2, true, 'Units sold', 'like_line');
+    series2.name('Units sold');
 
     setupBigTooltip(series);
     series.tooltip().contentFormatter(function(){
@@ -65,30 +61,24 @@ function revenueChart(data, container_id) {
         return result;
     });
 
-    turnOnLegend(chart, 'center');
+    chart.legend().enabled(true).tooltip(false).align('center');
     chart.padding(10, 0, 0, 0);
     chart.draw();
 }
 
 function drawBar(data, container_id) {
-    var hoverOpacity = 0.4;
     var stage = anychart.graphics.create(container_id);
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var pie_data = data;
     data = data.slice(0, data.length - 1);
     var chart = anychart.bar();
-    setupChart(chart, 'bar');
-    setupXAxis(chart, null, null, null, null, [0,10,0,0], false);
+    chart.palette(palette);
     chart.yAxis().enabled(false);
     chart.container(stage);
-    chart.padding(20, 12, 0, 0);
+    chart.padding(0, 12, 0, 0);
     chart.background(null);
     var series = chart.bar(data);
-    setupSeries(series, true, 'Revenue, $', 'like_bar');
-    series.stroke(null).fill(palette.colorAt(1));
-    series.hoverFill(palette.colorAt(1) + ' ' + hoverOpacity);
-    series.hoverStroke(line_thickness + ' ' + palette.colorAt(1));
     series.pointWidth('60%');
 
     setupBigTooltip(series);
@@ -126,17 +116,18 @@ function drawPie(data, container_id) {
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var chart = anychart.pie(data);
-    setupChart(chart, 'pie');
     chart.container(container_id);
+    chart.palette(palette);
     chart.title(null);
     chart.stroke('3 #fff');
     chart.hoverStroke(null);
     chart.labels().fontFamily("'Source Sans Pro', sans-serif;").fontSize(12).position('inside');
     chart.connectorLength(10);
-    chart.radius('40%');
+    chart.radius('45%');
     chart.innerRadius('20%');
     chart.padding(0);
     chart.margin(0);
+    chart.legend().enabled(false);
     setupBigTooltip(chart);
     chart.tooltip().contentFormatter(function(){
         var current = parseInt(this.value).formatMoney(0, '.', ',');
@@ -173,11 +164,11 @@ var createBulletChart = function (actual, target, invert) {
     var bullet = anychart.bullet([
         {
             value: value,
-            type: 'bar', gap: 0.6, fill: palette.colorAt(1), stroke: null
+            type: 'bar', gap: 0.6, fill: palette.colorAt(0), stroke: null
         },
         {
             value: 0, 'type': 'line', 'gap': 0.2, fill: palette.colorAt(4),
-            stroke: {thickness: 1.2, color: '#212121'}
+            stroke: {thickness: 1.1, color: '#212121'}
         }
     ]);
     bullet.background(null);
@@ -200,9 +191,9 @@ var createSparkLine = function (data) {
     sparkLine.xScale('linear');
     sparkLine.xScale().minimumGap(0).maximumGap(0);
     sparkLine.xScale().ticks().interval(1);
-    var color = palette.colorAt(1);
-    sparkLine.fill(color + ' ' + 0.5);
-    sparkLine.stroke(line_thickness + ' ' + color);
+    var color = palette.colorAt(0);
+    sparkLine.fill(color + ' ' + 0.4);
+    sparkLine.stroke('1 ' + color + ' ' + 0.6);
     return sparkLine;
 };
 
@@ -215,7 +206,7 @@ function createBulletScale(){
     axis.orientation('bottom');
     axis.stroke(colorAxisLines);
     axis.ticks().stroke(colorMinorAxisLines).length(4);
-    axis.labels().useHtml(true).textSettings(textLabelSettings).padding(0,3,0,10).fontColor(colorAxisFont)
+    axis.labels().useHtml(true).padding(0,3,0,10).fontColor(colorAxisFont)
         .textFormatter(function () {
         return this.value + '%'
     });

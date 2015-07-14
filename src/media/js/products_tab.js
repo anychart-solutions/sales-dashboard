@@ -220,7 +220,18 @@ function drawMap(data){
     cr.stroke(null);
     cr.ticks().stroke('2 #fff');
     cr.ticks().position('center').length(15);
-    cr.labels().fontSize(11).padding(0,0,0,5);
+    cr.labels().fontSize(11).padding(0,0,0,5).textFormatter(function(){
+        var range = this.colorRange;
+        var name;
+        if (isFinite(range.start + range.end)) {
+          name = range.start + ' - ' + range.end;
+        } else if (isFinite(range.start)) {
+          name = 'more ' + range.start;
+        } else {
+          name = 'less ' + range.end;
+        }
+        return name
+    });
 
 
     var s1 = map.choropleth(data);

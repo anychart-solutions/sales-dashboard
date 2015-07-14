@@ -1,13 +1,19 @@
 /*todo: comment next styles before release*/
-.anychart-credits { display: none; }
+.anychart-credits {
+    display: none;
+}
 
-a{color: #757575;}
+a {
+    color: #757575;
+}
+
 .title {
     font-size: 20px;
     display: inline-block;
     color: #242527;
     padding-bottom: 0;
 }
+
 .subtitle {
     font-size: 15px;
     color: #545f69;
@@ -15,10 +21,11 @@ a{color: #757575;}
     padding-bottom: 15px;
 }
 
-.tab-pane{
+.tab-pane {
     display: none;
 }
-.tab-pane.active{
+
+.tab-pane.active {
     display: block;
 }
 
@@ -29,7 +36,8 @@ ul.period-selector {
     width: 100%;
 
 }
-ul.period-selector li{
+
+ul.period-selector li {
     padding: 0 40px;
     margin: 0;
     display: inline-block;
@@ -39,34 +47,57 @@ ul.period-selector li{
     padding: 10px 40px;
     margin: 0;
 }
-.demo-charts{
+
+.demo-charts {
     padding: 20px 30px 20px 30px;
 }
-.chart{
+
+.chart {
     width: 100%;
 }
-.demo-charts h2{
+
+.demo-charts h2 {
     text-align: center;
     font-size: 18px;
     line-height: 20px;
     margin: 0;
     padding: 0;
     width: 100%;
+    color: #6C6C6C;
 }
-.demo-charts h2 span{
-    font-size: 14px;
-    color: #929292
+
+.demo-charts h2 span {
+    font-size: 11px;
+    color: #929292;
+    font-family: 'Verdana', Helvetica, Arial, sans-serif;
 }
-.demo-charts h2 a{
+
+.demo-charts h2 a {
     cursor: pointer;
     color: #A8A8A8;
 }
-.demo-charts h2 a:hover{
+
+.demo-charts h2 a:hover {
     text-decoration: underline;
 }
-.light-text{
+
+.light-text {
     color: #A8A8A8;
 }
-.label-chart{
+
+.label-chart {
     padding-top: 10px;
+}
+
+.demo-charts h2 span.category-name, .demo-charts h2 span.product-name{
+    color: #212121;
+    /*font-weight: bold;*/
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+.space-divider {
+    width: 100%;
+    display: block;
+    height: 10px;
 }

@@ -1,11 +1,25 @@
-var darkAccentColor = '#545f69';
-var fontColor = '#212121';
+
+var tooltipContentForRevenueChart = function(series){
+    setupBigTooltip(series);
+    series.tooltip().contentFormatter(function(){
+        var current = parseInt(this.value).formatMoney(0, '.', ',') + '$';
+        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">';
+        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
+        var result = span_for_title + this.x + ' (' + current + ')</span><br/><br/>';
+        var to_target = 248000 - this.value;
+        to_target = to_target.formatMoney(0, '.', ',') + '$';
+        var profit = this.value - 100000;
+        profit = profit.formatMoney(0, '.', ',') + '$';
+        result = result + span_for_names + 'To target: </span>' + to_target + '<br/>';
+        result = result + span_for_names + 'Profit: </span>' + profit + '<br/>';
+        return result;
+    });
+};
 
 function revenueChart(data, container_id) {
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var chart = anychart.column();
-    chart.background(null);
     chart.palette(palette);
     chart.container(container_id);
     var data_set = anychart.data.set(data);
@@ -21,50 +35,37 @@ function revenueChart(data, container_id) {
     chart.yAxis().labels().textFormatter(function(){
         return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
     });
-    chart.yAxis(1).labels().padding(0,0,0,5);
+    chart.yAxis(1).labels().padding(0,0,0,5).fontSize(11);
+    chart.xAxis().labels().padding(5,0,0,0).fontSize(11);
 
     var series = chart.column(data_set.mapAs({value: [1], x: [0]}));
     series.yScale(s1);
     series.name('Revenue, $');
+    tooltipContentForRevenueChart(series);
 
     var series2 = chart.line(data_set.mapAs({value: [2], x: [0]}));
     series2.yScale(s2);
     series2.name('Units sold');
-
-    setupBigTooltip(series);
-    series.tooltip().contentFormatter(function(){
-        var current = parseInt(this.value).formatMoney(0, '.', ',') + '$';
-        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">';
-        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-        var result = span_for_title + this.x + ' (' + current + ')</span><br/><br/>';
-        var to_target = 248000 - this.value;
-        to_target = to_target.formatMoney(0, '.', ',') + '$';
-        var profit = this.value - 100000;
-        profit = profit.formatMoney(0, '.', ',') + '$';
-        result = result + span_for_names + 'To target: </span>' + to_target + '<br/>';
-        result = result + span_for_names + 'Profit: </span>' + profit + '<br/>';
-        return result;
-    });
-
-    setupBigTooltip(series2);
-    series2.tooltip().contentFormatter(function(){
-        var current = parseInt(this.value).formatMoney(0, '.', ',') + '$';
-        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">';
-        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-        var result = span_for_title + this.x + ' (' + current + ')</span><br/><br/>';
-        var to_target = 248000 - this.value;
-        to_target = to_target.formatMoney(0, '.', ',') + '$';
-        var profit = this.value - 100000;
-        profit = profit.formatMoney(0, '.', ',') + '$';
-        result = result + span_for_names + 'To target: </span>' + to_target + '<br/>';
-        result = result + span_for_names + 'Profit: </span>' + profit + '<br/>';
-        return result;
-    });
+    tooltipContentForRevenueChart(series2);
 
     chart.legend().enabled(true).tooltip(false).align('center');
     chart.padding(10, 0, 0, 0);
     chart.draw();
 }
+
+
+var tooltipContentForBestFive = function(series){
+    setupBigTooltip(series);
+    series.tooltip().contentFormatter(function(){
+        var current = parseInt(this.value).formatMoney(0, '.', ',');
+        var percent = (this['value'] * 100 / this.getStat('sum')).toFixed(1);
+        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">$<strong>';
+        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
+        var result = span_for_title + this.x + '</span><br/>';
+        result = result + span_for_names + current + ' </strong> (' + percent + '%)</span>';
+        return result;
+    });
+};
 
 function drawBar(data, container_id) {
     var stage = anychart.graphics.create(container_id);
@@ -77,21 +78,9 @@ function drawBar(data, container_id) {
     chart.yAxis().enabled(false);
     chart.container(stage);
     chart.padding(0, 12, 0, 0);
-    chart.background(null);
     var series = chart.bar(data);
     series.pointWidth('60%');
-
-    setupBigTooltip(series);
-    series.tooltip().contentFormatter(function(){
-        var current = parseInt(this.value).formatMoney(0, '.', ',');
-        var percent = (this['value'] * 100 / this.getStat('sum')).toFixed(1);
-        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">$<strong>';
-        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-        var result = span_for_title + this.x + '</span><br/>';
-        result = result + span_for_names + current + ' </strong> (' + percent + '%)</span>';
-        return result;
-    });
-
+    tooltipContentForBestFive(series);
     var pieLabel = chart.label();
     pieLabel
         .position('rightTop')
@@ -108,6 +97,7 @@ function drawBar(data, container_id) {
 
     chart.title(null);
     chart.xAxis().title().enabled(false);
+    chart.xAxis().labels().padding(0,5,0,0).fontSize(11);
     chart.yAxis().title().enabled(false);
     chart.draw();
 }
@@ -121,24 +111,14 @@ function drawPie(data, container_id) {
     chart.title(null);
     chart.stroke('3 #fff');
     chart.hoverStroke(null);
-    chart.labels().fontFamily("'Source Sans Pro', sans-serif;").fontSize(12).position('inside');
+    chart.labels().fontSize(11).position('o');
     chart.connectorLength(10);
     chart.radius('45%');
     chart.innerRadius('20%');
     chart.padding(0);
     chart.margin(0);
     chart.legend().enabled(false);
-    setupBigTooltip(chart);
-    chart.tooltip().contentFormatter(function(){
-        var current = parseInt(this.value).formatMoney(0, '.', ',');
-        var percent = (this['value'] * 100 / this.getStat('sum')).toFixed(1);
-        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">$<strong>';
-        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-        var result = span_for_title + this.x + '</span><br/>';
-        result = result + span_for_names + current + ' </strong> (' + percent + '%)</span>';
-        return result;
-    });
-
+    tooltipContentForBestFive(chart);
     var barLabel = chart.label();
     barLabel
         .position('rightTop')
@@ -187,7 +167,7 @@ var createSparkLine = function (data) {
     sparkLine.type('area');
     sparkLine.padding(0);
     sparkLine.margin(5, 0, 5, 0);
-    sparkLine.background('#fff');
+    sparkLine.background(null);
     sparkLine.xScale('linear');
     sparkLine.xScale().minimumGap(0).maximumGap(0);
     sparkLine.xScale().ticks().interval(1);
@@ -201,7 +181,7 @@ function createBulletScale(){
     var axis = anychart.axes.linear();
     axis.title(null);
     var scale = anychart.scales.linear();
-    scale.minimum(-25).maximum(25).ticks().interval(25);
+    scale.minimum(-50).maximum(50).ticks().interval(50);
     axis.scale(scale);
     axis.orientation('bottom');
     axis.stroke(colorAxisLines);

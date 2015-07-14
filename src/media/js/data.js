@@ -2,7 +2,34 @@ var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', '
 var YEARS = ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014'];
 var WEEK_DAYS = ['Su.', 'Mo.', 'Tu.', 'We.', 'Th.', 'Fr.', 'Sa.'];
 
-var REGION_NAMES = ['Alsace', 'Aquitaine', 'Auvergne', 'Brittany', 'Burgundy', 'Centre-Val de Loire', 'Champagne-Ardenne', 'Franche-Comté', 'Île-de-France', 'Languedoc-Roussillon', 'Limousin', 'Lorraine', 'Lower Normandy', 'Midi-Pyrénées', 'Nord-Pas-de-Calais', 'Pays de la Loire', 'Picardy', 'Poitou-Charentes', 'Provence-Alpes-Côte d\'Azur', 'Rhône-Alpes', 'Upper Normandy', 'Corsica', 'French Guiana', 'Guadeloupe', 'Martinique', 'Mayotte', 'Reunion'];
+var REGION_NAMES = [
+    {id: 'fr-a', name: 'Alsace'},
+    {id: 'fr-b', name: 'Aquitaine'},
+    {id: 'fr-c', name: 'Auvergne'},
+    {id: 'fr-d', name: 'Bourgogne'},
+    {id: 'fr-e', name: 'Bretagne'},
+    {id: 'fr-f', name: 'Centre-Val de Loire'},
+    {id: 'fr-g', name: 'Champagne-Ardenne'},
+    {id: 'fr-h', name: 'Corse'},
+    {id: 'fr-i', name: 'Franche-Comté'},
+    {id: 'fr-j', name: 'Île-de-France'},
+    {id: 'fr-k', name: 'Languedoc-Roussillon'},
+    {id: 'fr-l', name: 'Limousin'},
+    {id: 'fr-m', name: 'Lorraine'},
+    {id: 'fr-n', name: 'Midi-Pyrénées'},
+    {id: 'fr-o', name: 'Nord-Pas-de-Calais'},
+    {id: 'fr-p', name: 'Basse-Normandie'},
+    {id: 'fr-q', name: 'Haute-Normandie'},
+    {id: 'fr-r', name: 'Pays de la Loire'},
+    {id: 'fr-s', name: 'Picardie'},
+    {id: 'fr-t', name: 'Poitou-Charentes'},
+    {id: 'fr-u', name: 'Provence-Alpes-Côte d\'Azur'},
+    {id: 'fr-v', name: 'Rhône-Alpes'},
+    {id: 'fr-gf', name: 'French Guiana'},
+    {id: 'fr-gp', name: 'Guadeloupe'},
+    {id: 'fr-mg', name: 'Martinique'},
+    {id: 'fr-yt', name: 'Mayotte'},
+    {id: 'fr-re', name: 'Reunion'}];
 var PEOPLE = ['Katherine Bailey', 'Joyce Owens', 'Nancy Gordon', 'Harold Sanchez', 'Jesse Cooper', 'Ann Bradley', 'Matthew Phillips', 'Jose Hart', 'Frances Chapman', 'Jerry Clark', 'Rose Montgomery', 'Roger Williamson', 'Norma Duncan', 'Frances Henderson', 'Melissa Riley', 'Ralph Butler', 'Marilyn Wood', 'Katherine Dean', 'Russell Thomas', 'Elizabeth Hudson', 'Willie Hansen', 'Dorothy Meyer', 'Judy Howell', 'Phillip Weaver', 'Arthur Boyd', 'Douglas Lopez', 'Sara Larson', 'Jimmy Hawkins', 'Juan Carpenter', 'Debra White', 'Billy Oliver', 'Angela Long', 'Beverly Gutierrez'];
 var CATEGORIES_REGION = ['Alsace', 'Beaujolais', 'Bordeaux', 'Brittany', 'Burgundy', 'Champagne', 'Corsica', 'Ile de France', 'Jura', 'Languedoc-Roussillon', 'Loire', 'Normandy', 'Picardy', 'Provence', 'Rhône', 'Savoy', 'South West France'];
 var CATEGORIES_GRAPE = ['Merlot', 'Grenache', 'Ugni blanc', 'Syrah', 'Carignan', 'Cabernet Sauvignon', 'Chardonnay', 'Cabernet Franc', 'Gamay', 'Pinot noir', 'Sauvignon blanc', 'Cinsaut', 'Melon de Bourgogne', 'Sémillon', 'Pinot Meunier', 'Chenin blanc', 'Mourvèdre', 'Colombard', 'Muscat Blanc à Petits Grains', 'Malbec', 'Alicante Bouschet', 'Grenache blanc', 'Viognier', 'Muscat de Hambourg', 'Riesling', 'Vermentino', 'Aramon', 'Gewurztraminer', 'Tannat', 'Gros Manseng', 'Macabeu', 'Muscat d\'Alexandrie', 'Pinot gris', 'Clairette', 'Caladoc', 'Grolleau', 'Auxerrois blanc', 'Marselan', 'Mauzac', 'Aligoté', 'Folle blanche', 'Grenache gris', 'Chasselas', 'Nielluccio', 'Fer', 'Muscadelle', 'Terret blanc', 'Sylvaner', 'Piquepoul blanc', 'Villard noir', 'Marsanne', 'Négrette', 'Roussanne', 'Pinot blanc', 'Plantet', 'Jacquère'];
@@ -139,15 +166,47 @@ var makeRevenueChartData = function(period){
     return result
 };
 
-
-var makeCategoriesChartData = function(names){
-    var result = generateData(1200, 600000, 8, true, names);
-    for (var i = 0; i < result.length; i++){
-        result[i].push(generateNumber(430, 520));
+var makeMapData = function(){
+    var data = [];
+    for (var i = 0; i < REGION_NAMES.length; i++){
+        data.push({
+            id: REGION_NAMES[i].id,
+            x: REGION_NAMES[i].name,
+            value: generateNumber(300000, 600000)
+        })
     }
-    return result
+    return data
 };
 
+var makeCategoriesProductData = function(){
+    var data = [];
+    var result = generateData(1200, 600000, generateNumber(20, 30), false, 'vines');
+    for (var i = 0; i < result.length; i++){
+        data.push({
+            x: result[i][0],
+            revenue: result[i][1],
+            last: generateData(1500, 12000, 12, false, false),
+            price: generateNumber(5, 60),
+            average_price: generateNumber(10, 20),
+            mapData: makeMapData()
+        });
+    }
+    return data
+};
+
+var makeCategoriesData = function(){
+    var data = [];
+    var result = generateData(1200, 600000, 13, true, 'categories_region');
+    for (var i = 0; i < result.length; i++){
+        data.push({
+            x: result[i][0],
+            value: result[i][1],
+            data: makeCategoriesProductData(),
+            mapData: makeMapData()
+        });
+    }
+    return data
+};
 
 var generateFiveBest = function () {
     var people_list = generateData(1200, 600000, 5, true, 'people');
@@ -160,5 +219,210 @@ var generateFiveBest = function () {
         'sales_men': people_list,
         'regions': region_list,
         'products': product_list
+    }
+};
+
+
+var generateGeneralDataForAll = function(){
+    return {
+        'all': {
+            revenue_chart: makeRevenueChartData('all'),
+            five_best: generateFiveBest(),
+            key_metrics: {
+                revenue: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                profit: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                expenses: {
+                    'invert': true,
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                order_size: {
+                    'value': generateNumber(50, 120),
+                    'target': generateNumber(50, 140),
+                    'last': generateData(50, 120, 12, false, false)
+                },
+                customers: {
+                    'value': generateNumber(1, 100),
+                    'target': generateNumber(50, 120),
+                    'last': generateData(1, 250, 12, false, false)
+                },
+                market_share: {
+                    'value': generateNumber(15, 25),
+                    'target': generateNumber(15, 30),
+                    'last': generateData(1, 40, 12, false, false)
+                }
+            }
+        },
+        'YTD': {
+            revenue_chart: makeRevenueChartData('YTD'),
+            five_best: generateFiveBest(),
+            key_metrics: {
+                revenue: {
+                    'value': generateNumber(300000, 600000),
+                    'target': generateNumber(400000, 700000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                profit: {
+                    'value': generateNumber(300000, 600000),
+                    'target': generateNumber(400000, 650000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                expenses: {
+                    'invert': true,
+                    'value': generateNumber(300000, 600000),
+                    'target': generateNumber(350000, 650000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                order_size: {
+                    'value': generateNumber(50, 120),
+                    'target': generateNumber(50, 140),
+                    'last': generateData(50, 120, 12, false, false)
+                },
+                customers: {
+                    'value': generateNumber(1, 100),
+                    'target': generateNumber(50, 120),
+                    'last': generateData(1, 250, 12, false, false)
+                },
+                market_share: {
+                    'value': generateNumber(15, 25),
+                    'target': generateNumber(15, 30),
+                    'last': generateData(1, 40, 12, false, false)
+                }
+            }
+        },
+        'QTD': {
+            revenue_chart: makeRevenueChartData('QTD'),
+            five_best: generateFiveBest(),
+            key_metrics: {
+                revenue: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                profit: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                expenses: {
+                    'invert': true,
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                order_size: {
+                    'value': generateNumber(50, 120),
+                    'target': generateNumber(50, 140),
+                    'last': generateData(50, 120, 12, false, false)
+                },
+                customers: {
+                    'value': generateNumber(1, 100),
+                    'target': generateNumber(50, 120),
+                    'last': generateData(1, 250, 12, false, false)
+                },
+                market_share: {
+                    'value': generateNumber(15, 25),
+                    'target': generateNumber(15, 30),
+                    'last': generateData(1, 40, 12, false, false)
+                }
+            }
+        },
+        'MTD': {
+            revenue_chart: makeRevenueChartData('MTD'),
+            five_best: generateFiveBest(),
+            key_metrics: {
+                revenue: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                profit: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                expenses: {
+                    'invert': true,
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                order_size: {
+                    'value': generateNumber(50, 120),
+                    'target': generateNumber(50, 140),
+                    'last': generateData(50, 120, 12, false, false)
+                },
+                customers: {
+                    'value': generateNumber(1, 100),
+                    'target': generateNumber(50, 120),
+                    'last': generateData(1, 250, 12, false, false)
+                },
+                market_share: {
+                    'value': generateNumber(15, 25),
+                    'target': generateNumber(15, 30),
+                    'last': generateData(1, 40, 12, false, false)
+                }
+            }
+        },
+        'WTD': {
+            revenue_chart: makeRevenueChartData('WTD'),
+            five_best: generateFiveBest(),
+            key_metrics: {
+                revenue: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                profit: {
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                expenses: {
+                    'invert': true,
+                    'value': generateNumber(100000, 150000),
+                    'target': generateNumber(100000, 160000),
+                    'last': generateData(1500, 12000, 12, false, false)
+                },
+                order_size: {
+                    'value': generateNumber(50, 120),
+                    'target': generateNumber(50, 140),
+                    'last': generateData(50, 120, 12, false, false)
+                },
+                customers: {
+                    'value': generateNumber(1, 100),
+                    'target': generateNumber(50, 120),
+                    'last': generateData(1, 250, 12, false, false)
+                },
+                market_share: {
+                    'value': generateNumber(15, 25),
+                    'target': generateNumber(15, 30),
+                    'last': generateData(1, 40, 12, false, false)
+                }
+            }
+        }
+
+    }
+};
+
+
+var generateProductsDataForAll = function(){
+    return {
+        all: {},
+        YTD: {
+            'categories_data': makeCategoriesData()
+        },
+        QTD: {},
+        MTD: {},
+        WTD: {}
     }
 };

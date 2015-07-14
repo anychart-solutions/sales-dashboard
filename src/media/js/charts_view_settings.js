@@ -1,10 +1,7 @@
 var colorAxisLines = '#CECECE';
 var colorMinorAxisLines = '#EAEAEA';
-var colorLightMinorAxisLines = '#F7F7F7';
 var colorAxisFont = '#7c868e';
 var darkAccentColor = '#545f69';
-var darkAxisColor = '#B9B9B9';
-
 var fontColor = '#212121';
 var tooltipContourColor = '#c1c1c1';
 

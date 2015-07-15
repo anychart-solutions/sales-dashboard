@@ -417,12 +417,10 @@ var generateGeneralDataForAll = function(){
 
 var generateProductsDataForAll = function(){
     return {
-        all: {},
-        YTD: {
-            'categories_data': makeCategoriesData()
-        },
-        QTD: {},
-        MTD: {},
-        WTD: {}
+        all: {'categories_data': makeCategoriesData()},
+        YTD: {'categories_data': makeCategoriesData()},
+        QTD: {'categories_data': makeCategoriesData()},
+        MTD: {'categories_data': makeCategoriesData()},
+        WTD: {'categories_data': makeCategoriesData()}
     }
 };

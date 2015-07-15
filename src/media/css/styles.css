@@ -59,7 +59,7 @@ ul.period-selector li {
 .demo-charts h2 {
     text-align: center;
     font-size: 18px;
-    line-height: 20px;
+    line-height: 18px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -70,6 +70,9 @@ ul.period-selector li {
     font-size: 11px;
     color: #929292;
     font-family: 'Verdana', Helvetica, Arial, sans-serif;
+    line-height: 12px;
+    padding-top: 7px;
+    display: inline-block;
 }
 
 .demo-charts h2 a {
@@ -100,4 +103,36 @@ ul.period-selector li {
     width: 100%;
     display: block;
     height: 10px;
+}
+.flex-align {
+   -webkit-box-align: start;
+   -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+   align-items: flex-start;
+   -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+   align-content: flex-start;
+}
+.mdl-menu__item a{
+    color: #212121;
+    text-decoration: none;
+    display: inline-block;
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-weight: 500;
+}
+.mdl-menu__item a i{
+    font-size: 20px;
+    margin: 0 5px;
 }

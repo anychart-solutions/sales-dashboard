@@ -11,6 +11,8 @@ Number.prototype.formatMoney = function (c, d, t) {
 
 var generalData, generatedGeneralData;
 var generatedProductsData, productsData;
+var generatedRegionsData, regionsData;
+var generatedSalesTeamData, salesTeamData;
 
 
 function changeTab(tab_name){
@@ -28,8 +30,12 @@ function changeTab(tab_name){
     }
     else if (tab_name == 'products'){
         categoryChart(productsData['categories_data'], 'category-chart');
-        //productInCategoryChart(productsData['category_products'], 'products-chart');
-        //mapPopularityChart(productsData['popularity_data'], 'category-map-chart');
+    }
+    else if (tab_name == 'regions'){
+        regionsChart(regionsData['regions_data'], 'regions-chart');
+    }
+    else if (tab_name == 'sales-team'){
+        salesTeamChart(salesTeamData['team_data'], salesTeamData['average_order'], 'sales-team-chart');
     }
 }
 
@@ -38,6 +44,8 @@ function changeTab(tab_name){
 function changeData(filter){
     generalData = generatedGeneralData[filter];
     productsData = generatedProductsData[filter];
+    regionsData = generatedRegionsData[filter];
+    salesTeamData = generatedSalesTeamData[filter];
     changeTab($('.tab-pane.active').attr('id'));
 }
 
@@ -47,5 +55,9 @@ $(function(){
     generalData = generatedGeneralData['YTD'];
     generatedProductsData = generateProductsDataForAll();
     productsData = generatedProductsData['YTD'];
+    generatedRegionsData = generateRegionsDataForAll();
+    regionsData = generatedRegionsData['YTD'];
+    generatedSalesTeamData = generateTeamDataForAll();
+    salesTeamData = generatedSalesTeamData['YTD'];
     changeTab($('.tab-pane.active').attr('id'))
 });

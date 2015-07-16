@@ -92,7 +92,10 @@ ul.period-selector li {
     padding-top: 10px;
 }
 
-.demo-charts h2 span.category-name, .demo-charts h2 span.product-name{
+.demo-charts h2 span.category-name,
+.demo-charts h2 span.product-name,
+.demo-charts h2 span.region-name,
+.demo-charts h2 span.person-name{
     color: #212121;
     /*font-weight: bold;*/
     text-decoration: underline;

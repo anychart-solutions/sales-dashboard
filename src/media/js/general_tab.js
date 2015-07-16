@@ -186,7 +186,7 @@ function createBulletScale(){
     axis.orientation('bottom');
     axis.stroke(colorAxisLines);
     axis.ticks().stroke(colorMinorAxisLines).length(4);
-    axis.labels().useHtml(true).padding(0,3,0,10).fontColor(colorAxisFont)
+    axis.labels().useHtml(true).padding(0,3,0,10).fontColor(colorAxisFont).fontSize(10)
         .textFormatter(function () {
         return this.value + '%'
     });

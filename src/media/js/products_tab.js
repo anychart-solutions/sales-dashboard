@@ -154,7 +154,7 @@ function drawTable(data){
             table.getRow(activeRow).cellFill(null);
         }
         activeRow = row;
-        table.getRow(activeRow).cellFill("#F7A028 0.2");
+        table.getRow(activeRow).cellFill("#F7A028 0.3");
         drawMap(data[activeRow-1].mapData);
         $('.product-name').html(data[activeRow-1].x);
     });
@@ -208,7 +208,6 @@ function drawMap(data){
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var map = anychart.map();
     map.geoData(Highcharts.maps["countries/fr/fr-all"]);
-    console.log(data);
     map.background(null);
     map.legend(null);
     map.title(null);
@@ -238,12 +237,8 @@ function drawMap(data){
     s1.geoIdField('hc-key');
     s1.stroke('#000 .3');
     s1.labels(null);
-    //s1.selectFill('#5588ff');
     var ocs = anychart.scales.ordinalColor([{less: 350000}, {from: 350000, to: 400000}, {from: 400000, to: 450000}, {from: 450000, to: 500000}, {from: 500000, to: 550000}, {greater: 550000}]);
     ocs.colors(['#ffd54f', '#FDC543', '#F9B033', '#F7A028', '#F28110', '#ef6c00']);
-
-
-
     s1.colorScale(ocs);
 
     map.padding(0).margin(0);

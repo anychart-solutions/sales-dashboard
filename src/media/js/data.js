@@ -155,7 +155,7 @@ var makeRevenueChartData = function(period){
             result.push([MONTHS[i], generateNumber(300000, 600000), generateNumber(430, 520)]);
         }
     } else if (period == 'MTD') {
-        for (i = 0; i < 31; i++){
+        for (i = 1; i <= 31; i++){
             result.push([i, generateNumber(300000, 600000), generateNumber(430, 520)]);
         }
     } else if (period == 'WTD') {
@@ -203,6 +203,39 @@ var makeCategoriesData = function(){
             value: result[i][1],
             data: makeCategoriesProductData(),
             mapData: makeMapData()
+        });
+    }
+    return data
+};
+
+var makeRegionsData = function(key){
+    var data = [];
+    var result = makeMapData();
+    for (var i = 0; i < result.length; i++){
+        data.push({
+            id: result[i].id,
+            x: result[i].x,
+            value: result[i].value,
+            market_share: generateNumber(5, 30),
+            total_share: generateNumber(5, 50),
+            revenue: makeRevenueChartData(key)
+        });
+    }
+    return data
+};
+
+var makeTeamData = function(key){
+    var data = [];
+    var result = generateData(1200, 3000, 20, true, 'people');
+    for (var i = 0; i < result.length; i++){
+        data.push({
+            name: result[i][0],
+            revenue: result[i][1],
+            average_order: generateNumber(10, 400),
+            sales_share: generateNumber(5, 20),
+            win_ratio: generateNumber(20, 90),
+            new_clients: generateData(5, 30, 12, false, false),
+            revenue_trend: makeRevenueChartData(key)
         });
     }
     return data
@@ -413,8 +446,6 @@ var generateGeneralDataForAll = function(){
 
     }
 };
-
-
 var generateProductsDataForAll = function(){
     return {
         all: {'categories_data': makeCategoriesData()},
@@ -422,5 +453,23 @@ var generateProductsDataForAll = function(){
         QTD: {'categories_data': makeCategoriesData()},
         MTD: {'categories_data': makeCategoriesData()},
         WTD: {'categories_data': makeCategoriesData()}
+    }
+};
+var generateRegionsDataForAll = function(){
+    return {
+        all: {'regions_data': makeRegionsData('all')},
+        YTD: {'regions_data': makeRegionsData('YTD')},
+        QTD: {'regions_data': makeRegionsData('QTD')},
+        MTD: {'regions_data': makeRegionsData('MTD')},
+        WTD: {'regions_data': makeRegionsData('WTD')}
+    }
+};
+var generateTeamDataForAll = function(){
+    return {
+        all: {'team_data': makeTeamData('all'), average_order: generateNumber(10, 400), average_revenue: generateNumber(1200, 3000)},
+        YTD: {'team_data': makeTeamData('YTD'), average_order: generateNumber(10, 400), average_revenue: generateNumber(1200, 3000)},
+        QTD: {'team_data': makeTeamData('QTD'), average_order: generateNumber(10, 400), average_revenue: generateNumber(1200, 3000)},
+        MTD: {'team_data': makeTeamData('MTD'), average_order: generateNumber(10, 400), average_revenue: generateNumber(1200, 3000)},
+        WTD: {'team_data': makeTeamData('WTD'), average_order: generateNumber(10, 400), average_revenue: generateNumber(1200, 3000)}
     }
 };

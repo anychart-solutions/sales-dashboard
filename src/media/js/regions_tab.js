@@ -1,4 +1,6 @@
-var globalData, regionsDataSet, map;
+var globalData, regionsDataSet, map, s1;
+
+
 
 function regionsChart(data, container_id) {
     globalData = data;
@@ -31,11 +33,12 @@ function regionsChart(data, container_id) {
         return name
     });
 
-    var s1 = map.choropleth(regionsDataSet);
+    s1 = map.choropleth(regionsDataSet);
     s1.geoIdField('hc-key');
     s1.stroke('#000 .3');
-    s1.labels(null);
+    s1.labels(null); //.fontSize(9).fontWeight('normal').fontColor('#212121');
     s1.selectFill(palette.colorAt(0));
+    tooltipContentForMapChart(s1);
     var ocs = anychart.scales.ordinalColor([{less: 350000}, {from: 350000, to: 400000}, {from: 400000, to: 450000}, {from: 450000, to: 500000}, {from: 500000, to: 550000}, {greater: 550000}]);
     ocs.colors(['#ffd54f', '#FDC543', '#F9B033', '#F7A028', '#F28110', '#ef6c00']);
     s1.colorScale(ocs);
@@ -86,24 +89,33 @@ function shareChart(value, container_id){
         .zIndex(1);
     gauge.container(container_id);
     gauge.draw()
-
 }
 
+
 function drillDownRegion(x){
+    console.log(x);
     var data;
     for (var i=0; i<globalData.length; i++){
         if (globalData[i].id == x.id)
             data = globalData[i];
     }
-    //console.log(data);
+    //s1.select(i);
     revenueChart(data.revenue, 'sales-in-region-chart');
     shareChart(data.total_share, 'total_share');
     shareChart(data.market_share, 'market_share');
-
-    console.log(x);
-    console.log(x.properties.name);
     $('.region-name').html(x.properties.name);
 
 
 }
 
+function fillMenuList(data){
+    for (var i=0; i<data.length; i++){
+        //var li_item = $('<li class="mdl-menu__item" onclick="drillDownRegion({id: \'' + data[i].id + '\', properties: {name: \'' + data[i].x + '\'}})">' + data[i].x + '</li>');
+        var li_item = $('<li class="mdl-menu__item" onclick="s1.select(' + i + ')">' + data[i].x + '</li>');
+        //li_item.attr('onclick', function(){return drillDownRegion(data[i])});
+        //console.log(data[i]);
+        $('#region-name-menu-list').append(li_item);
+    }
+
+
+}

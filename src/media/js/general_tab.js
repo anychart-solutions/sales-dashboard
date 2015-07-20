@@ -1,20 +1,12 @@
+function getDataByX(data, x){
+    for ( var i=0; i<data.length; i++){
+        if (data[i][0] == x) return data[i]
+    }
+    return null
+}
 
-var tooltipContentForRevenueChart = function(series){
-    setupBigTooltip(series);
-    series.tooltip().contentFormatter(function(){
-        var current = parseInt(this.value).formatMoney(0, '.', ',') + '$';
-        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">';
-        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-        var result = span_for_title + this.x + ' (' + current + ')</span><br/><br/>';
-        var to_target = 248000 - this.value;
-        to_target = to_target.formatMoney(0, '.', ',') + '$';
-        var profit = this.value - 100000;
-        profit = profit.formatMoney(0, '.', ',') + '$';
-        result = result + span_for_names + 'To target: </span>' + to_target + '<br/>';
-        result = result + span_for_names + 'Profit: </span>' + profit + '<br/>';
-        return result;
-    });
-};
+
+
 
 function revenueChart(data, container_id) {
     var $chartContainer = $('#' + container_id);
@@ -31,8 +23,11 @@ function revenueChart(data, container_id) {
     chart.xAxis().title(null);
     chart.yAxis().scale(s1);
     chart.yAxis(1).scale(s2).orientation('right');
+    chart.yAxis().scale().minimum(0);
+    chart.yAxis(1).scale().minimum(0);
 
-    chart.yAxis().labels().textFormatter(function(){
+
+    chart.yAxis().labels().fontSize(11).textFormatter(function(){
         return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
     });
     chart.yAxis(1).labels().padding(0,0,0,5).fontSize(11);
@@ -41,16 +36,31 @@ function revenueChart(data, container_id) {
     var series = chart.column(data_set.mapAs({value: [1], x: [0]}));
     series.yScale(s1);
     series.name('Revenue, $');
-    tooltipContentForRevenueChart(series);
+    tooltipContentForRevenueChart(series, data);
 
     var series2 = chart.line(data_set.mapAs({value: [2], x: [0]}));
     series2.yScale(s2);
     series2.name('Units sold');
-    tooltipContentForRevenueChart(series2);
+    tooltipContentForRevenueChart(series2, data);
 
     chart.legend().enabled(true).tooltip(false).align('center');
     chart.padding(10, 0, 0, 0);
     chart.draw();
+}
+
+function tooltipContentForRevenueChart(series, data){
+    setupBigTooltip(series);
+    series.tooltip().contentFormatter(function(){
+        var values = getDataByX(data, this.x);
+        var sold = parseInt(values[2]);
+        var revenue = '$' + parseInt(values[1]).formatMoney(0, '.', ',');
+        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">';
+        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
+        var result = span_for_title + this.x + '</span><br/><br/>';
+        result = result + span_for_names + 'Units sold: </span><strong>' + sold + '</strong> <br/>';
+        result = result + span_for_names + 'Revenue: </span><strong>' + revenue + '</strong> ';
+        return result;
+    });
 }
 
 
@@ -59,9 +69,9 @@ var tooltipContentForBestFive = function(series){
     series.tooltip().contentFormatter(function(){
         var current = parseInt(this.value).formatMoney(0, '.', ',');
         var percent = (this['value'] * 100 / this.getStat('sum')).toFixed(1);
-        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">$<strong>';
+        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px"><strong>$';
         var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-        var result = span_for_title + this.x + '</span><br/>';
+        var result = span_for_title + this.x + '</span><br/><br/>';
         result = result + span_for_names + current + ' </strong> (' + percent + '%)</span>';
         return result;
     });
@@ -77,6 +87,7 @@ function drawBar(data, container_id) {
     chart.palette(palette);
     chart.yAxis().enabled(false);
     chart.container(stage);
+
     chart.padding(0, 12, 0, 0);
     var series = chart.bar(data);
     series.pointWidth('60%');
@@ -105,19 +116,38 @@ function drawBar(data, container_id) {
 function drawPie(data, container_id) {
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
+    var stage = acgraph.create(container_id);
+
+
+
     var chart = anychart.pie(data);
-    chart.container(container_id);
+    chart.container(stage);
+    //chart.bounds(0, 0, '100%', 200);
+    chart.labels().textFormatter(function(){
+        return this.x
+    });
+
+
+    //var table = getLegend(data, chart);
+    //table.container(stage);
+    //table.bounds(0, 210, '100%', 40);
+    //table.draw();
+
     chart.palette(palette);
     chart.title(null);
     chart.stroke('3 #fff');
     chart.hoverStroke(null);
     chart.labels().fontSize(11).position('o');
     chart.connectorLength(10);
-    chart.radius('45%');
+    chart.radius('35%');
     chart.innerRadius('20%');
     chart.padding(0);
     chart.margin(0);
     chart.legend().enabled(false);
+
+
+
+
     tooltipContentForBestFive(chart);
     var barLabel = chart.label();
     barLabel
@@ -135,6 +165,7 @@ function drawPie(data, container_id) {
 
     chart.background(null);
     chart.draw();
+
 }
 
 var createBulletChart = function (actual, target, invert) {

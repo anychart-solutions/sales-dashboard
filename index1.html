@@ -9,11 +9,7 @@
     <link rel="stylesheet" type="text/css"  href="src/media/vendors/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css"  href="src/media/css/styles.css"/>
 
-    <!--<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.blue-orange.min.css">-->
-    <!--<script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>-->
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
 
-    <!--todo: comment next styles before release-->
     <style>
         .anychart-credits{
             display: none;
@@ -24,122 +20,7 @@
 <body>
 <div class="container-fluid">
     <div class="row full-height">
-        <div class="visible-sm visible-xs" id="panel">
-            <a class="pull-right panel-dismiss" onclick="$('#panel').animate({left: -300}, 500)"> <i class="fa fa-chevron-left" style="color: #fff"></i></a>
-            <ul class="list-unstyled layout-vertical">
-                <li class=""><a onclick="changeTab('general')" class="general">General info</a></li>
-                <li class="active"><a onclick="changeTab('products')" class="products">Sales by products</a></li>
-                <li><a onclick="changeTab('sales-team')"  class="sales-team">Sales team rates</a></li>
-                <li><a onclick="changeTab('regions')" class="regions">Sales by regions</a></li>
-                <li><a onclick="changeTab('seasons')" class="seasons">Sales by seasons</a></li>
-            </ul>
-            <div class="divider"></div>
-            <ul class="list-unstyled layout-vertical filters">
-                <li class="WTD"><a onclick="changeData('WTD')"><i class="fa fa-circle-o"></i> Last Week</a></li>
-                <li class="MTD"><a onclick="changeData('MTD')"><i class="fa fa-circle-o"></i> Last Month</a></li>
-                <li class="QTD"><a onclick="changeData('QTD')"> <i class="fa fa-circle-o"></i> Last Quarter</a></li>
-                <li class="YTD active"><a onclick="changeData('YTD')"><i class="fa fa-dot-circle-o"></i> Last year</a></li>
-                <li class="all"><a onclick="changeData('all')"><i class="fa fa-circle-o"></i> All time</a></li>
-            </ul>
-        </div>
-
-        <div class="col-xs-12 visible-sm visible-xs">
-            <p class="middle-title"> <a class="pull-left" onclick="$('#panel').animate({left: 0}, 500)"> <i class="fa fa-bars"></i></a>
-                <span class="title"> "Wines of France"</span> <span class="subtitle"> ACME corp. sales dashboard</span>
-        </div>
-        <div class="col-md-12 visible-md">
-            <p class="middle-title"><span class="title">"Wines of France"</span> <span class="subtitle"> ACME corp. sales dashboard</span>
-            <ul class="list-unstyled layout-horizontal">
-                <li class=""><a onclick="changeTab('general')" class="general">General info</a></li>
-                <li class="active"><a onclick="changeTab('products')" class="products">Sales by products</a></li>
-                <li><a onclick="changeTab('sales-team')"  class="sales-team">Sales team rates</a></li>
-                <li><a onclick="changeTab('regions')" class="regions">Sales by regions</a></li>
-                <li><a onclick="changeTab('seasons')" class="seasons">Sales by seasons</a></li>
-            </ul>
-        </div>
-        <div class="col-md-12 visible-md visible-lg col-lg-10 col-lg-offset-2">
-            <ul class="list-unstyled layout-horizontal filters">
-                <li class="WTD"><a onclick="changeData('WTD')"><i class="fa fa-circle-o"></i> Last Week</a></li>
-                <li class="MTD"><a onclick="changeData('MTD')"><i class="fa fa-circle-o"></i> Last Month</a></li>
-                <li class="QTD"><a onclick="changeData('QTD')"> <i class="fa fa-circle-o"></i> Last Quarter</a></li>
-                <li class="YTD active"><a onclick="changeData('YTD')"><i class="fa fa-dot-circle-o"></i> Last year</a></li>
-                <li class="all"><a onclick="changeData('all')"><i class="fa fa-circle-o"></i> All time</a></li>
-            </ul>
-        </div>
-        <div class="visible-lg col-lg-2 ">
-            <ul class="list-unstyled layout-vertical">
-                <li> <span class="title">"Wines of France"</span><br/> <span class="subtitle"> ACME corp. sales dashboard</span></li>
-                <li class=""><a onclick="changeTab('general')" class="general">General info</a></li>
-                <li class="active"><a onclick="changeTab('products')" class="products">Sales by products</a></li>
-                <li><a onclick="changeTab('sales-team')"  class="sales-team">Sales team rates</a></li>
-                <li><a onclick="changeTab('regions')" class="regions">Sales by regions</a></li>
-                <li><a onclick="changeTab('seasons')" class="seasons">Sales by seasons</a></li>
-            </ul>
-        </div>
-
-        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-10">
-            <div class="tab-content">
-                <div class="tab-pane" id="general">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="col-xs-12 chart-name">Revenue dynamic</div>
-                            <div class="col-xs-12"><div class="chart" id="revenue-chart" data-height="350"></div></div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="col-xs-12 chart-name">Key metrics</div>
-                            <div class="col-xs-12"><div class="chart" id="key-metric-chart" data-height="350"></div></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="col-xs-12 chart-name">Top 5 from sales team (<a onclick="changeTab('sales-team')">more</a>) </div>
-                            <div class="col-xs-12"><div class="chart" id="top-5-sales" data-height="200"></div></div>
-                        </div>
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="col-xs-12 chart-name">Top 5 regions (<a onclick="changeTab('regions')">more</a>) </i></a></div>
-                            <div class="col-xs-12"><div class="chart" id="top-5-regions" data-height="200"></div></div>
-                        </div>
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="col-xs-12 chart-name">Top 5 products (<a onclick="changeTab('products')">more</a>) </div>
-                            <div class="col-xs-12"><div class="chart" id="top-5-products" data-height="200"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane active" id="products">
-                    <div class="row">
-                        <div class="col-sm-7 col-xs-12">
-                            <div class="col-xs-12 chart-name">Product categories by revenue <br/><span class="text-muted">(In this sample products were divided in categories by the region they were produced)</span></div>
-                            <div class="col-xs-12"><div class="chart" id="revenue-chart-by-category" data-height="300"></div></div>
-                        </div>
-                        <div class="col-sm-5 col-xs-12">
-                            <div class="col-xs-12 chart-name">Most popular products in category</div>
-                            <div class="col-xs-12"><div class="chart" id="products-in-category" data-height="700"></div></div>
-                        </div>
-                        <div class="col-sm-7 col-xs-12">
-                            <div class="col-xs-12 chart-name">Products popularity by regions</div>
-                            <div class="col-xs-12"><div class="chart" id="products-popularity-regions" data-height="300"></div></div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="tab-pane" id="sales-team">
-                    <div class="row">
-
-                    </div>
-                </div>
-                <div class="tab-pane" id="regions">
-                    <div class="row">
-
-                    </div>
-                </div>
-                <div class="tab-pane" id="seasons">
-                    <div class="row">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="chart" id="revenue-chart" data-height="350"></div>
     </div>
 </div>
 </body>
@@ -147,6 +28,49 @@
 <script src="src/media/js/utils.js"></script>
 <script src="src/media/js/charts_view_settings.js"></script>
 <script src="src/media/js/data.js"></script>
-<script src="src/media/js/general_tab.js"></script>
-<script src="src/media/js/products_tab.js"></script>
+<script>
+    function revenueChart(data, container_id) {
+        var $chartContainer = $('#' + container_id);
+        $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
+        var chart = anychart.column();
+        chart.palette(palette);
+        chart.container(container_id);
+        var data_set = anychart.data.set(data);
+        var s1 = anychart.scales.linear();
+        var s2 = anychart.scales.linear();
+
+        chart.title(null);
+        chart.yAxis().orientation('left').title(null);
+        chart.xAxis().title(null);
+        chart.yAxis().scale(s1);
+        chart.yAxis(1).scale(s2).orientation('right');
+        chart.yAxis().scale().minimum(0);
+        chart.yAxis(1).scale().minimum(0);
+
+
+        chart.yAxis().labels().fontSize(11).textFormatter(function(){
+            return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
+        });
+        chart.yAxis(1).labels().padding(0,0,0,5).fontSize(11);
+        chart.xAxis().labels().padding(5,0,0,0).fontSize(11);
+
+        var series = chart.column(data_set.mapAs({value: [1], x: [0]}));
+        series.yScale(s1);
+        series.name('Revenue, $');
+
+        var series2 = chart.line(data_set.mapAs({value: [2], x: [0]}));
+        series2.yScale(s2);
+        series2.name('Units sold');
+
+        chart.legend().enabled(true).tooltip(false).align('center');
+        chart.padding(10, 0, 0, 0);
+        chart.draw();
+    }
+    $(function () {
+        generatedGeneralData = generateGeneralDataForAll();
+        generalData = generatedGeneralData['YTD'];
+        revenueChart(generalData['revenue_chart'], 'revenue-chart');
+    });
+
+</script>
 </html>

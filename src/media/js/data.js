@@ -64,7 +64,7 @@ var VINES = [
     'Les Domaines Montariol',
     'Tour du Vosc',
     'Chevalier Nicolas',
-    'Chateau Saint Nicolas,',
+    'Chateau Saint Nicolas',
     'Georges Duboeuf',
     'Barton & Guestier',
     'Domaine de Tara',

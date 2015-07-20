@@ -58,42 +58,42 @@
         </nav>
     </div>
     <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="tab-pane active" id="general">
+        <div class="tab-pane" id="general">
             <div class="mdl-grid demo-content">
                 <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
                     <h2>Revenue Dynamic</h2>
-                    <div id="revenue-chart" class="chart" data-height="300"></div>
+                    <div id="revenue-chart" class="chart" data-height="250"></div>
                 </div>
                 <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
                     <h2>Key Metrics</h2>
-                    <div id="key-metric-chart" class="chart" data-height="300"></div>
+                    <div id="key-metric-chart" class="chart" data-height="250"></div>
                 </div>
 
 
                 <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
-                    <h2>Top 5 from Sales Team <span> (<a onclick="changeTab('sales-team')">more</a>)</span> </h2>
-                    <div id="top-5-sales"  data-height="200" class="chart label-chart"></div>
+                    <h2>Top 5 Sales Team <span> (<a onclick="changeTab('sales-team')">more</a>)</span> </h2>
+                    <div id="top-5-sales"  data-height="250" class="chart label-chart"></div>
                 </div>
                 <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
-                    <h2>Top 5 from Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
-                    <div id="top-5-regions"  data-height="200" class="chart label-chart"></div>
+                    <h2>Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
+                    <div id="top-5-regions"  data-height="250" class="chart label-chart"></div>
                 </div>
                 <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
-                    <h2>Top 5 from Products <span>(<a onclick="changeTab('products')">more</a>) </span></h2>
-                    <div id="top-5-products"  data-height="200" class="chart label-chart"></div>
+                    <h2>Top 5 Products <span>(<a onclick="changeTab('products')">more</a>) </span></h2>
+                    <div id="top-5-products"  data-height="250" class="chart label-chart"></div>
                 </div>
             </div>
         </div>
-        <div class="tab-pane" id="products">
+        <div class="tab-pane active" id="products">
             <div class="mdl-grid demo-content mdl-grid--no-spacing">
                 <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid ">
                     <div class="demo-charts  mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop mdl-grid">
                         <h2>Product categories by revenue <br/><span class="text-muted">(In this sample products were divided in categories by the region they were produced)</span></h2>
-                        <div id="category-chart" class="chart" data-height="160"></div>
+                        <div id="category-chart" class="chart" data-height="200"></div>
                     </div>
                     <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
                         <h2>Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category </h2>
-                        <div id="category-map-chart"  data-height="250" class="chart label-chart"></div>
+                        <div id="category-map-chart"  data-height="210" class="chart label-chart"></div>
                     </div>
 
                 </div>
@@ -106,7 +106,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane" id="regions">
+        <div class="tab-pane " id="regions">
             <div class="mdl-grid demo-content mdl-grid--no-spacing">
                 <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid ">
                     <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane" id="sales-team">
+        <div class="tab-pane " id="sales-team">
             <div class="mdl-grid demo-content mdl-grid--no-spacing">
                 <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid ">
                     <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop">

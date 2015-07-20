@@ -1,46 +1,86 @@
-var tooltipContentForRevenueChart = function(series){
+var tooltipContentForCategoryChart = function(series, average){
     setupBigTooltip(series);
     series.tooltip().contentFormatter(function(){
         var current = '$' + parseInt(this.value).formatMoney(0, '.', ',') ;
         var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">';
         var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-        var result = span_for_title + this.x + ' (' + current + ')</span><br/><br/>';
-        var to_target = 248000 - this.value;
-        to_target = to_target.formatMoney(0, '.', ',') + '$';
-        var profit = this.value - 100000;
-        profit = profit.formatMoney(0, '.', ',') + '$';
-        result = result + span_for_names + 'To target: </span>' + to_target + '<br/>';
-        result = result + span_for_names + 'Profit: </span>' + profit + '<br/>';
+        var result = span_for_title + this.x + '</span><br/><br/>';
+
+        result = result + span_for_names + 'Revenue: </span>' + current + '<br/>';
+        if (this.value <= average) {
+            result = result + span_for_names + 'Less than Average by: </span><span style="color: #1976d2"> -$' + (average - this.value).formatMoney(0, '.', ',') + '</span><br/>';
+        } else if (this.value > average) {
+            result = result + span_for_names + 'More than Average by: </span><span style="color: #dd2c00"> +$' + (this.value - average).formatMoney(0, '.', ',') + '</span><br/>';
+        }
         return result;
     });
 };
 
+
+var tooltipContentForMapChart = function(series){
+    setupBigTooltip(series);
+    series.tooltip().contentFormatter(function(){
+        var current = '$' + parseInt(this.value).formatMoney(0, '.', ',') ;
+        var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 13px">';
+        var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
+        var result = span_for_title + this.name + '</span><br/><br/>';
+
+        result = result + span_for_names + 'Revenue: </span>' + current;
+        return result;
+    });
+};
+
+
 var selectedX = null;
 var globalData, revenueDataSet;
+
+function getAverage(data, index){
+    var sum = 0;
+    for (var i=0; i<data.length; i++){
+        sum += data[i][index];
+    }
+    return Math.round(sum/data.length)
+}
+
 
 function categoryChart(data, container_id) {
     globalData = data;
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
-    var chart = anychart.column();
-    chart.palette(palette);
+    var chart = anychart.bar();
     chart.container(container_id);
-    var data_set = revenueDataSet = anychart.data.set(globalData);
-    chart.title(null);
-    chart.yAxis().orientation('left').title(null);
-    chart.xAxis().title(null).labels(null);
-    chart.yAxis().labels().textFormatter(function(){
-        return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
-    });
 
-    var series = chart.column(data_set.mapAs({value: [1], x: [0]}));
-    series.name('Revenue, $');
+    chart.title(null);
+    chart.padding(5, 0, 0, 0);
+    chart.legend().enabled(false);
+    chart.palette(palette);
+    var data_set = revenueDataSet = anychart.data.set(globalData);
+    chart.xAxis().labels().fontSize(11);
+    chart.yAxis().enabled(false);
+    var series = chart.bar(data_set.mapAs({value: [1], x: [0]}));
+    series.clip(false);
+
     series.listen('pointClick', function (e) {
         drillDown(e.iterator.get('x'));
     });
-    tooltipContentForRevenueChart(series);
-    chart.legend().enabled(false);
-    chart.padding(20, 0, 0, 0);
+    chart.lineMarker()
+        .stroke({color: colorAxisFont, opacity: 1, thickness: '2 #cecece'})
+        .layout('vertical')
+        .scale(chart.yScale())
+        .value(getAverage(data, 'value'));
+
+    chart.textMarker()
+        .textSettings({fontSize: 10})
+        .scale(chart.yScale())
+        .fontColor(colorAxisFont)
+        .align('bottom')
+        .anchor('leftBottom')
+        .offsetX(5)
+        .offsetY(0)
+        .value(getAverage(data, 'value'))
+        .text('Average');
+    tooltipContentForCategoryChart(series, getAverage(data, 'value'));
+
     chart.draw();
     drillDown(globalData[0].x)
 }
@@ -223,17 +263,18 @@ function drawMap(data){
         var range = this.colorRange;
         var name;
         if (isFinite(range.start + range.end)) {
-          name = range.start + ' - ' + range.end;
+          name = range.start.formatMoney(0, '.', ',')  + ' - ' + range.end.formatMoney(0, '.', ',');
         } else if (isFinite(range.start)) {
-          name = 'more ' + range.start;
+          name = 'more ' + range.start.formatMoney(0, '.', ',');
         } else {
-          name = 'less ' + range.end;
+          name = 'less ' + range.end.formatMoney(0, '.', ',');
         }
         return name
     });
 
 
     var s1 = map.choropleth(data);
+    tooltipContentForMapChart(s1);
     s1.geoIdField('hc-key');
     s1.stroke('#000 .3');
     s1.labels(null);

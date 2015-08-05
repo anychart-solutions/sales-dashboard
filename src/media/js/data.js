@@ -180,7 +180,7 @@ var makeMapData = function(){
 
 var makeCategoriesProductData = function(){
     var data = [];
-    var result = generateData(1200, 600000, generateNumber(20, 30), false, 'vines');
+    var result = generateData(1200, 600000, generateNumber(15, 24), false, 'vines');
     for (var i = 0; i < result.length; i++){
         data.push({
             x: result[i][0],
@@ -188,7 +188,7 @@ var makeCategoriesProductData = function(){
             last: generateData(1500, 12000, 12, false, false),
             price: generateNumber(5, 60),
             average_price: generateNumber(10, 20),
-            mapData: makeMapData()
+            map_data: makeMapData()
         });
     }
     return data
@@ -202,7 +202,7 @@ var makeCategoriesData = function(){
             x: result[i][0],
             value: result[i][1],
             data: makeCategoriesProductData(),
-            mapData: makeMapData()
+            map_data: makeMapData()
         });
     }
     return data
@@ -473,3 +473,4 @@ var generateTeamDataForAll = function(){
         WTD: {'team_data': makeTeamData('WTD'), average_order: generateNumber(10, 400), average_revenue: generateNumber(1200, 3000)}
     }
 };
+

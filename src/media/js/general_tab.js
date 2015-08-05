@@ -1,38 +1,8 @@
-
 var drawGeneralRevenueChart = function(container_id){
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
-    var chart = anychart.column();
+    var chart = createRevenueChart();
     chart.container(container_id);
-
-    var s1 = anychart.scales.linear();
-    var s2 = anychart.scales.linear();
-    chart.yAxis().scale(s1);
-    chart.yAxis().scale().minimum(0);
-    chart.yAxis(1).scale(s2);
-    chart.yAxis(1).scale().minimum(0);
-
-    var series = chart.column();
-    series.yScale(s1);
-    series.name('Revenue, $');
-
-    var series2 = chart.line();
-    series2.yScale(s2);
-    series2.name('Units sold');
-
-    chart.title(null);
-    chart.yAxis().orientation('left').title(null);
-    chart.yAxis(1).orientation('right').title(null);
-    chart.xAxis().title(null);
-
-    chart.yAxis().labels().fontSize(11).textFormatter(function(){
-        return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
-    });
-    chart.yAxis(1).labels().padding(0,0,0,5).fontSize(11);
-    chart.xAxis().labels().padding(5,0,0,0).fontSize(11);
-
-    chart.legend().enabled(true).tooltip(false).align('center');
-    chart.padding(10, 0, 0, 0);
     chart.draw();
     return chart;
 };
@@ -44,7 +14,6 @@ var setGeneralRevenueData = function(chart, data){
 
     chart.getSeries(1).data(data_set.mapAs({value: [2], x: [0]}));
     tooltipContentForChart(chart.getSeries(1), 'revenue-sold', data);
-
 };
 
 var drawGeneralKeyMetricTable = function(container_id){
@@ -62,16 +31,8 @@ var drawGeneralKeyMetricTable = function(container_id){
         .vAlign('middle');
     table.getRow(0).cellBorder().bottom('1px #dedede');
     table.getRow(0).vAlign('bottom');
-
-
     table.contents([
-        [
-            'Last 12 months',
-            null,
-            'Metric',
-            'Variance from plan',
-            'Current'
-        ]
+        ['Last 12 months', null, 'Metric', 'Variance from plan', 'Current']
     ]);
 
     table.getRow(0).height(35);
@@ -162,7 +123,7 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
         label_src = './src/media/i/pie.jpg';
         new_type = 'pie';
         var bar_data = data.slice(0, data.length - 1);
-        chart = anychart.bar();
+        var chart = anychart.bar();
         chart.yAxis().enabled(false);
         chart.xAxis().title().enabled(false);
         chart.xAxis().labels().padding(0,5,0,0).fontSize(11);
@@ -171,8 +132,9 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
         series.pointWidth('50%');
         tooltipContentForChart(series, 'with_percent');
     } else {
-        var chart = anychart.pie(data);
+        chart = anychart.pie(data);
         chart.stroke('3 #fff');
+        chart.radius('30%');
         chart.hoverStroke(null);
         chart.labels().fontSize(11).position('o');
         chart.labels().textFormatter(function(){return this.x});

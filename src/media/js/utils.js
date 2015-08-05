@@ -7,6 +7,8 @@ var generalRevenueChart, generalKeyMetricTable;
 var top5productsStage, top5salesStage, top5regionsStage;
 var top5productsChart, top5salesChart, top5regionsChart;
 var categoryChart, categoryMapChart, categoryProductTable;
+var teamMainChart, teamPersonalRevenueChart, teamPersonalShareChart, teamPersonalWinRatioChart;
+var regionsChart, regionRevenueChart, regionTotalShareChart, regionMarketShareChart;
 
 function changeTab(tab_name) {
     $('.mdl-navigation a').removeClass('active');
@@ -32,6 +34,8 @@ function changeData(filter) {
     top5salesChart = changeDataFor5Top(top5salesStage, generalData['five_best']['sales_men'], 'pie', top5salesChart);
     top5regionsChart = changeDataFor5Top(top5regionsStage, generalData['five_best']['regions'], 'pie', top5regionsChart);
     changeCategoryData(categoryChart, productsData['categories_data']);
+    setMainTeamChartData(teamMainChart, salesTeamData);
+    setRegionsChartData(regionsChart, regionsData);
 }
 
 function drawAllCharts(filter){
@@ -59,18 +63,24 @@ function drawAllCharts(filter){
     acgraph.events.listen(categoryProductTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
     changeCategoryData(categoryChart, productsData['categories_data']);
 
-    //regionsChart(regionsData['regions_data'], 'regions-chart');
-    //fillMenuList(regionsData['regions_data']);
+    teamMainChart = drawTeamMainChart('sales-team-chart');
+    teamPersonalRevenueChart = drawTeamPersonalRevenueChart('sales-for-person');
+    teamPersonalShareChart = drawTeamPersonalShareChart('total_share_for_person');
+    teamPersonalWinRatioChart = drawTeamPersonalWinRatioChart('win_ratio_for_person');
+    setMainTeamChartData(teamMainChart, salesTeamData);
 
-    //salesTeamChart(salesTeamData['team_data'], salesTeamData['average_order'], 'sales-team-chart');
-
+    regionsChart = drawRegionsMapChart('regions-chart');
+    regionRevenueChart = drawRegionRevenueChart('sales-in-region-chart');
+    regionTotalShareChart = drawRegionTotalShareChart('total_share');
+    regionMarketShareChart = drawRegionMarketShareChart('market_share');
+    setRegionsChartData(regionsChart, regionsData);
 }
 
 $(function () {
     generatedGeneralData = generateGeneralDataForAll();
     generatedProductsData = generateProductsDataForAll();
-    generatedRegionsData = generateRegionsDataForAll();
     generatedSalesTeamData = generateTeamDataForAll();
+    generatedRegionsData = generateRegionsDataForAll();
     drawAllCharts('YTD');
     changeTab($('.tab-pane.active').attr('id'))
 });
@@ -82,13 +92,12 @@ function getDataByX(data, x){
     return null
 }
 
-function getTooltipContent(title, params){
+function getTooltipContent(params){
     var span_for_names = '<span style="color:' + darkAccentColor + '; font-size: 12px">';
-    var span_for_title = '<span style="color:' + colorAxisFont + '; font-size: 14px">';
-    var strong_for_value = '<strong style="color:' + darkAccentColor + '; font-size: 14px"> ';
-    var result = span_for_title + title + '</span><br/><br/>';
+    var strong_for_value = '<span style="color:' + fontColor + '; font-size: 12px"> ';
+    var result = '';
     for (var i=0; i<params.length; i++){
-        result = result + span_for_names + params[i].text + '</span>' + strong_for_value + params[i].value + '</strong>';
+        result = result + span_for_names + params[i].text + '</span>' + strong_for_value + params[i].value + '</span>';
         if (i < params.length - 1) result = result + '<br/>'
     }
     return result;
@@ -97,22 +106,29 @@ function getTooltipContent(title, params){
 
 function tooltipContentForChart(series, format, data){
     setupBigTooltip(series);
+    series.tooltip().title().fontColor(fontColor);
+    series.tooltip().separator().margin(0,0,5,0);
+    series.tooltip().content().lineHeight('5px');
+    series.tooltip().titleFormatter(function(){
+        if (format == 'simple_map') {
+            return this.name;
+        } else {
+            return this.x
+        }
+    });
     series.tooltip().contentFormatter(function(){
         if (format == 'revenue-sold'){
             var values = getDataByX(data, this.x);
-            var title = this.x;
             var params = [
                 {'text': 'Units sold:', value: parseInt(values[2]) },
                 {'text': 'Revenue:', value: '$' + parseInt(values[1]).formatMoney(0, '.', ',')}
             ];
         }else if (format == 'with_percent'){
-            title = this.x;
             var percent = (this.value * 100 / this.getStat('sum')).toFixed(1);
             params = [
                 {'text': percent + '%', value: '$' + parseInt(this.value).formatMoney(0, '.', ',')}
             ];
         }else if (format == 'with_average'){
-            title = this.x;
             params = [
                 {'text': 'Revenue:', value: '$' + parseInt(this.value).formatMoney(0, '.', ',')}
             ];
@@ -122,15 +138,46 @@ function tooltipContentForChart(series, format, data){
                 params.push({'text': 'More than Average by:', value: '<span style="color: #1976d2; font-weight: 100"> +$' + (this.value - data).formatMoney(0, '.', ',') + '</span>'});
             }
         }else if (format == 'simple_map'){
-            title = this.name;
             params = [
                 {'text': 'Revenue:', value: '$' + parseInt(this.value).formatMoney(0, '.', ',')}
             ];
         }
-        return getTooltipContent(title, params);
+        return getTooltipContent(params);
     });
 }
 
+var createRevenueChart = function () {
+    var chart = anychart.column();
+    var s1 = anychart.scales.linear();
+    var s2 = anychart.scales.linear();
+    chart.yAxis().scale(s1);
+    chart.yAxis().scale().minimum(0);
+    chart.yAxis(1).scale(s2);
+    chart.yAxis(1).scale().minimum(0);
+
+    var series = chart.column();
+    series.yScale(s1);
+    series.name('Revenue, $');
+
+    var series2 = chart.line();
+    series2.yScale(s2);
+    series2.name('Units sold');
+
+    chart.title(null);
+    chart.yAxis().orientation('left').title(null);
+    chart.yAxis(1).orientation('right').title(null);
+    chart.xAxis().title(null);
+
+    chart.yAxis().labels().fontSize(11).textFormatter(function () {
+        return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
+    });
+    chart.yAxis(1).labels().padding(0, 0, 0, 5).fontSize(11);
+    chart.xAxis().labels().padding(5, 0, 0, 0).fontSize(11);
+
+    chart.legend().enabled(true).tooltip(false).align('center');
+    chart.padding(10, 0, 0, 0);
+    return chart
+};
 
 var createSparkLine = function (data) {
     var sparkLine = anychart.sparkline(data);
@@ -165,6 +212,7 @@ var createBulletChart = function (min, max, actual, target, invert) {
     bullet.axis(null);
     bullet.title().enabled(false);
     bullet.padding(0, -1);
+    bullet.margin(0);
     bullet.rangePalette(bullet_range_palette);
     bullet.scale().minimum(min);
     bullet.scale().maximum(max);
@@ -190,6 +238,73 @@ function createBulletScale(max, min, interval, value_str){
     return axis
 }
 
+function createSolidChart(){
+    var gauge = anychart.circularGauge();
+    gauge.background(null);
+    gauge.fill(null);
+    gauge.stroke(null);
+    var axis = gauge.axis().radius(100).width(1).fill(null);
+    axis.scale()
+        .minimum(0)
+        .maximum(100)
+        .ticks({interval: 1})
+        .minorTicks({interval: 1});
+    axis.labels().enabled(false);
+    axis.ticks().enabled(false);
+    axis.minorTicks().enabled(false);
+
+    var stroke = '1 #e5e4e4';
+    gauge.bar(0).dataIndex(0).radius(80).width(50).fill(palette.colorAt(0)).stroke(null).zIndex(5);
+    gauge.bar(1).dataIndex(1).radius(80).width(50).fill('#F5F4F4').stroke(stroke).zIndex(4);
+    gauge.label()
+        .text('')
+        .hAlign('center')
+        .anchor('center')
+        .padding(5, 10)
+        .zIndex(1);
+    return gauge
+}
+
+function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSegments, colorRangesSegmentsColors){
+    var map = anychart.map();
+    map.geoData(Highcharts.maps["countries/fr/fr-all"]);
+    map.background(null);
+    map.legend(null);
+    map.title(null);
+
+    var cr = map.colorRange().enabled(true);
+    cr.orientation(colorRangeOrientation);
+    cr.colorLineSize(10);
+    cr.marker().size(5);
+    cr.align(colorRangeAlign);
+    cr.stroke(null);
+    cr.ticks().enabled(true).stroke('2 #fff');
+    cr.ticks().position('center').length(10);
+    cr.labels().fontSize(11).padding(0,0,0,5).textFormatter(function(){
+        var range = this.colorRange;
+        var name;
+        if (isFinite(range.start + range.end)) {
+          name = range.start.formatMoney(0, '.', ',')  + ' - ' + range.end.formatMoney(0, '.', ',');
+        } else if (isFinite(range.start)) {
+          name = 'more ' + range.start.formatMoney(0, '.', ',');
+        } else {
+          name = 'less ' + range.end.formatMoney(0, '.', ',');
+        }
+        return name
+    });
+
+    var s1 = map.choropleth();
+    s1.geoIdField('hc-key');
+    s1.labels(null);
+    tooltipContentForChart(s1, 'simple_map');
+    var ocs = anychart.scales.ordinalColor(colorRangesSegments);
+    ocs.colors(colorRangesSegmentsColors);
+    s1.colorScale(ocs);
+    s1.hoverFill(darkAccentColor);
+    map.padding(0).margin(0);
+    return map
+}
+
 function getAverage(data, index){
     var sum = 0;
     for (var i=0; i<data.length; i++){
@@ -208,7 +323,6 @@ Number.prototype.formatMoney = function (c, d, t) {
         j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
-
 
 
 

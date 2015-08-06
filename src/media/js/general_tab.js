@@ -127,7 +127,7 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
         chart.yAxis().enabled(false);
         chart.xAxis().title().enabled(false);
         chart.xAxis().labels().padding(0,5,0,0).fontSize(11);
-        chart.padding(20, 12, 20, 0);
+        chart.padding(0, 12, 0, 0);
         var series = chart.bar(bar_data);
         series.pointWidth('50%');
         tooltipContentForChart(series, 'with_percent');
@@ -135,6 +135,7 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
         chart = anychart.pie(data);
         chart.stroke('3 #fff');
         chart.radius('30%');
+        chart.padding(0);
         chart.hoverStroke(null);
         chart.labels().fontSize(11).position('o');
         chart.labels().textFormatter(function(){return this.x});

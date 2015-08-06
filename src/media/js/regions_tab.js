@@ -1,3 +1,5 @@
+var selectedPoint;
+
 function drawRegionsMapChart(container_id){
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
@@ -18,15 +20,23 @@ function drawRegionsMapChart(container_id){
 }
 
 function setRegionsChartData(map, data){
-    map.getSeries(0).data(data);
-    console.log(map, data);
+    map.getSeries(0).data(data.regions_data);
+    fillMenuList(data.regions_data);
+    regionsChart.getSeries(0).unselect();
     map.listen(anychart.enums.EventType.POINT_SELECT, function(e) {
-        var selectedPoint = e.selectedPoint;
+        selectedPoint = e.selectedPoint;
         if (selectedPoint) {
           drillDownRegion(selectedPoint);
         }
       });
     map.getSeries(0).select(1);
+
+    $('.region-name').html(data.regions_data[1].name);
+    regionTotalShareChart.data([data.regions_data[1].total_share, 100]);
+    regionTotalShareChart.label().text(data.regions_data[1].total_share + '%');
+    regionMarketShareChart.data([data.regions_data[1].market_share, 100]);
+    regionMarketShareChart.label().text(data.regions_data[1].market_share + '%');
+    setGeneralRevenueData(regionRevenueChart, data.regions_data[1].revenue);
 }
 
 function drawRegionRevenueChart(container_id){
@@ -44,6 +54,7 @@ function drawRegionTotalShareChart(container_id){
     var chart = createSolidChart();
     chart.container(container_id);
     chart.draw();
+    return chart;
 }
 
 function drawRegionMarketShareChart(container_id){
@@ -52,28 +63,39 @@ function drawRegionMarketShareChart(container_id){
     var chart = createSolidChart();
     chart.container(container_id);
     chart.draw();
+    return chart;
 }
 
 function drillDownRegion(x){
-    console.log(x);
-    //var data;
-    //for (var i=0; i<globalData.length; i++){
-    //    if (globalData[i].id == x.id)
-    //        data = globalData[i];
-    //}
-    ////s1.select(i);
-    //revenueChart(data.revenue, 'sales-in-region-chart');
-    //shareChart(data.total_share, 'total_share');
-    //shareChart(data.market_share, 'market_share');
-    //$('.region-name').html(x.properties.name);
+    var point_data = getDataByX(regionsData['regions_data'], x.id);
+    $('.region-name').html(point_data.x);
+    regionTotalShareChart.data([point_data.total_share, 100]);
+    regionTotalShareChart.label().text(point_data.total_share + '%');
+    regionMarketShareChart.data([point_data.market_share, 100]);
+    regionMarketShareChart.label().text(point_data.market_share + '%');
+    setGeneralRevenueData(regionRevenueChart, point_data.revenue);
 }
 
-//function fillMenuList(data){
-//    for (var i=0; i<data.length; i++){
-//        //var li_item = $('<li class="mdl-menu__item" onclick="drillDownRegion({id: \'' + data[i].id + '\', properties: {name: \'' + data[i].x + '\'}})">' + data[i].x + '</li>');
-//        var li_item = $('<li class="mdl-menu__item" onclick="s1.select(' + i + ')">' + data[i].x + '</li>');
-//        //li_item.attr('onclick', function(){return drillDownRegion(data[i])});
-//        //console.log(data[i]);
-//        $('#region-name-menu-list').append(li_item);
-//    }
-//}
+function selectPoint(x){
+    regionsChart.getSeries(0).unselect();
+    for ( var i=0; i<regionsData['regions_data'].length; i++){
+        if (regionsData['regions_data'][i].x == x) {
+            regionsChart.getSeries(0).select(i);
+            var point_data = regionsData['regions_data'][i];
+        }
+    }
+    $('.region-name').html(point_data.x);
+    regionTotalShareChart.data([point_data.total_share, 100]);
+    regionTotalShareChart.label().text(point_data.total_share + '%');
+    regionMarketShareChart.data([point_data.market_share, 100]);
+    regionMarketShareChart.label().text(point_data.market_share + '%');
+    setGeneralRevenueData(regionRevenueChart, point_data.revenue);
+}
+
+function fillMenuList(data){
+    for (var i=0; i<data.length; i++){
+        var li_item = $('<li class="mdl-menu__item" onclick="selectPoint(\'' + data[i].x + '\');">' + data[i].x + '</li>');
+        $('#region-name-menu-list').append(li_item);
+    }
+    $('.region-name').html(data[0].x)
+}

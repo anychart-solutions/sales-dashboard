@@ -87,7 +87,9 @@ $(function () {
 
 function getDataByX(data, x){
     for ( var i=0; i<data.length; i++){
-        if (data[i][0] == x) return data[i]
+        if (data[i][0] == x) return data[i];
+        if (data[i].id == x) return data[i];
+        if (data[i].name == x) return data[i]
     }
     return null
 }
@@ -300,7 +302,8 @@ function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSe
     var ocs = anychart.scales.ordinalColor(colorRangesSegments);
     ocs.colors(colorRangesSegmentsColors);
     s1.colorScale(ocs);
-    s1.hoverFill(darkAccentColor);
+    s1.hoverFill('#CCCFD2');
+    s1.selectFill(darkAccentColor);
     map.padding(0).margin(0);
     return map
 }

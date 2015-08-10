@@ -136,6 +136,7 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
         chart.stroke('3 #fff');
         chart.radius('30%');
         chart.padding(0);
+        chart.explode(5);
         chart.hoverStroke(null);
         chart.labels().fontSize(11).position('o');
         chart.labels().textFormatter(function(){return this.x});

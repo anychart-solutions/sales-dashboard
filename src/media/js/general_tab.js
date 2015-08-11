@@ -29,7 +29,7 @@ var drawGeneralKeyMetricTable = function(container_id){
         .useHtml(true)
         .fontColor(darkAccentColor)
         .vAlign('middle');
-    table.getRow(0).cellBorder().bottom('1px #dedede');
+    //table.getRow(0).cellBorder().bottom('1px #dedede');
     table.getRow(0).vAlign('bottom');
     table.contents([
         ['Last 12 months', null, 'Metric', 'Variance from plan', 'Current']

@@ -1,3 +1,7 @@
+.anychart-credits {
+    display: none;
+}
+
 html {
     height: 100%;
 }
@@ -5,7 +9,7 @@ html {
 body {
     font-family: 'Verdana', Helvetica, Arial, sans-serif;
     height: 100%;
-    background: #f6f6f6;
+    background: #fff;
 }
 
 a {
@@ -120,7 +124,7 @@ hr {
     display: block;
     min-height: 100%;
     position: absolute;
-    background-color: #fff;
+    background-color: #f6f6f6;
     border: 1px solid #EAEAEA;
     border-radius: 0;
     padding: 20px 0 0 0;
@@ -179,24 +183,24 @@ hr {
     text-decoration: none;
 }
 
-.credits {
+.dashboard-credits {
     position: absolute;
     right: 20px;
     bottom: 5px;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.credits a {
+.dashboard-credits a {
     font-size: 11px;
     line-height: 12px;
     color: #929292;
 }
 
-.credits a:hover {
+.dashboard-credits a:hover {
     text-decoration: none;
 }
 
-.credits img {
+.dashboard-credits img {
     height: 12px;
 }
 
@@ -215,22 +219,17 @@ hr {
 .chart-block {
     padding: 0 20px 5px 20px;
     margin: 3px 0 15px 0;
-    background-color: #ffffff;
-    border: 1px solid #EAEAEA;
-    border-radius: 2px;
-    -webkit-box-shadow: 3px 3px 3px -1px rgba(124, 134, 142, 0.2);
-    -moz-box-shadow: 3px 3px 3px -1px rgba(124, 134, 142, 0.2);
-    box-shadow: 3px 3px 3px -1px rgba(124, 134, 142, 0.2);
 }
 
 h2.chart-title {
     text-align: center;
     font-size: 16px;
     line-height: 18px;
+    min-height: 23px;
     margin: 10px 0 5px 0;
     padding: 0;
     width: 100%;
-    color: #545f69;
+    color: #7c868e;
 }
 
 h2.chart-title span {
@@ -254,6 +253,7 @@ h2.chart-title a:hover {
 }
 
 .chart {
+    border-top: 1px solid #dedede;
     width: 100%;
 }
 
@@ -262,7 +262,7 @@ h2.chart-title span.product-name,
 h2.chart-title span.region-name,
 h2.chart-title span.person-name {
     color: #212121;
-    text-decoration: underline;
+    font-style: italic;
     font-size: 16px;
     line-height: 20px;
     text-transform: none;

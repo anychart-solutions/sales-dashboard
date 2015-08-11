@@ -30,7 +30,7 @@ function drawTeamMainChart(container_id){
         .useHtml(true)
         .fontColor(darkAccentColor);
 
-    table.getRow(0).cellBorder().bottom('1px #dedede');
+    //table.getRow(0).cellBorder().bottom('1px #dedede');
     table.getRow(0).vAlign('bottom');
     table.getRow(0).height(35);
     table.getCol(1).hAlign('center');

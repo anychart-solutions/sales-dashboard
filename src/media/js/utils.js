@@ -69,6 +69,7 @@ function drawAllCharts(filter){
     setMainTeamChartData(teamMainChart, salesTeamData);
 
     regionsChart = drawRegionsMapChart('regions-chart');
+    fillMenuList(regionsData.regions_data);
     regionRevenueChart = drawRegionRevenueChart('sales-in-region-chart');
     regionTotalShareChart = drawRegionTotalShareChart('total_share');
     regionMarketShareChart = drawRegionMarketShareChart('market_share');

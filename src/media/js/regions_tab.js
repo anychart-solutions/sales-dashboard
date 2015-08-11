@@ -2,6 +2,7 @@ var selectedPoint;
 
 function drawRegionsMapChart(container_id){
     var $chartContainer = $('#' + container_id);
+
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var map = createMapOfFrance(
         'bottom',
@@ -21,7 +22,6 @@ function drawRegionsMapChart(container_id){
 
 function setRegionsChartData(map, data){
     map.getSeries(0).data(data.regions_data);
-    fillMenuList(data.regions_data);
     regionsChart.getSeries(0).unselect();
     map.listen(anychart.enums.EventType.POINT_SELECT, function(e) {
         selectedPoint = e.selectedPoint;

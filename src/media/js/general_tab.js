@@ -127,7 +127,7 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
         chart.yAxis().enabled(false);
         chart.xAxis().title().enabled(false);
         chart.xAxis().labels().padding(0,5,0,0).fontSize(11);
-        chart.padding(0, 12, 0, 0);
+        chart.padding(10, 12, 0, 0);
         var series = chart.bar(bar_data);
         series.pointWidth('50%');
         tooltipContentForChart(series, 'with_percent');
@@ -145,6 +145,7 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
     var label = chart.label();
     label.enabled(true)
         .position('rightTop').anchor('rightTop')
+        .offsetY(5)
         .width(25).height(25).text('')
         .background({enabled: true, fill: {src: label_src}, stroke: null});
 

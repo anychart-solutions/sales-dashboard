@@ -12,7 +12,7 @@ var drawCategoryChart = function(container_id){
     chart.container(container_id);
 
     chart.title(null);
-    chart.padding(5, 0, 0, 0);
+    chart.padding(15, 0, 5, 0);
     chart.legend().enabled(false);
     chart.xAxis().labels().fontSize(11);
     chart.yAxis().enabled(false);

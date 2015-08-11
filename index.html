@@ -2,166 +2,243 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title> Sales Dashboard in Material Design</title>
+    <title>Sales Dashboard</title>
+
+    <link rel="icon" href="src/media/i/anychart.ico">
     <script src="src/media/vendors/jquery/jquery-2.1.3.min.js"></script>
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.blue_grey-light_blue.min.css">
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css"  href="src/media/css/default.css"/>
+    <script src="src/media/vendors/bootstrap-3/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"  href="src/media/vendors/bootstrap-3/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"  href="src/media/vendors/font-awesome-4.4.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css"  href="src/media/css/styles.css"/>
 </head>
 <body>
-<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header ">
-    <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
-        <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">Sales Dashboard in Material Design, <span class="light-text">"Wine Sales in France"</span></span>
-            <div class="mdl-layout-spacer"></div>
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon  mdl-button--mini-fab mdl-button--colored" id="menu-list">
-                <i class="material-icons">more_vert</i>
-            </button>
+<div class="global-shadow"></div>
 
-            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="menu-list">
-                <li class="mdl-menu__item"><a href=""><i class="material-icons">info_outline</i> About this dashboard</a></li>
-                <li class="mdl-menu__item"><a href=""><i class="material-icons">help_outline</i> Contact support</a></li>
-            </ul>
-        </div>
-    </header>
-    <div class="demo-drawer mdl-layout__drawer">
-        <nav class="demo-navigation mdl-navigation">
-            <a class="mdl-navigation__link general active" onclick="changeTab('general')"><i class="material-icons">party_mode</i> General Info</a>
-            <a class="mdl-navigation__link products " onclick="changeTab('products')"><i class="material-icons">shopping_cart</i> Sales by Products</a>
-            <a class="mdl-navigation__link sales-team " onclick="changeTab('sales-team')"><i class="material-icons">people</i> Sales Team Rates</a>
-            <a class="mdl-navigation__link regions " onclick="changeTab('regions')"><i class="material-icons">public</i> Sales by Regions</a>
-            <hr/>
-            <div class="period-selector">
-                 <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="WTD" onclick="changeData('WTD')"/>
-                    <span class="mdl-radio__label">WTD</span>
-                </label>
-                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                    <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="MTD" onclick="changeData('MTD')"/>
-                    <span class="mdl-radio__label">MTD</span>
-                </label>
-                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
-                    <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="QTD" onclick="changeData('QTD')"/>
-                    <span class="mdl-radio__label">QTD</span>
-                </label>
-                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
-                    <input type="radio" id="option-4" class="mdl-radio__button" name="options" value="YTD" checked onclick="changeData('YTD')"/>
-                    <span class="mdl-radio__label">YTD</span>
-                </label>
-                <p><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-5">
-                    <input type="radio" id="option-5" class="mdl-radio__button" name="options" value="all" onclick="changeData('all')"/>
-                    <span class="mdl-radio__label">All Time</span>
-                </label>
+<div class="modal fade" id="aboutDashboardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sales Dashboard <span class="bright-text">"Wine Sales in France"</span></h4>
             </div>
-        </nav>
+            <div class="modal-body">
+                <h4>Idea and goal</h4>
+                <p> Nunc vulputate magna ac laoreet blandit. Aenean at metus a eros sodales sagittis. Vivamus urna neque, fringilla vel turpis vitae, aliquam dignissim velit. Aenean tincidunt tempus enim nec consectetur. Nam purus est, dictum vel congue vel, faucibus eu sem. Mauris libero urna, consequat at aliquet ut, ultrices vitae diam. Donec quis eleifend est. Sed tempus nec justo non tempus. Nulla ex felis, tempor sed porta ac, lobortis id dolor. Vestibulum ac congue odio.
+
+                <h4>Use custom data</h4>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mi quam, rutrum non augue sit amet, varius elementum tortor. Ut auctor odio at metus commodo, sit amet interdum orci imperdiet. Aliquam euismod lorem mi, id eleifend libero posuere a. Sed nec eros ut dui efficitur lacinia at eget est. Quisque eget turpis efficitur, gravida ante in, tincidunt diam. Etiam erat libero, maximus vel dolor vel, fermentum dapibus purus. Donec lacus nulla, tincidunt ultricies mauris quis, pharetra porttitor urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut sapien dolor, facilisis sed dolor convallis, rutrum ultricies nibh. Mauris lorem turpis, vehicula vel sapien eu, vehicula rhoncus purus.
+
+                <h4>Chart types</h4>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mi quam, rutrum non augue sit amet, varius elementum tortor. Ut auctor odio at metus commodo, sit amet interdum orci imperdiet. Aliquam euismod lorem mi, id eleifend libero posuere a. Sed nec eros ut dui efficitur lacinia at eget est. Quisque eget turpis efficitur, gravida ante in, tincidunt diam. Etiam erat libero, maximus vel dolor vel, fermentum dapibus purus. Donec lacus nulla, tincidunt ultricies mauris quis, pharetra porttitor urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut sapien dolor, facilisis sed dolor convallis, rutrum ultricies nibh. Mauris lorem turpis, vehicula vel sapien eu, vehicula rhoncus purus.
+            </div>
+        </div>
     </div>
-    <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="tab-pane active" id="general">
-            <div class="mdl-grid demo-content">
-                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                    <h2>Revenue Dynamic</h2>
-                    <div id="general-revenue-chart" class="chart" data-height="230"></div>
+</div>
+
+<div class="row title-dashboard-panel">
+    <div class="col-lg-8 col-lg-offset-3 dashboard-limitation">
+        <h1 class="title">
+            <a class="hidden-lg switcher" onclick="showBars(true)"><i class="fa fa-bars"></i></a>
+            Sales Dashboard <span class="bright-text">"Wine Sales in France"</span>
+
+            <div class="btn-group pull-right submenu">
+                <a type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a data-toggle="modal" data-target="#aboutDashboardModal"><i class="fa fa-info-circle"></i> About this dashboard</a></li>
+                    <li><a href="http://anychart.com/support/" target="_blank"><i class="fa fa-life-ring"></i> Support</a></li>
+
+                </ul>
+            </div>
+        </h1>
+    </div>
+</div>
+
+<div class="col-lg-3 menu-dashboard-panel no-print ">
+    <div class="menu-wrapper">
+        <ul class="list-unstyled">
+            <li><a class="general active" onclick="changeTab('general')">General Info <i class="fa fa-balance-scale"></i></a></li>
+            <li><a class="products " onclick="changeTab('products')">Sales by Products <i class="fa fa-shopping-cart"></i></a></li>
+            <li><a class="sales-team " onclick="changeTab('sales-team')">Sales Team Rates <i class="fa fa-user"></i></a></li>
+            <li><a class="regions " onclick="changeTab('regions')"> Sales by Regions <i class="fa fa-map-marker"></i></a></li>
+        </ul>
+        <hr/>
+        <ul class="period-selector list-unstyled">
+            <li><label for="option-1">
+                <span>WTD</span>
+                <input type="radio" id="option-1" name="options" value="WTD" onclick="changeData('WTD')"/>
+            </label></li>
+            <li><label for="option-2">
+                <span>MTD</span>
+                <input type="radio" id="option-2" name="options" value="MTD" onclick="changeData('MTD')"/>
+            </label></li>
+            <li><label for="option-3">
+                <span>QTD</span>
+                <input type="radio" id="option-3" name="options" value="QTD" onclick="changeData('QTD')"/>
+            </label></li>
+            <li><label for="option-4">
+                <span>YTD</span>
+                <input type="radio" id="option-4" name="options" value="YTD" checked onclick="changeData('YTD')"/>
+            </label></li>
+            <li><label for="option-5">
+                <span>All Time</span>
+                <input type="radio" id="option-5" name="options" value="all" onclick="changeData('all')"/>
+            </label></li>
+        </ul>
+        <hr/>
+        <ul class="list-unstyled compressed">
+            <li><a class="">GitHub project<i class="fa fa-git"></i></i></a></li>
+            <li><a class="">Download .zip <i class="fa fa-download"></i></a></li>
+        </ul>
+        <div class="divider"></div>
+        <div class="credits"> <a href="http://anychart.com/"><img src="http://static.anychart.com/logo.png"/> AnyChart.com</a></div>
+    </div>
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-3 dashboard-limitation content">
+            <div class="tab-pane active" id="general">
+                <div class="col-md-6">
+                    <h2 class="chart-title">Revenue Dynamic</h2>
+                    <div class="chart-block">
+                        <div id="general-revenue-chart" class="chart" data-height="250"></div>
+                    </div>
                 </div>
-                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                    <h2>Key Metrics</h2>
-                    <div id="general-key-metric-chart" class="chart" data-height="230"></div>
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="chart-title">Key Metrics</h2>
+                    <div class="chart-block">
+                        <div id="general-key-metric-chart" class="chart" data-height="250"></div>
+                    </div>
                 </div>
-                <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
-                    <h2>Top 5 Products <span>(<a onclick="changeTab('products')">more</a>) </span></h2>
-                    <div id="top-5-products"  data-height="200" class="chart label-chart"></div>
+                <div class="col-md-4 col-sm-6">
+                    <h2 class="chart-title">Top 5 Products <span>(<a onclick="changeTab('products')">more</a>) </span>
+                    </h2>
+                    <div class="chart-block">
+                        <div id="top-5-products" data-height="200" class="chart label-chart"></div>
+                    </div>
+
                 </div>
-                <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
-                    <h2>Top 5 Sales Team <span> (<a onclick="changeTab('sales-team')">more</a>)</span> </h2>
-                    <div id="top-5-sales"  data-height="200" class="chart label-chart"></div>
+                <div class="col-md-4 col-sm-6">
+                    <h2 class="chart-title">Top 5 Sales Team <span>
+                        (<a onclick="changeTab('sales-team')">more</a>)</span></h2>
+                    <div class="chart-block">
+                        <div id="top-5-sales" data-height="200" class="chart label-chart"></div>
+                    </div>
                 </div>
-                <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
-                    <h2>Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
-                    <div id="top-5-regions"  data-height="200" class="chart label-chart"></div>
+                <div class="col-md-4 col-sm-6">
+                    <h2 class="chart-title">Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
+                    <div class="chart-block">
+                        <div id="top-5-regions" data-height="200" class="chart label-chart"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="tab-pane" id="products">
-            <div class="mdl-grid demo-content mdl-grid--no-spacing">
-                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid ">
-                    <div class="demo-charts  mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop mdl-grid">
-                        <h2>Product categories by revenue <br/><span class="text-muted">(In this sample products were divided in categories by the region they were produced)</span></h2>
+            <div class="tab-pane " id="products">
+                <div class="col-lg-6 col-sm-6">
+                    <h2 class="chart-title">
+                        Product categories by revenue <br/>
+                        <span class="text-muted">
+                            (In this sample products were divided in categories by the region they were produced)
+                        </span>
+                    </h2>
+                    <div class="chart-block">
                         <div id="category-chart" class="chart" data-height="200"></div>
                     </div>
-                    <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                        <h2>Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category </h2>
-                        <div id="category-map-chart"  data-height="180" class="chart label-chart"></div>
+                    <h2 class="chart-title">Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category</h2>
+                    <div class="chart-block ">
+                        <div id="category-map-chart" class="chart" data-height="225"></div>
                     </div>
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <h2 class="chart-title">Product sales in <span class="category-name"></span></h2>
+                    <div class="chart-block">
+                        <div id="category-products-chart" class="chart" data-height="510"></div>
+                    </div>
+                </div>
 
-                </div>
-                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop mdl-grid">
-                        <h2>Product sales in <span class="category-name"></span></h2>
-                        <div class="space-divider"></div>
-                        <div id="category-products-chart" class="chart" data-height="500"></div>
-                    </div>
-                </div>
+            </div>
+            <div class="tab-pane " id="sales-team">
+                 <div class="row">
+                     <div class="col-md-6">
+                         <h2 class="chart-title">Sales Team Rating</h2>
+                         <div class="chart-block">
+                             <div id="sales-team-chart" data-height="500" class="chart label-chart"></div>
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="row">
+                             <div class="col-lg-12">
+                                 <h2 class="chart-title">Revenue trend for <span class="person-name"></span></h2>
+                                 <div class="chart-block">
+                                     <div id="sales-for-person" class="chart" data-height="240"></div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-6">
+                                 <h2 class="chart-title">Share of Total Sales <br/>for <span class="person-name"></span></h2>
+                                 <div class="chart-block">
+                                     <div id="total_share_for_person" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-6">
+                                 <h2 class="chart-title">Win Ratio <br/> <span class="person-name"></span></h2>
+                                 <div class="chart-block">
+                                     <div id="win_ratio_for_person" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+            <div class="tab-pane" id="regions">
+                 <div class="row">
+                     <div class="col-md-6">
+                         <h2 class="chart-title">Regional Sales Range</h2>
+                         <div class="chart-block">
+                         <div id="regions-chart"  data-height="500" class="chart label-chart"></div>
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="row">
+                             <div class="col-lg-12">
+                                 <h2 class="chart-title"> Revenue trend for
+                                     <div class="btn-group">
+                                         <button id="region-name-menu" type="button" class="btn btn-link btn-xs dropdown-toggle"
+                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                 style="padding: 0">
+                                             <span class="region-name"></span> <span class="caret"></span>
+                                         </button>
+                                         <ul class="dropdown-menu"  id="region-name-menu-list"></ul>
+                                     </div>
+                                 </h2>
+                                 <div class="chart-block">
+                                     <div id="sales-in-region-chart" class="chart" data-height="230"></div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-6">
+                                 <h2 class="chart-title"> Share of Total Sales <br/>for <span class="region-name"></span></h2>
+                                 <div class="chart-block">
+                                     <div id="total_share" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-6">
+                                 <h2 class="chart-title">Market Share <br/>for <span class="region-name"></span></h2>
+                                 <div class="chart-block">
+                                     <div id="market_share" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
             </div>
         </div>
-        <div class="tab-pane " id="sales-team">
-            <div class="mdl-grid demo-content mdl-grid--no-spacing">
-                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid ">
-                    <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                        <h2> Sales Team Rating </h2>
-                        <div id="sales-team-chart"  data-height="500" class="chart label-chart"></div>
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                    <div class="demo-charts  mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop mdl-grid">
-                        <h2> Revenue trend for <span class="person-name"></span> </h2>
-                        <div id="sales-for-person" class="chart" data-height="200"></div>
-                    </div>
-
-                    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                        <h2> Share of Total Sales <br/>for <span class="person-name"></span></h2>
-                        <div id="total_share_for_person" class="chart" data-height="180"></div>
-                    </div>
-                    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                        <h2>Win Ratio <br/> <span class="person-name"></span></h2>
-                        <div id="win_ratio_for_person" class="chart" data-height="180"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane " id="regions">
-            <div class="mdl-grid demo-content mdl-grid--no-spacing">
-                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid ">
-                    <div class="demo-charts mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                        <h2>Regional Sales Range</h2>
-                        <div id="regions-chart"  data-height="500" class="chart label-chart"></div>
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                    <div class="demo-charts  mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-desktop mdl-grid">
-                        <h2> Data for
-                            <button id="region-name-menu" class="mdl-button mdl-js-button mdl-button--raised">
-                                <span><span class="region-name"></span><i class="material-icons">arrow_drop_down</i></span>
-                            </button>
-                            <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-                                for="region-name-menu" id="region-name-menu-list">
-                            </ul>
-                        </h2>
-                        <div id="sales-in-region-chart" class="chart" data-height="200"></div>
-                        <div class=" mdl-cell mdl-cell--4-col-tablet mdl-cell--6-col-desktop mdl-grid ">
-                            <h2> Share of Total Sales </h2>
-                            <div id="total_share" class="chart" data-height="180"></div>
-                        </div>
-                        <div class=" mdl-cell mdl-cell--4-col-tablet mdl-cell--6-col-desktop mdl-grid">
-                            <h2>Market Share </h2>
-                            <div id="market_share" class="chart" data-height="180"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+    </div>
 </div>
 
 </body>
@@ -170,10 +247,9 @@
 </script>
 <script src="http://code.highcharts.com/mapdata/countries/fr/fr-all.js"></script>
 <script src="src/media/vendors/anychart/anychart-bundle.min.js"></script>
-<script src="src/media/js/utils.js"></script>
-<script src="src/media/js/charts_view_settings.js"></script>
 <script src="src/media/js/data.js"></script>
-
+<script src="src/media/js/charts_view_settings.js"></script>
+<script src="src/media/js/utils.js"></script>
 <script src="src/media/js/general_tab.js"></script>
 <script src="src/media/js/products_tab.js"></script>
 <script src="src/media/js/regions_tab.js"></script>

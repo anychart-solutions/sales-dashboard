@@ -11,8 +11,8 @@ var teamMainChart, teamPersonalRevenueChart, teamPersonalShareChart, teamPersona
 var regionsChart, regionRevenueChart, regionTotalShareChart, regionMarketShareChart;
 
 function changeTab(tab_name) {
-    $('.mdl-navigation a').removeClass('active');
-    $('.mdl-navigation a.' + tab_name).addClass('active');
+    $('.menu-wrapper a').removeClass('active');
+    $('.menu-wrapper a.' + tab_name).addClass('active');
     $('.tab-pane').removeClass('active');
     $('#' + tab_name).addClass('active');
 }
@@ -27,7 +27,6 @@ function updateData(filter){
 
 function changeData(filter) {
     updateData(filter);
-
     setGeneralRevenueData(generalRevenueChart, generalData['revenue_chart']);
     setGeneralKeyMetricData(generalKeyMetricTable, generalData['key_metrics']);
     top5productsChart = changeDataFor5Top(top5productsStage, generalData['five_best']['products'], 'pie', top5productsChart);
@@ -77,12 +76,12 @@ function drawAllCharts(filter){
 }
 
 $(function () {
-    generatedGeneralData = generateGeneralDataForAll();
-    generatedProductsData = generateProductsDataForAll();
-    generatedSalesTeamData = generateTeamDataForAll();
-    generatedRegionsData = generateRegionsDataForAll();
     drawAllCharts('YTD');
-    changeTab($('.tab-pane.active').attr('id'))
+    changeTab($('.tab-pane.active').attr('id'));
+    $(document).keyup(function (e) {
+        if (e.keyCode == 27) showBars(false);
+    });
+    $('.global-shadow').click(function(){showBars(false);});
 });
 
 function getDataByX(data, x){
@@ -176,8 +175,8 @@ var createRevenueChart = function () {
     chart.yAxis(1).labels().padding(0, 0, 0, 5).fontSize(11);
     chart.xAxis().labels().padding(5, 0, 0, 0).fontSize(11);
 
-    chart.legend().enabled(true).tooltip(false).align('center');
-    chart.padding(10, 0, 0, 0);
+    chart.legend().position('bottom').enabled(true).tooltip(false).align('center').padding(10, 0, 0, 0);
+    chart.padding(20, 0, 0, 0);
     return chart
 };
 
@@ -256,13 +255,13 @@ function createSolidChart(){
     axis.minorTicks().enabled(false);
 
     var stroke = '1 #e5e4e4';
-    gauge.bar(0).dataIndex(0).radius(80).width(50).fill(palette.colorAt(0)).stroke(null).zIndex(5);
-    gauge.bar(1).dataIndex(1).radius(80).width(50).fill('#F5F4F4').stroke(stroke).zIndex(4);
+    gauge.bar(0).dataIndex(0).radius(90).width(50).fill(palette.colorAt(0)).stroke(null).zIndex(5);
+    gauge.bar(1).dataIndex(1).radius(90).width(50).fill('#F5F4F4').stroke(stroke).zIndex(4);
     gauge.label()
         .text('')
         .hAlign('center')
         .anchor('center')
-        .padding(5, 10)
+        .padding(0)
         .zIndex(1);
     return gauge
 }
@@ -304,7 +303,7 @@ function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSe
     s1.colorScale(ocs);
     s1.hoverFill('#CCCFD2');
     s1.selectFill(darkAccentColor);
-    map.padding(0).margin(0);
+    map.padding(15, 0, 5, 0).margin(0);
     return map
 }
 
@@ -328,46 +327,15 @@ Number.prototype.formatMoney = function (c, d, t) {
 };
 
 
+function showBars(flag) {
+    if (flag) {
+        $('.menu-dashboard-panel').addClass('shown').css('z-index', 20).animate({left: 0}, 300);
+        $('.global-shadow').show();
+    } else if ($('.menu-dashboard-panel').hasClass('shown')) {
+        $('.menu-dashboard-panel').animate({left: -250}, 300, function () {
+            $('.menu-dashboard-panel').removeClass('shown').css('z-index', 10);
+        });
+        $('.global-shadow').fadeOut();
+    }
+}
 
-var getLegend = function (item_names, chart) {
-    var legendTable = anychart.ui.table(2, 3);
-    var legendItem = function (i) {
-        var legend = anychart.ui.legend();
-        legend.fontSize('10px');
-        legend.fontFamily("'Verdana', Helvetica, Arial, sans-serif");
-        legend.itemsLayout('horizontal');
-        legend.fontColor(darkAccentColor);
-        legend.align('left');
-        legend.padding(0);
-        legend.tooltip(false);
-        legend.margin(0);
-        legend.itemsSpacing(8);
-        legend.iconTextSpacing(3);
-        legend.title().enabled(false);
-        legend.titleSeparator().enabled(false);
-        legend.paginator().enabled(false);
-        legend.background().enabled(false);
-        legend.items([
-            {
-                'index': i,
-                'text': item_names[i][0],
-                'iconType': 'square',
-                'iconStroke': 'none',
-                'iconFill': palette.colorAt(i)
-            }
-        ]);
-        legend.listen('mouseOver', function () {
-            chart.hover(i);
-        });
-        legend.listen('mouseOut', function () {
-            chart.unhover();
-        });
-        return legend
-    };
-    legendTable.cellBorder(null);
-    legendTable.contents([
-        [legendItem(0), legendItem(1), legendItem(2)],
-        [legendItem(3), legendItem(4), legendItem(5)]
-    ]);
-    return legendTable
-};

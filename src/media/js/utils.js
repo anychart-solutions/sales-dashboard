@@ -29,51 +29,47 @@ function changeData(filter) {
     updateData(filter);
     setGeneralRevenueData(generalRevenueChart, generalData['revenue_chart']);
     setGeneralKeyMetricData(generalKeyMetricTable, generalData['key_metrics']);
-    top5productsChart = changeDataFor5Top(top5productsStage, generalData['five_best']['products'], 'pie', top5productsChart);
-    top5salesChart = changeDataFor5Top(top5salesStage, generalData['five_best']['sales_men'], 'pie', top5salesChart);
-    top5regionsChart = changeDataFor5Top(top5regionsStage, generalData['five_best']['regions'], 'pie', top5regionsChart);
+    top5productsChart = changeDataFor5Top(top5productsStage, generalData['five_best']['products'], 'pie', 'topProducts', top5productsChart);
+    top5salesChart = changeDataFor5Top(top5salesStage, generalData['five_best']['sales_men'], 'pie', 'topSales', top5salesChart);
+    top5regionsChart = changeDataFor5Top(top5regionsStage, generalData['five_best']['regions'], 'pie', 'topRegions', top5regionsChart);
     changeCategoryData(categoryChart, productsData['categories_data']);
     setMainTeamChartData(teamMainChart, salesTeamData);
     setRegionsChartData(regionsChart, regionsData);
 }
 
 function drawAllCharts(filter){
-    updateData(filter);
-
     generalRevenueChart = drawGeneralRevenueChart('general-revenue-chart');
-    setGeneralRevenueData(generalRevenueChart, generalData['revenue_chart']);
-
     generalKeyMetricTable = drawGeneralKeyMetricTable('general-key-metric-chart');
-    setGeneralKeyMetricData(generalKeyMetricTable, generalData['key_metrics']);
-
     top5productsStage = draw5TopChart('top-5-products');
-    top5productsChart = changeDataFor5Top(top5productsStage, generalData['five_best']['products'], 'pie', null);
-
     top5salesStage = draw5TopChart('top-5-sales');
-    top5salesChart = changeDataFor5Top(top5salesStage, generalData['five_best']['sales_men'], 'pie', null);
-
     top5regionsStage = draw5TopChart('top-5-regions');
-    top5regionsChart = changeDataFor5Top(top5regionsStage, generalData['five_best']['regions'], 'pie', null);
-
     categoryChart = drawCategoryChart('category-chart');
     categoryMapChart = drawCategoryMapChart('category-map-chart');
     categoryProductTable = drawCategoryProductTable('category-products-chart');
-
-    acgraph.events.listen(categoryProductTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    changeCategoryData(categoryChart, productsData['categories_data']);
-
     teamMainChart = drawTeamMainChart('sales-team-chart');
     teamPersonalRevenueChart = drawTeamPersonalRevenueChart('sales-for-person');
     teamPersonalShareChart = drawTeamPersonalShareChart('total_share_for_person');
     teamPersonalWinRatioChart = drawTeamPersonalWinRatioChart('win_ratio_for_person');
-    setMainTeamChartData(teamMainChart, salesTeamData);
-
     regionsChart = drawRegionsMapChart('regions-chart');
-    fillMenuList(regionsData.regions_data);
     regionRevenueChart = drawRegionRevenueChart('sales-in-region-chart');
     regionTotalShareChart = drawRegionTotalShareChart('total_share');
     regionMarketShareChart = drawRegionMarketShareChart('market_share');
-    setRegionsChartData(regionsChart, regionsData);
+    changeData(filter);
+
+    // todo: delete console log after fixing this showing bug
+    acgraph.events.listen(generalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(generalKeyMetricTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(categoryChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(categoryMapChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(categoryProductTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(teamMainChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(teamPersonalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(teamPersonalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(teamPersonalWinRatioChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(regionsChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(regionRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(regionTotalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    acgraph.events.listen(regionMarketShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
 }
 
 $(function () {
@@ -156,26 +152,21 @@ var createRevenueChart = function () {
     chart.yAxis().scale().minimum(0);
     chart.yAxis(1).scale(s2);
     chart.yAxis(1).scale().minimum(0);
-
     var series = chart.column();
     series.yScale(s1);
     series.name('Revenue, $');
-
     var series2 = chart.line();
     series2.yScale(s2);
     series2.name('Units sold');
-
     chart.title(null);
     chart.yAxis().orientation('left').title(null);
     chart.yAxis(1).orientation('right').title(null);
     chart.xAxis().title(null);
-
     chart.yAxis().labels().fontSize(11).textFormatter(function () {
         return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
     });
     chart.yAxis(1).labels().padding(0, 0, 0, 5).fontSize(11);
     chart.xAxis().labels().padding(5, 0, 0, 0).fontSize(11);
-
     chart.legend().position('bottom').enabled(true).tooltip(false).align('center').padding(10, 0, 0, 0);
     chart.padding(20, 0, 0, 0);
     return chart
@@ -199,16 +190,9 @@ var createSparkLine = function (data) {
 var createBulletChart = function (min, max, actual, target, invert) {
     var value = -(100 - Math.round(actual * 100 / target));
     if (invert) value = 100 - Math.round(actual * 100 / target);
-
     var bullet = anychart.bullet([
-        {
-            value: value,
-            type: 'bar', gap: 0.6, fill: palette.colorAt(0), stroke: null
-        },
-        {
-            value: 0, 'type': 'line', 'gap': 0.2, fill: palette.colorAt(4),
-            stroke: {thickness: 1.1, color: '#212121'}
-        }
+        {value: value, type: 'bar', gap: 0.6, fill: palette.colorAt(0), stroke: null},
+        {value: 0, 'type': 'line', 'gap': 0.2, fill: palette.colorAt(4), stroke: {thickness: 1.1, color: '#212121'}}
     ]);
     bullet.background(null);
     bullet.axis(null);
@@ -265,6 +249,22 @@ function createSolidChart(){
         .padding(0)
         .zIndex(1);
     return gauge
+}
+
+function createTable(){
+    var table = anychart.ui.table();
+    table.cellBorder(null);
+    table.fontFamily("'Verdana', Helvetica, Arial, sans-serif")
+        .fontSize(11)
+        .useHtml(true)
+        .fontColor(darkAccentColor)
+        .textWrap("noWrap")
+        .textOverflow("..")
+        .vAlign('middle');
+    table.getRow(0).cellBorder().bottom('1px #dedede');
+    table.getRow(0).vAlign('bottom');
+    table.getRow(0).height(25);
+    return table
 }
 
 function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSegments, colorRangesSegmentsColors){

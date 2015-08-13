@@ -21,21 +21,10 @@ var drawGeneralKeyMetricTable = function(container_id){
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
 
     var stage = anychart.graphics.create(container_id);
-    var table = anychart.ui.table();
-    table.cellBorder(null);
-
-    table.fontFamily("'Verdana', Helvetica, Arial, sans-serif")
-        .fontSize(11)
-        .useHtml(true)
-        .fontColor(darkAccentColor)
-        .vAlign('middle');
-    //table.getRow(0).cellBorder().bottom('1px #dedede');
-    table.getRow(0).vAlign('bottom');
+    var table = createTable();
     table.contents([
         ['Last 12 months', null, 'Metric', 'Variance from plan', 'Current']
     ]);
-
-    table.getRow(0).height(35);
     table.getCol(1).width(20);
     table.getCol(3).hAlign('center');
     table.getCol(4).hAlign('right');
@@ -114,8 +103,10 @@ var draw5TopChart = function(container_id){
     return acgraph.create(container_id);
 };
 
-var changeDataFor5Top = function(stage, data, type, old_chart){
-    if (old_chart) old_chart.dispose();
+var changeDataFor5Top = function(stage, data, type, name, old_chart){
+    if (old_chart) {
+        old_chart.dispose();
+    }
 
     var label_src = './src/media/i/bar.jpg';
     var new_type = 'bar';
@@ -150,7 +141,12 @@ var changeDataFor5Top = function(stage, data, type, old_chart){
         .background({enabled: true, fill: {src: label_src}, stroke: null});
 
     label.listen('click', function () {
-        changeDataFor5Top(stage, data, new_type, chart);
+        if (name == 'topProducts')
+            top5productsChart = changeDataFor5Top(stage, data, new_type, 'topProducts', chart);
+        else if (name == 'topSales')
+            top5salesChart  = changeDataFor5Top(stage, data, new_type, 'topSales', chart);
+        else if (name == 'topRegions')
+            top5salesChart  = changeDataFor5Top(stage, data, new_type, 'topRegions', chart);
     });
     chart.title(null);
     chart.container(stage);

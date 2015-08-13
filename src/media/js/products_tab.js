@@ -89,8 +89,7 @@ var drawCategoryProductTable = function(container_id){
         mainTableHeight - 50).parent(stage);
     productsTableRect.fill('#fff .0000000001').stroke(null).zIndex(200);
 
-    var table = anychart.ui.table();
-    table.cellBorder(null);
+    var table = createTable();
     table.contents([['Product', 'Revenue trend', 'Revenue', 'Variance from<br/>average price', 'Price']]);
 
     anychart.graphics.events.listen(stage, anychart.graphics.vector.Stage.EventType.STAGE_RESIZE, function(e){
@@ -99,15 +98,6 @@ var drawCategoryProductTable = function(container_id){
         bounds.height -= 55;
         productsTableRect.setBounds(bounds);
     });
-
-    table.fontFamily("'Verdana', Helvetica, Arial, sans-serif")
-        .fontSize(11)
-        .useHtml(true)
-        .fontColor(darkAccentColor)
-        .vAlign('middle');
-    //table.getRow(0).cellBorder().bottom('1px #dedede');
-    table.getRow(0).vAlign('bottom');
-    table.getRow(0).height(35);
     table.getCol(2).hAlign('center');
     table.getCol(3).hAlign('center');
     table.getCol(4).hAlign('center');

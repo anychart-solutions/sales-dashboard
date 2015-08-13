@@ -13,26 +13,17 @@ function drawTeamMainChart(container_id){
         mainTableHeight - 50).parent(stage);
     mainTableRect.fill('#fff .0000000001').stroke(null).zIndex(200);
 
-    var table = anychart.ui.table();
+    var table = createTable();
     var content = [
         ['Name', 'Revenue', 'Variance from Avg', 'Avg Or.', 'New Clients']
     ];
-
     table.contents(content);
-    table.cellBorder(null);
     anychart.graphics.events.listen(stage, anychart.graphics.vector.Stage.EventType.STAGE_RESIZE, function(e){
         var bounds = stage.getBounds();
         bounds.top += 35;
         bounds.height -= 55;
         mainTableRect.setBounds(bounds);
     });
-    table.fontSize(11)
-        .useHtml(true)
-        .fontColor(darkAccentColor);
-
-    //table.getRow(0).cellBorder().bottom('1px #dedede');
-    table.getRow(0).vAlign('bottom');
-    table.getRow(0).height(35);
     table.getCol(1).hAlign('center');
     table.getCol(2).hAlign('center').cellPadding(0);
     table.getCol(3).hAlign('center');

@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Sales Dashboard</title>
-
     <link rel="icon" href="src/media/i/anychart.ico">
     <script src="src/media/vendors/jquery/jquery-2.1.3.min.js"></script>
     <script src="src/media/vendors/bootstrap-3/bootstrap.min.js"></script>
@@ -14,7 +13,7 @@
 <body>
 <div class="global-shadow"></div>
 
-<div class="modal fade" id="aboutDashboardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal " id="aboutDashboardModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,32 +21,123 @@
                 <h4 class="modal-title" id="myModalLabel">Sales Dashboard <span class="light-text">"Wine Sales in France"</span></h4>
             </div>
             <div class="modal-body">
-                <h4>Idea and goal</h4>
-                <p> Nunc vulputate magna ac laoreet blandit. Aenean at metus a eros sodales sagittis. Vivamus urna
-                    neque, fringilla vel turpis vitae, aliquam dignissim velit. Aenean tincidunt tempus enim nec
-                    consectetur. Nam purus est, dictum vel congue vel, faucibus eu sem. Mauris libero urna, consequat at
-                    aliquet ut, ultrices vitae diam. Donec quis eleifend est. Sed tempus nec justo non tempus. Nulla ex
-                    felis, tempor sed porta ac, lobortis id dolor. Vestibulum ac congue odio.
+                <p class="important"> This is an example which covers the basic sales dashboard items in our opinion. We
+                    have tried to make it a comfortable, visually appealing, and easy to grasp.<br/>
+                    Example contains four tabs: The first tab - is a general view - which allows to
+                    assess the situation as a whole, the other three tabs intend to reveal the situations of particular categories of
+                    products, sales team advances and evaluation of sales by region. <br/>
+                    The solution is dedicated to the wines of France, because we believe that this
+                    topic is pleasant thing to think about.
 
-                <h4>Use custom data</h4>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mi quam, rutrum non augue sit amet,
-                    varius elementum tortor. Ut auctor odio at metus commodo, sit amet interdum orci imperdiet. Aliquam
-                    euismod lorem mi, id eleifend libero posuere a. Sed nec eros ut dui efficitur lacinia at eget est.
-                    Quisque eget turpis efficitur, gravida ante in, tincidunt diam. Etiam erat libero, maximus vel dolor
-                    vel, fermentum dapibus purus. Donec lacus nulla, tincidunt ultricies mauris quis, pharetra porttitor
-                    urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut
-                    sapien dolor, facilisis sed dolor convallis, rutrum ultricies nibh. Mauris lorem turpis, vehicula
-                    vel sapien eu, vehicula rhoncus purus.
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Replacing Data</h4>
+                        <p> All data, used in this sample are collected in <strong><em>src/data/data.js</em> </strong>file. <br/>
+                            The structure of the data is (all 4 data sets have same first level: "YTD", "QTD", "MTD", "WTD" and "all". And the structure for this five is the same, so this level will be skiped further): </p>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        generatedGeneralData </a>  <span class="text-muted">- data for "General" tab.</span>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <ul class="list-default">
+                                            <li>revenue_chart <span class="text-muted">- table with rows like ["2001", 354165, 457]</span>
+                                            </li>
+                                            <li>key_metrics <span class="text-muted"> - has several objects and the data for each of them. </span>
+                                            </li>
+                                            <li>five_best
+                                                <ul class="list-default">
+                                                    <li>sales_men <span class="text-muted">- table with ["Katherine Dean", 505625] rows</span>
+                                                    </li>
+                                                    <li>regions <span class="text-muted">- table with ["Katherine Dean", 505625] rows</span>
+                                                    </li>
+                                                    <li>products <span class="text-muted">- table with ["Katherine Dean", 505625] rows</span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseThree">
+                                        generatedProductsData
+                                    </a> <span class="text-muted">- data for "Sales by Product" tab.</span>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <ul class="list-default">
+                                            <li>categories_data <span class="text-muted"> - data of thr products by categories. The biggest data set in the sample.</span>
+                                                <ul class="list-default">
+                                                    <li>x <span class="text-muted">- category name </span></li>
+                                                    <li>value <span class="text-muted">- value for the whole category</span></li>
+                                                    <li>data <span class="text-muted">- data for the table and map chart on this tab</span></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            generatedRegionsData
+                                        </a> <span class="text-muted">- data for "Sales by Region" tab.</span>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <ul class="list-default">
+                                            <li>regions_data <span class="text-muted">- list of all regions with data for each of them, such as:</span>
+                                                <ul>
+                                                    <li>id <span class="text-muted">- id of region </span></li>
+                                                    <li>x  <span class="text-muted">- name of region </span></li>
+                                                    <li>value <span class="text-muted">- value for region </span></li>
+                                                    <li>market_share <span class="text-muted">- the share of our products in the region </span></li>
+                                                    <li>total_share <span class="text-muted">- the share of sales in this region from the total sales</span></li>
+                                                    <li>revenue <span class="text-muted">- table data for revenue chart [["2001", 480973, 490]</span></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingFour">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                        generatedSalesTeamData
+                                    </a><span class="text-muted"> - data for "Sales Team" tab.</span>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <ul class="list-default">
+                                            <li>team_data <span class="text-muted">- list of all person with data for each of them</span> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Technology stack</h4>
+                        <p> To create this sample <a href="http://cdn.anychart.com/js/7.6.0/anychart-bundle.min.js">AnyChart 7.6.0</a> was used.
+                            <br/>Link to documentation of this version: <a href="http://docs.anychart.com/7.6.0/Quick_Start/Quick_Start">Documentation</a>
+                            <br/> Api reference for this version: <a href="http://api.anychart.com/7.6.0/anychart">API Reference</a>
+                            <br/> Also were used:
+                        <ul class="list-default">
+                            <li><a href="http://api.jquery.com/"> Jquery 2.1.3</a></li>
+                            <li><a href="http://getbootstrap.com/getting-started/">Bootstrap 3</a></li>
+                            <li><a href="http://fortawesome.github.io/Font-Awesome/get-started/">Font awesome 4.4.0</a></li>
+                        </ul>
+                        <p> We also thanks <a href="http://design.google.com/">Google Material Design</a> for the inspiration and design ideas.
 
-                <h4>Chart types</h4>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mi quam, rutrum non augue sit amet,
-                    varius elementum tortor. Ut auctor odio at metus commodo, sit amet interdum orci imperdiet. Aliquam
-                    euismod lorem mi, id eleifend libero posuere a. Sed nec eros ut dui efficitur lacinia at eget est.
-                    Quisque eget turpis efficitur, gravida ante in, tincidunt diam. Etiam erat libero, maximus vel dolor
-                    vel, fermentum dapibus purus. Donec lacus nulla, tincidunt ultricies mauris quis, pharetra porttitor
-                    urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut
-                    sapien dolor, facilisis sed dolor convallis, rutrum ultricies nibh. Mauris lorem turpis, vehicula
-                    vel sapien eu, vehicula rhoncus purus.
+                        <h4>License</h4>
+                        <p> License Apache 2.0 and can be customized and vary for particular task.
+                        <br/> Fil free to contribute on <a href="#">GitHub</a>.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,7 +157,6 @@
                 <ul class="dropdown-menu">
                     <li><a data-toggle="modal" data-target="#aboutDashboardModal"><i class="fa fa-info-circle"></i> About this dashboard</a></li>
                     <li><a href="http://anychart.com/support/" target="_blank"><i class="fa fa-life-ring"></i> Support</a></li>
-
                 </ul>
             </div>
         </h1>
@@ -121,91 +210,85 @@
         <div class="col-lg-8 col-lg-offset-3 dashboard-limitation content">
             <div class="tab-pane active" id="general">
                 <div class="col-md-6">
-                    <h2 class="chart-title">Revenue Dynamic</h2>
                     <div class="chart-block">
+                        <h2 class="chart-title">Revenue Dynamic</h2>
                         <div id="general-revenue-chart" class="chart" data-height="250"></div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                    <h2 class="chart-title">Key Metrics</h2>
                     <div class="chart-block">
+                        <h2 class="chart-title">Key Metrics</h2>
                         <div id="general-key-metric-chart" class="chart" data-height="250"></div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <h2 class="chart-title">Top 5 Products <span>(<a onclick="changeTab('products')">more</a>) </span>
-                    </h2>
                     <div class="chart-block">
-                        <div id="top-5-products" data-height="200" class="chart label-chart"></div>
-                    </div>
-
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <h2 class="chart-title">Top 5 Sales Team <span>
-                        (<a onclick="changeTab('sales-team')">more</a>)</span></h2>
-                    <div class="chart-block">
-                        <div id="top-5-sales" data-height="200" class="chart label-chart"></div>
+                        <h2 class="chart-title">Top 5 Products <span>(<a onclick="changeTab('products')">more</a>)</span></h2>
+                        <div id="top-5-products" data-height="200" class="chart"></div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <h2 class="chart-title">Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
                     <div class="chart-block">
-                        <div id="top-5-regions" data-height="200" class="chart label-chart"></div>
+                        <h2 class="chart-title">Top 5 Sales Team <span>(<a onclick="changeTab('sales-team')">more</a>)</span></h2>
+                        <div id="top-5-sales" data-height="200" class="chart"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="chart-block">
+                        <h2 class="chart-title">Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
+                        <div id="top-5-regions" data-height="200" class="chart"></div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane " id="products">
                 <div class="col-lg-6 col-sm-6">
-                    <h2 class="chart-title">
-                        Product categories by revenue <br/>
-                        <span class="text-muted">
-                            (In this sample products were divided in categories by the region they were produced)
-                        </span>
-                    </h2>
                     <div class="chart-block">
+                        <h2 class="chart-title"> Product categories by revenue <br/>
+                            <span class="text-muted">
+                                (In this sample products were divided in categories by the region they were produced)
+                            </span>
+                        </h2>
                         <div id="category-chart" class="chart" data-height="200"></div>
                     </div>
-                    <h2 class="chart-title">
-                        Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category</h2>
-                    <div class="chart-block ">
+                    <div class="chart-block">
+                        <h2 class="chart-title"> Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category</h2>
                         <div id="category-map-chart" class="chart" data-height="225"></div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">
-                    <h2 class="chart-title">Product sales in <span class="category-name"></span></h2>
                     <div class="chart-block">
+                        <h2 class="chart-title">Product sales in <span class="category-name"></span></h2>
                         <div id="category-products-chart" class="chart" data-height="510"></div>
                     </div>
                 </div>
-
             </div>
-            <div class="tab-pane " id="sales-team">
+            <div class="tab-pane" id="sales-team">
                  <div class="row">
                      <div class="col-md-6">
-                         <h2 class="chart-title">Sales Team Rating</h2>
                          <div class="chart-block">
-                             <div id="sales-team-chart" data-height="500" class="chart label-chart"></div>
+                             <h2 class="chart-title">Sales Team Rating</h2>
+                             <div id="sales-team-chart" data-height="500" class="chart"></div>
                          </div>
                      </div>
                      <div class="col-md-6">
                          <div class="row">
                              <div class="col-lg-12">
-                                 <h2 class="chart-title">Revenue trend for <span class="person-name"></span></h2>
                                  <div class="chart-block">
+                                     <h2 class="chart-title">Revenue trend for <span class="person-name"></span></h2>
                                      <div id="sales-for-person" class="chart" data-height="240"></div>
                                  </div>
                              </div>
                          </div>
                          <div class="row">
                              <div class="col-sm-6">
-                                 <h2 class="chart-title">Share of Total Sales <br/>for <span class="person-name"></span></h2>
                                  <div class="chart-block">
+                                     <h2 class="chart-title">Share of Total Sales <br/>for <span class="person-name"></span></h2>
                                      <div id="total_share_for_person" class="chart" data-height="180"></div>
                                  </div>
                              </div>
                              <div class="col-sm-6">
-                                 <h2 class="chart-title">Win Ratio <br/> <span class="person-name"></span></h2>
                                  <div class="chart-block">
+                                     <h2 class="chart-title">Win Ratio <br/> <span class="person-name"></span></h2>
                                      <div id="win_ratio_for_person" class="chart" data-height="180"></div>
                                  </div>
                              </div>
@@ -216,39 +299,40 @@
             <div class="tab-pane" id="regions">
                  <div class="row">
                      <div class="col-md-6">
-                         <h2 class="chart-title">Regional Sales Range</h2>
                          <div class="chart-block">
-                         <div id="regions-chart"  data-height="500" class="chart label-chart"></div>
+                             <h2 class="chart-title">Regional Sales Range</h2>
+                             <div id="regions-chart" data-height="500" class="chart"></div>
                          </div>
                      </div>
                      <div class="col-md-6">
                          <div class="row">
                              <div class="col-lg-12">
-                                 <h2 class="chart-title"> Revenue trend for
-                                     <div class="btn-group">
-                                         <button id="region-name-menu" type="button" class="btn btn-link btn-xs dropdown-toggle"
-                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                 style="padding: 0">
-                                             <span class="region-name"></span> <span class="caret"></span>
-                                         </button>
-                                         <ul class="dropdown-menu"  id="region-name-menu-list"></ul>
-                                     </div>
-                                 </h2>
                                  <div class="chart-block">
+                                     <h2 class="chart-title"> Revenue trend for
+                                         <div class="btn-group">
+                                             <button id="region-name-menu" type="button" class="btn btn-link btn-xs dropdown-toggle"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                     style="padding: 0">
+                                                 <span class="region-name"></span> <span class="caret"></span>
+                                             </button>
+                                             <ul class="dropdown-menu"  id="region-name-menu-list"></ul>
+                                         </div>
+                                     </h2>
+
                                      <div id="sales-in-region-chart" class="chart" data-height="230"></div>
                                  </div>
                              </div>
                          </div>
                          <div class="row">
                              <div class="col-sm-6">
-                                 <h2 class="chart-title"> Share of Total Sales <br/>for <span class="region-name"></span></h2>
                                  <div class="chart-block">
+                                     <h2 class="chart-title"> Share of Total Sales <br/>for <span class="region-name"></span></h2>
                                      <div id="total_share" class="chart" data-height="180"></div>
                                  </div>
                              </div>
                              <div class="col-sm-6">
-                                 <h2 class="chart-title">Market Share <br/>for <span class="region-name"></span></h2>
                                  <div class="chart-block">
+                                     <h2 class="chart-title">Market Share <br/>for <span class="region-name"></span></h2>
                                      <div id="market_share" class="chart" data-height="180"></div>
                                  </div>
                              </div>
@@ -266,7 +350,7 @@
 </script>
 <script src="http://code.highcharts.com/mapdata/countries/fr/fr-all.js"></script>
 <script src="src/media/vendors/anychart/anychart-bundle.min.js"></script>
-<script src="src/media/js/data.js"></script>
+<script src="src/data/data.js"></script>
 <script src="src/media/js/charts_view_settings.js"></script>
 <script src="src/media/js/utils.js"></script>
 <script src="src/media/js/general_tab.js"></script>

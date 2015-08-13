@@ -9,6 +9,7 @@ Bug list:
 * Map of France (we need our own)
 * Resize
 * Console errors
+* chart.xAxis().labels().width('40%') - General tab (after switching pie to bar chart) 
 * Bullet Chart bug (when the value more then scale.max - it's just doesn't show)
 
 Wish list:

@@ -117,8 +117,8 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
         var chart = anychart.bar();
         chart.yAxis().enabled(false);
         chart.xAxis().title().enabled(false);
-        chart.xAxis().labels().padding(0,5,0,0).fontSize(11);
-        chart.padding(10, 12, 0, 0);
+        chart.xAxis().labels().width('40%').textOverflow('..').hAlign('right').padding(0,5,0,0).fontSize(11);
+        chart.padding(10, 15, 0, 0);
         var series = chart.bar(bar_data);
         series.pointWidth('50%');
         tooltipContentForChart(series, 'with_percent');
@@ -146,7 +146,7 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
         else if (name == 'topSales')
             top5salesChart  = changeDataFor5Top(stage, data, new_type, 'topSales', chart);
         else if (name == 'topRegions')
-            top5salesChart  = changeDataFor5Top(stage, data, new_type, 'topRegions', chart);
+            top5regionsChart  = changeDataFor5Top(stage, data, new_type, 'topRegions', chart);
     });
     chart.title(null);
     chart.container(stage);

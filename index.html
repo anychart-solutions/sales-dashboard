@@ -3,15 +3,213 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Sales Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="src/media/i/anychart.ico">
-    <script src="src/media/vendors/jquery/jquery-2.1.3.min.js"></script>
-    <script src="src/media/vendors/bootstrap-3/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css"  href="src/media/vendors/bootstrap-3/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css"  href="src/media/vendors/font-awesome-4.4.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css"  href="src/media/css/styles.css"/>
 </head>
 <body>
 <div class="global-shadow"></div>
+<div class="row title-dashboard-panel">
+    <div class="col-lg-8 col-lg-offset-3 dashboard-limitation">
+        <h1 class="title">
+            <a class="hidden-lg switcher" onclick="showBars(true)"><i class="fa fa-bars"></i></a>
+            Sales Dashboard <span class="bright-text">"Wine Sales in France"</span>
+
+            <div class="btn-group pull-right submenu">
+                <a type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a data-toggle="modal" data-target="#aboutDashboardModal"><i class="fa fa-info-circle"></i> About this dashboard</a></li>
+                    <li><a href="http://anychart.com/support/" target="_blank"><i class="fa fa-life-ring"></i> Support</a></li>
+                </ul>
+            </div>
+        </h1>
+    </div>
+</div>
+
+<div class="col-lg-3 menu-dashboard-panel no-print ">
+    <div class="menu-wrapper">
+        <ul class="list-unstyled">
+            <li><a class="general active" onclick="changeTab('general')">General Info <i class="fa fa-bookmark"></i></a></li>
+            <li><a class="products " onclick="changeTab('products')">Sales by Products <i class="fa fa-shopping-cart"></i></a></li>
+            <li><a class="sales-team " onclick="changeTab('sales-team')">Sales Team Rates <i class="fa fa-user"></i></a></li>
+            <li><a class="regions " onclick="changeTab('regions')"> Sales by Regions <i class="fa fa-map-marker"></i></a></li>
+        </ul>
+        <hr/>
+        <ul class="period-selector list-unstyled">
+            <li><label for="option-1">
+                <span>WTD</span>
+                <input type="radio" id="option-1" name="options" value="WTD" onclick="changeData('WTD')"/>
+            </label></li>
+            <li><label for="option-2">
+                <span>MTD</span>
+                <input type="radio" id="option-2" name="options" value="MTD" onclick="changeData('MTD')"/>
+            </label></li>
+            <li><label for="option-3">
+                <span>QTD</span>
+                <input type="radio" id="option-3" name="options" value="QTD" onclick="changeData('QTD')"/>
+            </label></li>
+            <li><label for="option-4">
+                <span>YTD</span>
+                <input type="radio" id="option-4" name="options" value="YTD" checked onclick="changeData('YTD')"/>
+            </label></li>
+            <li><label for="option-5">
+                <span>All Time</span>
+                <input type="radio" id="option-5" name="options" value="all" onclick="changeData('all')"/>
+            </label></li>
+        </ul>
+        <hr/>
+        <ul class="list-unstyled compressed">
+            <li><a class="">GitHub project<i class="fa fa-git"></i></i></a></li>
+            <li><a class="">Download .zip <i class="fa fa-download"></i></a></li>
+        </ul>
+        <div class="divider"></div>
+        <div class="dashboard-credits"> <a href="http://anychart.com/"><img src="http://static.anychart.com/logo.png"/> AnyChart.com</a></div>
+    </div>
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-3 dashboard-limitation content">
+            <div class="tab-pane active" id="general">
+                <div class="col-md-6">
+                    <div class="chart-block">
+                        <h2 class="chart-title">Revenue Dynamic</h2>
+                        <div id="general-revenue-chart" class="chart" data-height="250"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="chart-block">
+                        <h2 class="chart-title">Key Metrics</h2>
+                        <div id="general-key-metric-chart" class="chart" data-height="250"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="chart-block">
+                        <h2 class="chart-title">Top 5 Products <span>(<a onclick="changeTab('products')">more</a>)</span></h2>
+                        <div id="top-5-products" data-height="200" class="chart"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="chart-block">
+                        <h2 class="chart-title">Top 5 Sales Team <span>(<a onclick="changeTab('sales-team')">more</a>)</span></h2>
+                        <div id="top-5-sales" data-height="200" class="chart"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="chart-block">
+                        <h2 class="chart-title">Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
+                        <div id="top-5-regions" data-height="200" class="chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane " id="products">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="chart-block">
+                        <h2 class="chart-title"> Product categories by revenue <br/>
+                            <span class="text-muted">
+                                (In this sample products were divided in categories by the region they were produced)
+                            </span>
+                        </h2>
+                        <div id="category-chart" class="chart" data-height="200"></div>
+                    </div>
+                    <div class="chart-block">
+                        <h2 class="chart-title"> Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category</h2>
+                        <div id="category-map-chart" class="chart" data-height="225"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <div class="chart-block">
+                        <h2 class="chart-title">Product sales in <span class="category-name"></span></h2>
+                        <div id="category-products-chart" class="chart" data-height="510"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="sales-team">
+                 <div class="row">
+                     <div class="col-md-6">
+                         <div class="chart-block">
+                             <h2 class="chart-title">Sales Team Rating</h2>
+                             <div id="sales-team-chart" data-height="500" class="chart"></div>
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="row">
+                             <div class="col-lg-12">
+                                 <div class="chart-block">
+                                     <h2 class="chart-title">Revenue trend for <span class="person-name"></span></h2>
+                                     <div id="sales-for-person" class="chart" data-height="240"></div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-6">
+                                 <div class="chart-block">
+                                     <h2 class="chart-title">Share of Total Sales <br/>for <span class="person-name"></span></h2>
+                                     <div id="total_share_for_person" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-6">
+                                 <div class="chart-block">
+                                     <h2 class="chart-title">Win Ratio <br/> <span class="person-name"></span></h2>
+                                     <div id="win_ratio_for_person" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+            <div class="tab-pane" id="regions">
+                 <div class="row">
+                     <div class="col-md-6">
+                         <div class="chart-block">
+                             <h2 class="chart-title">Regional Sales Range</h2>
+                             <div id="regions-chart" data-height="500" class="chart"></div>
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="row">
+                             <div class="col-lg-12">
+                                 <div class="chart-block">
+                                     <h2 class="chart-title"> Revenue trend for
+                                         <div class="btn-group">
+                                             <button id="region-name-menu" type="button" class="btn btn-link btn-xs dropdown-toggle"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                     style="padding: 0">
+                                                 <span class="region-name"></span> <span class="caret"></span>
+                                             </button>
+                                             <ul class="dropdown-menu"  id="region-name-menu-list"></ul>
+                                         </div>
+                                     </h2>
+
+                                     <div id="sales-in-region-chart" class="chart" data-height="230"></div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-6">
+                                 <div class="chart-block">
+                                     <h2 class="chart-title"> Share of Total Sales <br/>for <span class="region-name"></span></h2>
+                                     <div id="total_share" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-6">
+                                 <div class="chart-block">
+                                     <h2 class="chart-title">Market Share <br/>for <span class="region-name"></span></h2>
+                                     <div id="market_share" class="chart" data-height="180"></div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal " id="aboutDashboardModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -142,209 +340,11 @@
         </div>
     </div>
 </div>
-
-<div class="row title-dashboard-panel">
-    <div class="col-lg-8 col-lg-offset-3 dashboard-limitation">
-        <h1 class="title">
-            <a class="hidden-lg switcher" onclick="showBars(true)"><i class="fa fa-bars"></i></a>
-            Sales Dashboard <span class="bright-text">"Wine Sales in France"</span>
-
-            <div class="btn-group pull-right submenu">
-                <a type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
-                    <i class="fa fa-ellipsis-v"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a data-toggle="modal" data-target="#aboutDashboardModal"><i class="fa fa-info-circle"></i> About this dashboard</a></li>
-                    <li><a href="http://anychart.com/support/" target="_blank"><i class="fa fa-life-ring"></i> Support</a></li>
-                </ul>
-            </div>
-        </h1>
-    </div>
-</div>
-
-<div class="col-lg-3 menu-dashboard-panel no-print ">
-    <div class="menu-wrapper">
-        <ul class="list-unstyled">
-            <li><a class="general active" onclick="changeTab('general')">General Info <i class="fa fa-bookmark"></i></a></li>
-            <li><a class="products " onclick="changeTab('products')">Sales by Products <i class="fa fa-shopping-cart"></i></a></li>
-            <li><a class="sales-team " onclick="changeTab('sales-team')">Sales Team Rates <i class="fa fa-user"></i></a></li>
-            <li><a class="regions " onclick="changeTab('regions')"> Sales by Regions <i class="fa fa-map-marker"></i></a></li>
-        </ul>
-        <hr/>
-        <ul class="period-selector list-unstyled">
-            <li><label for="option-1">
-                <span>WTD</span>
-                <input type="radio" id="option-1" name="options" value="WTD" onclick="changeData('WTD')"/>
-            </label></li>
-            <li><label for="option-2">
-                <span>MTD</span>
-                <input type="radio" id="option-2" name="options" value="MTD" onclick="changeData('MTD')"/>
-            </label></li>
-            <li><label for="option-3">
-                <span>QTD</span>
-                <input type="radio" id="option-3" name="options" value="QTD" onclick="changeData('QTD')"/>
-            </label></li>
-            <li><label for="option-4">
-                <span>YTD</span>
-                <input type="radio" id="option-4" name="options" value="YTD" checked onclick="changeData('YTD')"/>
-            </label></li>
-            <li><label for="option-5">
-                <span>All Time</span>
-                <input type="radio" id="option-5" name="options" value="all" onclick="changeData('all')"/>
-            </label></li>
-        </ul>
-        <hr/>
-        <ul class="list-unstyled compressed">
-            <li><a class="">GitHub project<i class="fa fa-git"></i></i></a></li>
-            <li><a class="">Download .zip <i class="fa fa-download"></i></a></li>
-        </ul>
-        <div class="divider"></div>
-        <div class="dashboard-credits"> <a href="http://anychart.com/"><img src="http://static.anychart.com/logo.png"/> AnyChart.com</a></div>
-    </div>
-
-</div>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-3 dashboard-limitation content">
-            <div class="tab-pane active" id="general">
-                <div class="col-md-6">
-                    <div class="chart-block">
-                        <h2 class="chart-title">Revenue Dynamic</h2>
-                        <div id="general-revenue-chart" class="chart" data-height="250"></div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="chart-block">
-                        <h2 class="chart-title">Key Metrics</h2>
-                        <div id="general-key-metric-chart" class="chart" data-height="250"></div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="chart-block">
-                        <h2 class="chart-title">Top 5 Products <span>(<a onclick="changeTab('products')">more</a>)</span></h2>
-                        <div id="top-5-products" data-height="200" class="chart"></div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="chart-block">
-                        <h2 class="chart-title">Top 5 Sales Team <span>(<a onclick="changeTab('sales-team')">more</a>)</span></h2>
-                        <div id="top-5-sales" data-height="200" class="chart"></div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="chart-block">
-                        <h2 class="chart-title">Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
-                        <div id="top-5-regions" data-height="200" class="chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane " id="products">
-                <div class="col-lg-6 col-sm-6">
-                    <div class="chart-block">
-                        <h2 class="chart-title"> Product categories by revenue <br/>
-                            <span class="text-muted">
-                                (In this sample products were divided in categories by the region they were produced)
-                            </span>
-                        </h2>
-                        <div id="category-chart" class="chart" data-height="200"></div>
-                    </div>
-                    <div class="chart-block">
-                        <h2 class="chart-title"> Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category</h2>
-                        <div id="category-map-chart" class="chart" data-height="225"></div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-6">
-                    <div class="chart-block">
-                        <h2 class="chart-title">Product sales in <span class="category-name"></span></h2>
-                        <div id="category-products-chart" class="chart" data-height="510"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="sales-team">
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="chart-block">
-                             <h2 class="chart-title">Sales Team Rating</h2>
-                             <div id="sales-team-chart" data-height="500" class="chart"></div>
-                         </div>
-                     </div>
-                     <div class="col-md-6">
-                         <div class="row">
-                             <div class="col-lg-12">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title">Revenue trend for <span class="person-name"></span></h2>
-                                     <div id="sales-for-person" class="chart" data-height="240"></div>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="row">
-                             <div class="col-sm-6">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title">Share of Total Sales <br/>for <span class="person-name"></span></h2>
-                                     <div id="total_share_for_person" class="chart" data-height="180"></div>
-                                 </div>
-                             </div>
-                             <div class="col-sm-6">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title">Win Ratio <br/> <span class="person-name"></span></h2>
-                                     <div id="win_ratio_for_person" class="chart" data-height="180"></div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-            </div>
-            <div class="tab-pane" id="regions">
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="chart-block">
-                             <h2 class="chart-title">Regional Sales Range</h2>
-                             <div id="regions-chart" data-height="500" class="chart"></div>
-                         </div>
-                     </div>
-                     <div class="col-md-6">
-                         <div class="row">
-                             <div class="col-lg-12">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title"> Revenue trend for
-                                         <div class="btn-group">
-                                             <button id="region-name-menu" type="button" class="btn btn-link btn-xs dropdown-toggle"
-                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                     style="padding: 0">
-                                                 <span class="region-name"></span> <span class="caret"></span>
-                                             </button>
-                                             <ul class="dropdown-menu"  id="region-name-menu-list"></ul>
-                                         </div>
-                                     </h2>
-
-                                     <div id="sales-in-region-chart" class="chart" data-height="230"></div>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="row">
-                             <div class="col-sm-6">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title"> Share of Total Sales <br/>for <span class="region-name"></span></h2>
-                                     <div id="total_share" class="chart" data-height="180"></div>
-                                 </div>
-                             </div>
-                             <div class="col-sm-6">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title">Market Share <br/>for <span class="region-name"></span></h2>
-                                     <div id="market_share" class="chart" data-height="180"></div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 </body>
+<link rel="stylesheet" type="text/css"  href="src/media/vendors/font-awesome-4.4.0/css/font-awesome.min.css"/>
+<script src="src/media/vendors/jquery/jquery-2.1.3.min.js"></script>
+<script src="src/media/vendors/bootstrap-3/bootstrap.min.js"></script>
+
 <script>
     var Highcharts = {}; Highcharts.maps = {};
 </script>

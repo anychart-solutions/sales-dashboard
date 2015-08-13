@@ -166,7 +166,7 @@ var createRevenueChart = function () {
         return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
     });
     chart.yAxis(1).labels().padding(0, 0, 0, 5).fontSize(11);
-    chart.xAxis().labels().padding(5, 0, 0, 0).fontSize(11);
+    chart.xAxis().labels().padding(5, 3, 0, 3).fontSize(11);
     chart.legend().position('bottom').enabled(true).tooltip(false).align('center').padding(10, 0, 0, 0);
     chart.padding(20, 0, 0, 0);
     return chart

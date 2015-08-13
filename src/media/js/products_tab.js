@@ -121,6 +121,7 @@ var drawCategoryMapChart = function(container_id){
         {greater: 550000}],
         ['#ffd54f', '#FDC543', '#F9B033', '#F7A028', '#F28110', '#ef6c00']
     );
+    map.allowPointsSelect(false);
     map.container(container_id);
     map.draw();
     return map

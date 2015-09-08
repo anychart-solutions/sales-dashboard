@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Sales Dashboard</title>
+    <title>Wine Sales Dashboard Sample</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="src/media/i/anychart.ico">
     <link rel="stylesheet" type="text/css"  href="src/media/vendors/bootstrap-3/bootstrap.min.css"/>
@@ -34,9 +34,9 @@
     <div class="menu-wrapper">
         <ul class="list-unstyled">
             <li><a class="general active" onclick="changeTab('general')">General Info <i class="fa fa-bookmark"></i></a></li>
-            <li><a class="products " onclick="changeTab('products')">Sales by Products <i class="fa fa-shopping-cart"></i></a></li>
-            <li><a class="sales-team " onclick="changeTab('sales-team')">Sales Team Rates <i class="fa fa-user"></i></a></li>
-            <li><a class="regions " onclick="changeTab('regions')"> Sales by Regions <i class="fa fa-map-marker"></i></a></li>
+            <li><a class="products " onclick="changeTab('products')">Sales by Product <i class="fa fa-shopping-cart"></i></a></li>
+            <li><a class="sales-team " onclick="changeTab('sales-team')">Sales Team Rate <i class="fa fa-user"></i></a></li>
+            <li><a class="regions " onclick="changeTab('regions')"> Sales by Region <i class="fa fa-map-marker"></i></a></li>
         </ul>
         <hr/>
         <ul class="period-selector list-unstyled">
@@ -78,7 +78,7 @@
             <div class="tab-pane active" id="general">
                 <div class="col-md-6">
                     <div class="chart-block">
-                        <h2 class="chart-title">Revenue Dynamic</h2>
+                        <h2 class="chart-title">Revenue</h2>
                         <div id="general-revenue-chart" class="chart" data-height="250"></div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="chart-block">
-                        <h2 class="chart-title">Top 5 Sales Team <span>(<a onclick="changeTab('sales-team')">more</a>)</span></h2>
+                        <h2 class="chart-title">Top 5 Sales <span>(<a onclick="changeTab('sales-team')">more</a>)</span></h2>
                         <div id="top-5-sales" data-height="200" class="chart"></div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     <div class="chart-block">
                         <h2 class="chart-title"> Product categories by revenue <br/>
                             <span class="text-muted">
-                                (In this sample products were divided in categories by the region they were produced)
+                                (products divided in categories by the region of origin)
                             </span>
                         </h2>
                         <div id="category-chart" class="chart" data-height="200"></div>
@@ -219,19 +219,21 @@
                 <h4 class="modal-title" id="myModalLabel">Sales Dashboard <span class="light-text">"Wine Sales in France"</span></h4>
             </div>
             <div class="modal-body">
-                <p class="important"> This is an example which covers the basic sales dashboard items in our opinion. We
-                    have tried to make it a comfortable, visually appealing, and easy to grasp.<br/>
-                    Example contains four tabs: The first tab - is a general view - which allows to
-                    assess the situation as a whole, the other three tabs intend to reveal the situations of particular categories of
+                <p class="important"> This is an example which covers the basics of any sales dashboard. We
+                    did our best to make it visually appealing and easy to grasp.<br/>
+                    Example contains four tabs: The first tab - is a general view - it allows to
+                    assess the situation as a whole, the other three tabs intend to reveal the situation for particular categories of
                     products, sales team advances and evaluation of sales by region. <br/>
-                    The solution is dedicated to the wines of France, because we believe that this
-                    topic is pleasant thing to think about.
-
+                    The solution is dedicated to the wines of France - a pleasant topic to think about.
+                    But don't forget that according to the Surgeon General, women should not drink alcoholic
+                    beverages during pregnancy because of the risk of birth defects and that consumption of
+                    alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause
+                    health problems.
                 <div class="row">
                     <div class="col-md-6">
                         <h4>Replacing Data</h4>
-                        <p> All data, used in this sample are collected in <strong><em>src/data/data.js</em> </strong>file. <br/>
-                            The structure of the data is (all 4 data sets have same first level: "YTD", "QTD", "MTD", "WTD" and "all". And the structure for this five is the same, so this level will be skiped further): </p>
+                        <p>All data used in this sample can be found in <strong><em>src/data/data.js</em> </strong>file. <br/>
+                            The structure of the data is (all 4 data sets have same first level: "YTD", "QTD", "MTD", "WTD" and "all"): </p>
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingOne">
@@ -249,9 +251,9 @@
                                                 <ul class="list-default">
                                                     <li>sales_men <span class="text-muted">- table with ["Katherine Dean", 505625] rows</span>
                                                     </li>
-                                                    <li>regions <span class="text-muted">- table with ["Katherine Dean", 505625] rows</span>
+                                                    <li>regions <span class="text-muted">- table with ["Languedoc-Roussillon", 524336] rows</span>
                                                     </li>
-                                                    <li>products <span class="text-muted">- table with ["Katherine Dean", 505625] rows</span>
+                                                    <li>products <span class="text-muted">- table with ["Comtes de Tastes", 350012] rows</span>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -268,11 +270,11 @@
                                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                     <div class="panel-body">
                                         <ul class="list-default">
-                                            <li>categories_data <span class="text-muted"> - data of thr products by categories. The biggest data set in the sample.</span>
+                                            <li>categories_data <span class="text-muted"> - products by categories data. The biggest data set in the sample.</span>
                                                 <ul class="list-default">
                                                     <li>x <span class="text-muted">- category name </span></li>
                                                     <li>value <span class="text-muted">- value for the whole category</span></li>
-                                                    <li>data <span class="text-muted">- data for the table and map chart on this tab</span></li>
+                                                    <li>data <span class="text-muted">- data for the table and the map in this tab</span></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -288,12 +290,12 @@
                                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                     <div class="panel-body">
                                         <ul class="list-default">
-                                            <li>regions_data <span class="text-muted">- list of all regions with data for each of them, such as:</span>
+                                            <li>regions_data <span class="text-muted">- list of all regions with data for each of them:</span>
                                                 <ul>
-                                                    <li>id <span class="text-muted">- id of region </span></li>
-                                                    <li>x  <span class="text-muted">- name of region </span></li>
-                                                    <li>value <span class="text-muted">- value for region </span></li>
-                                                    <li>market_share <span class="text-muted">- the share of our products in the region </span></li>
+                                                    <li>id <span class="text-muted">- region id </span></li>
+                                                    <li>x  <span class="text-muted">- region name </span></li>
+                                                    <li>value <span class="text-muted">- value </span></li>
+                                                    <li>market_share <span class="text-muted">- products market share in the region </span></li>
                                                     <li>total_share <span class="text-muted">- the share of sales in this region from the total sales</span></li>
                                                     <li>revenue <span class="text-muted">- table data for revenue chart [["2001", 480973, 490]</span></li>
                                                 </ul>
@@ -306,12 +308,12 @@
                                 <div class="panel-heading" role="tab" id="headingFour">
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
                                         generatedSalesTeamData
-                                    </a><span class="text-muted"> - data for "Sales Team" tab.</span>
+                                    </a><span class="text-muted"> - data for the "Sales Team" tab.</span>
                                 </div>
                                 <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                     <div class="panel-body">
                                         <ul class="list-default">
-                                            <li>team_data <span class="text-muted">- list of all person with data for each of them</span> </li>
+                                            <li>team_data <span class="text-muted">- list of all persons with data for each of them</span> </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -320,20 +322,20 @@
                     </div>
                     <div class="col-md-6">
                         <h4>Technology stack</h4>
-                        <p> To create this sample <a href="http://cdn.anychart.com/js/7.6.0/anychart-bundle.min.js">AnyChart 7.6.0</a> was used.
-                            <br/>Link to documentation of this version: <a href="http://docs.anychart.com/7.6.0/Quick_Start/Quick_Start">Documentation</a>
-                            <br/> Api reference for this version: <a href="http://api.anychart.com/7.6.0/anychart">API Reference</a>
-                            <br/> Also were used:
+                        <p> Charting in this sample is done exclisively by <a target="_blank" href="http://cdn.anychart.com/">the latest version</a> of <a  target="_blank"  href="http://www.anychart.com/">AnyChart JavaScript Web Charting Framework</a>.
+                            <br/><a target="_blank" href="http://docs.anychart.com/">AnyChart Users' Guide</a>
+                            <br/><a target="_blank"  href="http://api.anychart.com/">AnyChart JavaScript API Reference</a>
+                            <br/>To create tabs, handle data and interactions the following tools are used:
                         <ul class="list-default">
-                            <li><a href="http://api.jquery.com/"> Jquery 2.1.3</a></li>
-                            <li><a href="http://getbootstrap.com/getting-started/">Bootstrap 3</a></li>
-                            <li><a href="http://fortawesome.github.io/Font-Awesome/get-started/">Font awesome 4.4.0</a></li>
+                            <li><a target="_blank" href="http://jquery.com/">Jquery 2.1.3</a></li>
+                            <li><a target="_blank" href="http://getbootstrap.com/getting-started/">Bootstrap 3</a></li>
+                            <li><a target="_blank" href="http://fortawesome.github.io/Font-Awesome/get-started/">Font Awesome 4.4.0</a></li>
                         </ul>
-                        <p> We also thanks <a href="http://design.google.com/">Google Material Design</a> for the inspiration and design ideas.
+                        <p>Special thanks to <a target="_blank" href="http://design.google.com/">Google Material Design</a> for the inspiration and design ideas.
 
                         <h4>License</h4>
-                        <p> License Apache 2.0 and can be customized and vary for particular task.
-                        <br/> Fil free to contribute on <a href="#">GitHub</a>.
+                        <p>Scripts source code and data sets are licensed under <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>, AnyChart, Bootstrap, JQuery and Font Awesome have their own respective licenses, be aware of them when deploying your variations of the sample or using these libraries in your projects.</p>
+                        <br/>Feel free to contribute or fork this Sales Dashboard Sample on <a href="#">GitHub</a>.
                     </div>
                 </div>
             </div>
@@ -344,12 +346,8 @@
 <link rel="stylesheet" type="text/css"  href="src/media/vendors/font-awesome-4.4.0/css/font-awesome.min.css"/>
 <script src="src/media/vendors/jquery/jquery-2.1.3.min.js"></script>
 <script src="src/media/vendors/bootstrap-3/bootstrap.min.js"></script>
-
-<script>
-    var Highcharts = {}; Highcharts.maps = {};
-</script>
-<script src="http://code.highcharts.com/mapdata/countries/fr/fr-all.js"></script>
-<script src="src/media/vendors/anychart/anychart-bundle.min.js"></script>
+<script src="src/media/js/france.js"></script>
+<script src="https://cdn.anychart.com/js/latest/anychart.min.js"></script>
 <script src="src/data/data.js"></script>
 <script src="src/media/js/charts_view_settings.js"></script>
 <script src="src/media/js/utils.js"></script>

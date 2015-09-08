@@ -269,7 +269,7 @@ function createTable(){
 
 function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSegments, colorRangesSegmentsColors){
     var map = anychart.map();
-    map.geoData(Highcharts.maps["countries/fr/fr-all"]);
+    map.geoData(anychart.maps["france"]);
     map.background(null);
     map.legend(null);
     map.title(null);

@@ -32,5 +32,9 @@ var setupBigTooltip = function (series) {
     series.tooltip(true);
     series.tooltip();
     series.tooltip(bigTooltipSettings);
-    series.tooltip().content().textWrap('byLetter').useHtml(true).textSettings(bigTooltipTitleSettings);
+    if (series.getType && series.getType() == 'pie')
+        series.tooltip().content().textWrap('byLetter').useHtml(true).textSettings(bigTooltipTitleSettings);
+    else
+        series.tooltip().textWrap('byLetter').useHtml(true).textSettings(bigTooltipTitleSettings);
+
 };

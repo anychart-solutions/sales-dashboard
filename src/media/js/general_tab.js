@@ -2,6 +2,7 @@ var drawGeneralRevenueChart = function(container_id){
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var chart = createRevenueChart();
+    chart.interactivity().selectionMode("none");
     chart.container(container_id);
     chart.draw();
     return chart;
@@ -115,6 +116,7 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
         new_type = 'pie';
         var bar_data = data.slice(0, data.length - 1);
         var chart = anychart.bar();
+        chart.interactivity().selectionMode("none");
         chart.yAxis().enabled(false);
         chart.xAxis().title().enabled(false);
         chart.xAxis().labels().width('40%').textOverflow('..').hAlign('right').padding(0,5,0,0).fontSize(11);

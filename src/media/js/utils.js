@@ -57,19 +57,19 @@ function drawAllCharts(filter){
     changeData(filter);
 
     // todo: delete console log after fixing this showing bug
-    acgraph.events.listen(generalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(generalKeyMetricTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(categoryChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(categoryMapChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(categoryProductTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamMainChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamPersonalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamPersonalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamPersonalWinRatioChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionsChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionTotalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionMarketShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(generalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(generalKeyMetricTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(categoryChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(categoryMapChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(categoryProductTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(teamMainChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(teamPersonalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(teamPersonalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(teamPersonalWinRatioChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(regionsChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(regionRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(regionTotalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
+    //acgraph.events.listen(regionMarketShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
 }
 
 $(function () {
@@ -106,7 +106,8 @@ function tooltipContentForChart(series, format, data){
     setupBigTooltip(series);
     series.tooltip().title().fontColor(fontColor);
     series.tooltip().separator().margin(0,0,5,0);
-    series.tooltip().content().lineHeight('5px');
+    if (series.getType && series.getType() == 'pie') series.tooltip().content().lineHeight('5px');
+    else series.tooltip().lineHeight('5px');
     series.tooltip().titleFormatter(function(){
         if (format == 'simple_map') {
             return this.name;
@@ -114,7 +115,7 @@ function tooltipContentForChart(series, format, data){
             return this.x
         }
     });
-    series.tooltip().contentFormatter(function(){
+series.tooltip().textFormatter(function(){
         if (format == 'revenue-sold'){
             var values = getDataByX(data, this.x);
             var params = [
@@ -159,6 +160,7 @@ var createRevenueChart = function () {
     series2.yScale(s2);
     series2.name('Units sold');
     chart.title(null);
+    chart.interactivity("byX");
     chart.yAxis().orientation('left').title(null);
     chart.yAxis(1).orientation('right').title(null);
     chart.xAxis().title(null);
@@ -181,9 +183,6 @@ var createSparkLine = function (data) {
     sparkLine.xScale('linear');
     sparkLine.xScale().minimumGap(0).maximumGap(0);
     sparkLine.xScale().ticks().interval(1);
-    var color = palette.colorAt(0);
-    sparkLine.fill(color + ' ' + 0.4);
-    sparkLine.stroke('1 ' + color + ' ' + 0.6);
     return sparkLine;
 };
 
@@ -296,7 +295,7 @@ function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSe
     });
 
     var s1 = map.choropleth();
-    s1.geoIdField('hc-key');
+    s1.geoIdField('id');
     s1.labels(null);
     tooltipContentForChart(s1, 'simple_map');
     var ocs = anychart.scales.ordinalColor(colorRangesSegments);

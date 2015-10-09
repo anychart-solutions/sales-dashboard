@@ -12,12 +12,16 @@ var drawCategoryChart = function(container_id){
     chart.container(container_id);
 
     chart.title(null);
+    chart.interactivity("byX");
     chart.padding(15, 0, 5, 0);
     chart.legend().enabled(false);
     chart.xAxis().labels().fontSize(11);
     chart.yAxis().enabled(false);
+    chart.interactivity().selectionMode("none");
     var series = chart.bar();
     series.clip(false);
+    //series.selectFill(palette.colorAt(3));
+    //series.selectStroke(anychart.color.darken(palette.colorAt(3)));
 
     series.listen('pointClick', function (e) {
         drillDown(e.iterator.get('x'));

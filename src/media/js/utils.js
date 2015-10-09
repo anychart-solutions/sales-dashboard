@@ -55,21 +55,6 @@ function drawAllCharts(filter){
     regionTotalShareChart = drawRegionTotalShareChart('total_share');
     regionMarketShareChart = drawRegionMarketShareChart('market_share');
     changeData(filter);
-
-    // todo: delete console log after fixing this showing bug
-    //acgraph.events.listen(generalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(generalKeyMetricTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(categoryChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(categoryMapChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(categoryProductTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(teamMainChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(teamPersonalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(teamPersonalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(teamPersonalWinRatioChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(regionsChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(regionRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(regionTotalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    //acgraph.events.listen(regionMarketShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
 }
 
 $(function () {

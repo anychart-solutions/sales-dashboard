@@ -23,8 +23,8 @@ function drawRegionsMapChart(container_id){
 function setRegionsChartData(map, data){
     map.getSeries(0).data(data.regions_data);
     regionsChart.getSeries(0).unselect();
-    map.listen(anychart.enums.EventType.POINT_SELECT, function(e) {
-        selectedPoint = e.selectedPoint;
+    map.listen(anychart.enums.EventType.POINTS_SELECT, function(e) {
+        selectedPoint = e.currentPoint;
         if (selectedPoint) {
           drillDownRegion(selectedPoint);
         }
@@ -67,7 +67,7 @@ function drawRegionMarketShareChart(container_id){
 }
 
 function drillDownRegion(x){
-    var point_data = getDataByX(regionsData['regions_data'], x.id);
+    var point_data = regionsData['regions_data'][x.index];
     $('.region-name').html(point_data.x);
     regionTotalShareChart.data([point_data.total_share, 100]);
     regionTotalShareChart.label().text(point_data.total_share + '%');

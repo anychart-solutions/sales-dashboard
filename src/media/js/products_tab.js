@@ -20,9 +20,6 @@ var drawCategoryChart = function(container_id){
     chart.interactivity().selectionMode("none");
     var series = chart.bar();
     series.clip(false);
-    //series.selectFill(palette.colorAt(3));
-    //series.selectStroke(anychart.color.darken(palette.colorAt(3)));
-
     series.listen('pointClick', function (e) {
         drillDown(e.iterator.get('x'));
     });

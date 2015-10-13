@@ -321,6 +321,20 @@ h2.chart-title span.person-name {
     line-height: 20px;
     text-transform: none;
 }
+.loader-text{
+    line-height: 30px;
+    margin-top: 40px;
+}
+.loader-text span{
+    display: inline-block;
+    font-size: 20px;
+}
+.icon-spin-reverse {
+  -moz-animation: spin 2s infinite linear reverse;
+  -o-animation: spin 2s infinite linear reverse;
+  -webkit-animation: spin 2s infinite linear reverse;
+  animation: spin 2s infinite linear reverse;
+}
 
 .dropdown-menu>li>a {
     padding: 0 20px;

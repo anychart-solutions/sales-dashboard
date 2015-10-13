@@ -8,12 +8,15 @@ var drawGeneralRevenueChart = function(container_id){
     return chart;
 };
 
+var general_data_set = anychart.data.set();
+var general_data_set_map1 = general_data_set.mapAs({value: [1], x: [0]});
+var general_data_set_map2 = general_data_set.mapAs({value: [2], x: [0]});
 var setGeneralRevenueData = function(chart, data){
-    var data_set = anychart.data.set(data);
-    chart.getSeries(0).data(data_set.mapAs({value: [1], x: [0]}));
+    general_data_set.data(data);
+    chart.getSeries(0).data(general_data_set_map1);
     tooltipContentForChart(chart.getSeries(0), 'revenue-sold', data);
 
-    chart.getSeries(1).data(data_set.mapAs({value: [2], x: [0]}));
+    chart.getSeries(1).data(general_data_set_map2);
     tooltipContentForChart(chart.getSeries(1), 'revenue-sold', data);
 };
 

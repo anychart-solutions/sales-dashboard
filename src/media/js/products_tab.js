@@ -1,6 +1,6 @@
 
 var selectedX = null;
-var revenueDataSet, globalData;
+var globalData;
 var productsTableHeight, productsTableRect;
 var activeRow = null;
 var hoverRow = null;
@@ -42,21 +42,26 @@ var drawCategoryChart = function(container_id){
     return chart;
 };
 
+var revenueDataSet = anychart.data.set();
+var revenueDataSet_map1 = revenueDataSet.mapAs({value: [1], x: [0]});
 var changeCategoryData = function(chart, data){
     globalData = data;
-    revenueDataSet = anychart.data.set(data);
+    revenueDataSet.data(data);
 
-    chart.getSeries(0).data(revenueDataSet.mapAs({value: [1], x: [0]}));
-    chart.lineMarker(0).value(getAverage(data, 'value'));
-    chart.textMarker(0).value(getAverage(data, 'value'));
-    tooltipContentForChart(chart.getSeries(0), 'with_average', getAverage(data, 'value'));
+    var average = getAverage(data, 'value');
+
+    chart.getSeries(0).data(revenueDataSet_map1);
+    chart.lineMarker(0).value(average);
+    chart.textMarker(0).value(average);
+    tooltipContentForChart(chart.getSeries(0), 'with_average', average);
     drillDown(data[0].x)
 };
 
 function getGlobalDataByX(x){
     for (var i=0; i<globalData.length; i++) {
         if (globalData[i].x == x) {
-          var selectedData = globalData[i]
+          var selectedData = globalData[i];
+          break;
         }
     }
     return selectedData

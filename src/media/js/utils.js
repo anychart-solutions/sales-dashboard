@@ -18,46 +18,53 @@ function changeTab(tab_name) {
 }
 
 function updateData(filter){
+
+
     //console.time("update data");
     generalData = generatedGeneralData[filter];
     productsData = generatedProductsData[filter];
     regionsData = generatedRegionsData[filter];
     salesTeamData = generatedSalesTeamData[filter];
     //console.timeEnd("update data");
+
 }
 
 
 function changeData(filter) {
-    console.time("get data");
+    var active_pane_id = $('.tab-pane.active').attr('id');
+    //$('.tab-pane').removeClass('active');
+    //$('#spinner').addClass('active');
+    //changeTab('general');
+    //console.time("get data");
     updateData(filter);
-    console.timeEnd("get data");
-
+    //console.timeEnd("get data");
     console.time("set data");
-    console.time("set data main");
+    //console.time("set data main");
     setGeneralRevenueData(generalRevenueChart, generalData['revenue_chart']);
     setGeneralKeyMetricData(generalKeyMetricTable, generalData['key_metrics']);
     top5productsChart = changeDataFor5Top(top5productsStage, generalData['five_best']['products'], 'pie', 'topProducts', top5productsChart);
     top5salesChart = changeDataFor5Top(top5salesStage, generalData['five_best']['sales_men'], 'pie', 'topSales', top5salesChart);
     top5regionsChart = changeDataFor5Top(top5regionsStage, generalData['five_best']['regions'], 'pie', 'topRegions', top5regionsChart);
-    console.timeEnd("set data main");
-
-    console.time("set data categories");
+    //console.timeEnd("set data main");
+    //console.time("set data categories");
     changeCategoryData(categoryChart, productsData['categories_data']);
-    console.timeEnd("set data categories");
-
-    console.time("set data team");
+    //console.timeEnd("set data categories");
+    //console.time("set data team");
     setMainTeamChartData(teamMainChart, salesTeamData);
-    console.timeEnd("set data team");
-
-    console.time("set data regions");
+    //console.timeEnd("set data team");
+    //console.time("set data regions");
     setRegionsChartData(regionsChart, regionsData);
-    console.timeEnd("set data regions");
+    //console.timeEnd("set data regions");
 
     console.timeEnd("set data");
+
+    //changeTab(active_pane_id);
+    //$('#spinner').removeClass('active');
+    //$('#'+ active_pane_id).addClass('active');
 }
 
 function drawAllCharts(filter){
-    console.time("drawing charts");
+    //console.time("drawing charts");
     generalRevenueChart = drawGeneralRevenueChart('general-revenue-chart');
     generalKeyMetricTable = drawGeneralKeyMetricTable('general-key-metric-chart');
     top5productsStage = draw5TopChart('top-5-products');
@@ -74,29 +81,13 @@ function drawAllCharts(filter){
     regionRevenueChart = drawRegionRevenueChart('sales-in-region-chart');
     regionTotalShareChart = drawRegionTotalShareChart('total_share');
     regionMarketShareChart = drawRegionMarketShareChart('market_share');
-    console.timeEnd("drawing charts");
+    //console.timeEnd("drawing charts");
     changeData(filter);
-
-    // todo: delete console log after fixing this showing bug
-    acgraph.events.listen(generalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(generalKeyMetricTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(categoryChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(categoryMapChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(categoryProductTable.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamMainChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamPersonalRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamPersonalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(teamPersonalWinRatioChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionsChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionRevenueChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionTotalShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-    acgraph.events.listen(regionMarketShareChart.container().getStage(), 'stageResize', function() {console.log('stageResize, WTF?')});
-
 }
 
 $(function () {
     drawAllCharts('YTD');
-    changeTab($('.tab-pane.active').attr('id'));
+    changeTab('general');
     $(document).keyup(function (e) {
         if (e.keyCode == 27) showBars(false);
     });
@@ -137,7 +128,7 @@ function tooltipContentForChart(series, format, data){
             return this.x
         }
     });
-series.tooltip().textFormatter(function(){
+    series.tooltip().textFormatter(function(){
         if (format == 'revenue-sold'){
             var values = getDataByX(data, this.x);
             var params = [

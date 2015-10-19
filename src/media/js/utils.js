@@ -18,8 +18,6 @@ function changeTab(tab_name) {
 }
 
 function updateData(filter){
-
-
     //console.time("update data");
     generalData = generatedGeneralData[filter];
     productsData = generatedProductsData[filter];
@@ -38,7 +36,7 @@ function changeData(filter) {
     //console.time("get data");
     updateData(filter);
     //console.timeEnd("get data");
-    console.time("set data");
+    //console.time("set data");
     //console.time("set data main");
     setGeneralRevenueData(generalRevenueChart, generalData['revenue_chart']);
     setGeneralKeyMetricData(generalKeyMetricTable, generalData['key_metrics']);
@@ -55,9 +53,7 @@ function changeData(filter) {
     //console.time("set data regions");
     setRegionsChartData(regionsChart, regionsData);
     //console.timeEnd("set data regions");
-
-    console.timeEnd("set data");
-
+    //console.timeEnd("set data");
     //changeTab(active_pane_id);
     //$('#spinner').removeClass('active');
     //$('#'+ active_pane_id).addClass('active');

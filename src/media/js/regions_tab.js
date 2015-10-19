@@ -21,7 +21,6 @@ function drawRegionsMapChart(container_id){
 }
 
 function setRegionsChartData(map, data){
-    console.log(data);
     map.getSeries(0).data(data.regions_data);
     regionsChart.getSeries(0).unselect();
     map.listen(anychart.enums.EventType.POINTS_SELECT, function(e) {

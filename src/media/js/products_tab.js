@@ -100,7 +100,6 @@ var drawCategoryProductTable = function(container_id){
 
     anychart.graphics.events.listen(stage, anychart.graphics.vector.Stage.EventType.STAGE_RESIZE, function(e){
         var bounds = stage.getBounds();
-        console.log(bounds.width, bounds.height);
         bounds.top += 35;
         bounds.height -= 55;
         productsTableRect.setBounds(bounds);

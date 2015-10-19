@@ -76,38 +76,38 @@
     <div class="row">
 
 
-        <div class="col-lg-8 col-lg-offset-3 dashboard-limitation content">
+        <div class="col-lg-8 col-lg-offset-3 dashboard-limitation no-padding content">
             <div class="tab-pane active" id="spinner">
                 <p class="text-center loader-text">
                     <span><i class="fa fa-spinner fa-spin"></i></span> loading ...
             </div>
 
             <div class="tab-pane" id="general">
-                <div class="col-md-6">
+                <div class="col-md-6 no-padding">
                     <div class="chart-block">
                         <h2 class="chart-title">Revenue</h2>
                         <div id="general-revenue-chart" class="chart" data-height="250"></div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12 no-padding">
                     <div class="chart-block">
                         <h2 class="chart-title">Key Metrics</h2>
                         <div id="general-key-metric-chart" class="chart" data-height="250"></div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-4 col-sm-6 no-padding">
                     <div class="chart-block">
                         <h2 class="chart-title">Top 5 Products <span>(<a onclick="changeTab('products')">more</a>)</span></h2>
                         <div id="top-5-products" data-height="200" class="chart"></div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-4 col-sm-6 no-padding">
                     <div class="chart-block">
                         <h2 class="chart-title">Top 5 Sales <span>(<a onclick="changeTab('sales-team')">more</a>)</span></h2>
                         <div id="top-5-sales" data-height="200" class="chart"></div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-4 col-sm-6 no-padding">
                     <div class="chart-block">
                         <h2 class="chart-title">Top 5 Regions <span>(<a onclick="changeTab('regions')">more</a>) </span></h2>
                         <div id="top-5-regions" data-height="200" class="chart"></div>
@@ -115,48 +115,43 @@
                 </div>
             </div>
             <div class="tab-pane " id="products">
-                <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6 no-padding">
                     <div class="chart-block">
-                        <h2 class="chart-title"> Product categories by revenue <br/>
-                            <span class="text-muted">
-                                (products divided in categories by the region of origin)
-                            </span>
-                        </h2>
-                        <div id="category-chart" class="chart" data-height="200"></div>
+                        <h2 class="chart-title"> Regions by Revenue </h2>
+                        <div id="category-chart" class="chart" data-height="213"></div>
                     </div>
                     <div class="chart-block">
-                        <h2 class="chart-title"> Product <span class="product-name"></span> popularity <br/>from <span class="category-name"></span> category</h2>
-                        <div id="category-map-chart" class="chart" data-height="225"></div>
+                        <h2 class="chart-title"> <span class="product-name"></span> Sales by Region</h2>
+                        <div id="category-map-chart" class="chart" data-height="250"></div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6 no-padding">
                     <div class="chart-block">
-                        <h2 class="chart-title">Product sales in <span class="category-name"></span></h2>
+                        <h2 class="chart-title">Sales in <span class="category-name"></span></h2>
                         <div id="category-products-chart" class="chart" data-height="510"></div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane" id="sales-team">
-                 <div class="row">
-                     <div class="col-md-6">
+                     <div class="col-md-6 no-padding">
                          <div class="chart-block">
                              <h2 class="chart-title">Sales Team Rating</h2>
                              <div id="sales-team-chart" data-height="500" class="chart"></div>
                          </div>
                      </div>
-                     <div class="col-md-6">
+                     <div class="col-md-6 no-padding">
                          <div class="row">
-                             <div class="col-lg-12">
+                             <div class="col-lg-12 ">
                                  <div class="chart-block">
                                      <h2 class="chart-title">Revenue trend for <span class="person-name"></span></h2>
-                                     <div id="sales-for-person" class="chart" data-height="240"></div>
+                                     <div id="sales-for-person" class="chart" data-height="248"></div>
                                  </div>
                              </div>
                          </div>
                          <div class="row">
                              <div class="col-sm-6">
                                  <div class="chart-block">
-                                     <h2 class="chart-title">Share of Total Sales <br/>for <span class="person-name"></span></h2>
+                                     <h2 class="chart-title">Share of total <br/><span class="person-name"></span></h2>
                                      <div id="total_share_for_person" class="chart" data-height="180"></div>
                                  </div>
                              </div>
@@ -168,47 +163,44 @@
                              </div>
                          </div>
                      </div>
-                 </div>
             </div>
             <div class="tab-pane" id="regions">
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="chart-block">
-                             <h2 class="chart-title">Regional Sales Range</h2>
-                             <div id="regions-chart" data-height="500" class="chart"></div>
+                 <div class="col-md-6 no-padding">
+                     <div class="chart-block">
+                         <h2 class="chart-title">Regional Sales Range</h2>
+                         <div id="regions-chart" data-height="480" class="chart"></div>
+                     </div>
+                 </div>
+                 <div class="col-md-6 no-padding">
+                     <div class="row">
+                         <div class="col-lg-12">
+                             <div class="chart-block">
+                                 <h2 class="chart-title"> Revenue trend for
+                                     <div class="btn-group">
+                                         <button id="region-name-menu" type="button" class="btn btn-link btn-xs dropdown-toggle"
+                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                 style="padding: 0">
+                                             <span class="region-name"></span> <span class="caret"></span>
+                                         </button>
+                                         <ul class="dropdown-menu"  id="region-name-menu-list"></ul>
+                                     </div>
+                                 </h2>
+
+                                 <div id="sales-in-region-chart" class="chart" data-height="230"></div>
+                             </div>
                          </div>
                      </div>
-                     <div class="col-md-6">
-                         <div class="row">
-                             <div class="col-lg-12">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title"> Revenue trend for
-                                         <div class="btn-group">
-                                             <button id="region-name-menu" type="button" class="btn btn-link btn-xs dropdown-toggle"
-                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                     style="padding: 0">
-                                                 <span class="region-name"></span> <span class="caret"></span>
-                                             </button>
-                                             <ul class="dropdown-menu"  id="region-name-menu-list"></ul>
-                                         </div>
-                                     </h2>
-
-                                     <div id="sales-in-region-chart" class="chart" data-height="230"></div>
-                                 </div>
+                     <div class="row">
+                         <div class="col-sm-6">
+                             <div class="chart-block">
+                                 <h2 class="chart-title"> Share of Total <br/><span class="region-name"></span></h2>
+                                 <div id="total_share" class="chart" data-height="180"></div>
                              </div>
                          </div>
-                         <div class="row">
-                             <div class="col-sm-6">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title"> Share of Total Sales <br/>for <span class="region-name"></span></h2>
-                                     <div id="total_share" class="chart" data-height="180"></div>
-                                 </div>
-                             </div>
-                             <div class="col-sm-6">
-                                 <div class="chart-block">
-                                     <h2 class="chart-title">Market Share <br/>for <span class="region-name"></span></h2>
-                                     <div id="market_share" class="chart" data-height="180"></div>
-                                 </div>
+                         <div class="col-sm-6">
+                             <div class="chart-block">
+                                 <h2 class="chart-title">Market Share <br/><span class="region-name"></span></h2>
+                                 <div id="market_share" class="chart" data-height="180"></div>
                              </div>
                          </div>
                      </div>

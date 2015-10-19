@@ -100,13 +100,14 @@ var drawCategoryProductTable = function(container_id){
 
     anychart.graphics.events.listen(stage, anychart.graphics.vector.Stage.EventType.STAGE_RESIZE, function(e){
         var bounds = stage.getBounds();
+        console.log(bounds.width, bounds.height);
         bounds.top += 35;
         bounds.height -= 55;
         productsTableRect.setBounds(bounds);
     });
-    table.getCol(2).hAlign('center');
+    table.getCol(2).hAlign('right');
     table.getCol(3).hAlign('center');
-    table.getCol(4).hAlign('center');
+    table.getCol(4).hAlign('right');
     table.getCol(2).width(80);
     table.getCol(4).width(60);
     table.container(stage).draw();
@@ -118,7 +119,7 @@ var drawCategoryMapChart = function(container_id){
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var map = createMapOfFrance(
         'right',
-        'top',
+        'center',
         [{less: 350000},
         {from: 350000, to: 400000},
         {from: 400000, to: 450000},

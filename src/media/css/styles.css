@@ -340,6 +340,9 @@ h2.chart-title span.person-name {
     padding: 0 20px;
     cursor: pointer;
 }
+.no-padding{
+    padding: 10px 10px 0 0;
+}
 @media (min-width: 1200px) {
     .menu-dashboard-panel {
         left: 0

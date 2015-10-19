@@ -21,6 +21,7 @@ function drawRegionsMapChart(container_id){
 }
 
 function setRegionsChartData(map, data){
+    console.log(data);
     map.getSeries(0).data(data.regions_data);
     regionsChart.getSeries(0).unselect();
     map.listen(anychart.enums.EventType.POINTS_SELECT, function(e) {
@@ -29,9 +30,9 @@ function setRegionsChartData(map, data){
           drillDownRegion(selectedPoint);
         }
       });
+    fillMenuList(data.regions_data);
     map.getSeries(0).select(1);
-
-    $('.region-name').html(data.regions_data[1].name);
+    $('.region-name').html(data.regions_data[1].x);
     regionTotalShareChart.data([data.regions_data[1].total_share, 100]);
     regionTotalShareChart.label().text(data.regions_data[1].total_share + '%');
     regionMarketShareChart.data([data.regions_data[1].market_share, 100]);
@@ -43,6 +44,7 @@ function drawRegionRevenueChart(container_id){
     var $chartContainer = $('#' + container_id);
     $chartContainer.css('height', parseInt($chartContainer.attr('data-height'))).html('');
     var chart = createRevenueChart();
+    chart.interactivity().selectionMode("none");
     chart.container(container_id);
     chart.draw();
     return chart;

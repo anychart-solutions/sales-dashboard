@@ -77,10 +77,12 @@ function drawAllCharts(filter){
     teamPersonalRevenueChart = drawTeamPersonalRevenueChart('sales-for-person');
     teamPersonalShareChart = drawTeamPersonalShareChart('total_share_for_person');
     teamPersonalWinRatioChart = drawTeamPersonalWinRatioChart('win_ratio_for_person');
+
     regionsChart = drawRegionsMapChart('regions-chart');
     regionRevenueChart = drawRegionRevenueChart('sales-in-region-chart');
     regionTotalShareChart = drawRegionTotalShareChart('total_share');
     regionMarketShareChart = drawRegionMarketShareChart('market_share');
+
     //console.timeEnd("drawing charts");
     changeData(filter);
 }
@@ -190,6 +192,17 @@ var createRevenueChart = function () {
 var createSparkLine = function (data) {
     var sparkLine = anychart.sparkline(data);
     sparkLine.type('area');
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    sparkLine.tooltip().enabled(true);
+    setupBigTooltip(sparkLine);
+    sparkLine.tooltip().padding('3px').title().enabled(true).fontColor(fontColor).fontWeight('normal');
+    sparkLine.tooltip().fontColor(darkAccentColor);
+    sparkLine.tooltip().titleFormatter(function(){
+        return MONTHS[this.x]
+    });
+    sparkLine.tooltip().textFormatter(function(){
+        return this.value
+    });
     sparkLine.padding(0);
     sparkLine.margin(5, 0, 5, 0);
     sparkLine.background(null);
@@ -287,6 +300,7 @@ function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSe
     map.title(null);
 
     var cr = map.colorRange().enabled(true);
+    cr.removeAllListeners('click');
     cr.orientation(colorRangeOrientation);
     cr.colorLineSize(10);
     cr.marker().size(5);
@@ -300,9 +314,9 @@ function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSe
         if (isFinite(range.start + range.end)) {
           name = range.start.formatMoney(0, '.', ',')  + ' - ' + range.end.formatMoney(0, '.', ',');
         } else if (isFinite(range.start)) {
-          name = 'more ' + range.start.formatMoney(0, '.', ',');
+          name = '> ' + range.start.formatMoney(0, '.', ',');
         } else {
-          name = 'less ' + range.end.formatMoney(0, '.', ',');
+          name = '< ' + range.end.formatMoney(0, '.', ',');
         }
         return name
     });

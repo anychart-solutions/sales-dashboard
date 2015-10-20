@@ -109,9 +109,12 @@ function selectPoint(x){
 }
 
 function fillMenuList(data){
-    for (var i=0; i<data.length; i++){
-        var li_item = $('<li> <a onclick="selectPoint(\'' + data[i].x + '\');">' + data[i].x + '</a></li>');
-        $('#region-name-menu-list').append(li_item);
+    if ($('#region-name-menu-list').html() == ''){
+        for (var i=0; i<data.length; i++){
+            var li_item = $('<li> <a onclick="selectPoint(\'' + data[i].x + '\');">' + data[i].x + '</a></li>');
+            $('#region-name-menu-list').append(li_item);
+        }
+        $('.region-name').html(data[0].x)
     }
-    $('.region-name').html(data[0].x)
+
 }

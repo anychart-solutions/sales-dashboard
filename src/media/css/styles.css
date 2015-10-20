@@ -343,6 +343,10 @@ h2.chart-title span.person-name {
 .no-padding{
     padding: 10px 10px 0 0;
 }
+#region-name-menu-list{
+    max-height: 490px;
+    overflow-y: scroll;
+}
 @media (min-width: 1200px) {
     .menu-dashboard-panel {
         left: 0

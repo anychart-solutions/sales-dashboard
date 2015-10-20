@@ -20,8 +20,19 @@ function drawRegionsMapChart(container_id){
     return map
 }
 
-function setRegionsChartData(map, data){
+function getDataIndexById(x, data){
+    for (var i=0; i<data.length; i++) {
+        if (data[i].id == x) {
+            var index = i;
+            break;
+        }
+    }
+    return index
+}
+
+function setRegionsChartData(map, data, region_id){
     map.getSeries(0).data(data.regions_data);
+
     regionsChart.getSeries(0).unselect();
     map.listen(anychart.enums.EventType.POINTS_SELECT, function(e) {
         selectedPoint = e.currentPoint;
@@ -30,13 +41,17 @@ function setRegionsChartData(map, data){
         }
       });
     fillMenuList(data.regions_data);
-    map.getSeries(0).select(1);
-    $('.region-name').html(data.regions_data[1].x);
-    regionTotalShareChart.data([data.regions_data[1].total_share, 100]);
-    regionTotalShareChart.label().text(data.regions_data[1].total_share + '%');
-    regionMarketShareChart.data([data.regions_data[1].market_share, 100]);
-    regionMarketShareChart.label().text(data.regions_data[1].market_share + '%');
-    setGeneralRevenueData(regionRevenueChart, data.regions_data[1].revenue);
+
+    if (!region_id) var index = 1;
+    else index = getDataIndexById(region_id, data.regions_data);
+
+    map.getSeries(0).select(index);
+    $('.region-name').html(data.regions_data[index].x);
+    regionTotalShareChart.data([data.regions_data[index].total_share, 100]);
+    regionTotalShareChart.label().text(data.regions_data[index].total_share + '%');
+    regionMarketShareChart.data([data.regions_data[index].market_share, 100]);
+    regionMarketShareChart.label().text(data.regions_data[index].market_share + '%');
+    setGeneralRevenueData(regionRevenueChart, data.regions_data[index].revenue);
 }
 
 function drawRegionRevenueChart(container_id){

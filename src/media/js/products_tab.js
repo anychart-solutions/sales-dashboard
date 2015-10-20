@@ -44,7 +44,7 @@ var drawCategoryChart = function(container_id){
 
 var revenueDataSet = anychart.data.set();
 var revenueDataSet_map1 = revenueDataSet.mapAs({value: [1], x: [0]});
-var changeCategoryData = function(chart, data){
+var changeCategoryData = function(chart, data, index){
     globalData = data;
     revenueDataSet.data(data);
 
@@ -54,7 +54,8 @@ var changeCategoryData = function(chart, data){
     chart.lineMarker(0).value(average);
     chart.textMarker(0).value(average);
     tooltipContentForChart(chart.getSeries(0), 'with_average', average);
-    drillDown(data[0].x)
+    if (!index) drillDown(data[0].x);
+    else drillDown(data[index].x)
 };
 
 function getGlobalDataByX(x){

@@ -10,57 +10,42 @@ var categoryChart, categoryMapChart, categoryProductTable;
 var teamMainChart, teamPersonalRevenueChart, teamPersonalShareChart, teamPersonalWinRatioChart;
 var regionsChart, regionRevenueChart, regionTotalShareChart, regionMarketShareChart;
 
-function changeTab(tab_name) {
+function changeTab(tab_name, index) {
     $('.menu-wrapper a').removeClass('active');
     $('.menu-wrapper a.' + tab_name).addClass('active');
     $('.tab-pane').removeClass('active');
     $('#' + tab_name).addClass('active');
+    if (tab_name == 'products' && index)
+        changeCategoryData(categoryChart, productsData['categories_data'], index);
+    else if (tab_name == 'sales-team' && index)
+        setMainTeamChartData(teamMainChart, salesTeamData, index);
+    else if (tab_name == 'regions' && index)
+        setRegionsChartData(regionsChart, regionsData, index);
 }
 
 function updateData(filter){
-    //console.time("update data");
     generalData = generatedGeneralData[filter];
     productsData = generatedProductsData[filter];
     regionsData = generatedRegionsData[filter];
     salesTeamData = generatedSalesTeamData[filter];
-    //console.timeEnd("update data");
 
 }
 
 
 function changeData(filter) {
-    var active_pane_id = $('.tab-pane.active').attr('id');
-    //$('.tab-pane').removeClass('active');
-    //$('#spinner').addClass('active');
-    //changeTab('general');
-    //console.time("get data");
     updateData(filter);
-    //console.timeEnd("get data");
-    //console.time("set data");
-    //console.time("set data main");
     setGeneralRevenueData(generalRevenueChart, generalData['revenue_chart']);
     setGeneralKeyMetricData(generalKeyMetricTable, generalData['key_metrics']);
     top5productsChart = changeDataFor5Top(top5productsStage, generalData['five_best']['products'], 'pie', 'topProducts', top5productsChart);
     top5salesChart = changeDataFor5Top(top5salesStage, generalData['five_best']['sales_men'], 'pie', 'topSales', top5salesChart);
     top5regionsChart = changeDataFor5Top(top5regionsStage, generalData['five_best']['regions'], 'pie', 'topRegions', top5regionsChart);
-    //console.timeEnd("set data main");
-    //console.time("set data categories");
+
     changeCategoryData(categoryChart, productsData['categories_data']);
-    //console.timeEnd("set data categories");
-    //console.time("set data team");
     setMainTeamChartData(teamMainChart, salesTeamData);
-    //console.timeEnd("set data team");
-    //console.time("set data regions");
     setRegionsChartData(regionsChart, regionsData);
-    //console.timeEnd("set data regions");
-    //console.timeEnd("set data");
-    //changeTab(active_pane_id);
-    //$('#spinner').removeClass('active');
-    //$('#'+ active_pane_id).addClass('active');
 }
 
 function drawAllCharts(filter){
-    //console.time("drawing charts");
     generalRevenueChart = drawGeneralRevenueChart('general-revenue-chart');
     generalKeyMetricTable = drawGeneralKeyMetricTable('general-key-metric-chart');
     top5productsStage = draw5TopChart('top-5-products');
@@ -78,8 +63,6 @@ function drawAllCharts(filter){
     regionRevenueChart = drawRegionRevenueChart('sales-in-region-chart');
     regionTotalShareChart = drawRegionTotalShareChart('total_share');
     regionMarketShareChart = drawRegionMarketShareChart('market_share');
-
-    //console.timeEnd("drawing charts");
     changeData(filter);
 }
 

@@ -58,7 +58,7 @@ function drawTeamPersonalWinRatioChart(container_id){
 }
 
 
-function setMainTeamChartData(table, data){
+function setMainTeamChartData(table, data, index){
     var content = [
         ['Name', 'Revenue', 'Variance from Avg', 'Avg Or.', 'New Clients']
     ];
@@ -80,13 +80,16 @@ function setMainTeamChartData(table, data){
     table.getRow(data['team_data'].length + 1).vAlign('top').fontSize(10);
     table.getRow(data['team_data'].length + 1).height(20);
 
-
+    if (activeRow) {
+        table.getRow(activeRow).cellFill(null);
+        activeRow = null;
+    }
     anychart.graphics.events.listen(mainTableRect, anychart.graphics.events.EventType.CLICK, function(e){
         var h = (mainTableHeight - 50) / data['team_data'].length;
         var row = Math.round(e.offsetY/h)-1;
+
         if (activeRow) {
             table.getRow(activeRow).cellFill(null);
-            activeRow = null;
         }
         activeRow = row;
         table.getRow(activeRow).cellFill("#F7A028 0.3");
@@ -116,7 +119,10 @@ function setMainTeamChartData(table, data){
         }
     });
 
-    activeRow = 1;
+    if (!index || index == 0) activeRow = 1;
+    else activeRow = index + 1;
+    //console.log(activeRow, index);
+
     table.getRow(activeRow).cellFill("#F7A028 0.3");
     teamPersonalShareChart.data([data['team_data'][activeRow-1].sales_share, 100]);
     teamPersonalShareChart.label().text(data['team_data'][activeRow-1].sales_share + '%');

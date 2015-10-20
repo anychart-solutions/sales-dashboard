@@ -2,9 +2,9 @@ generatedGeneralData = {
     "all": {
         "revenue_chart": [["2001", 354165, 457], ["2002", 443161, 501], ["2003", 359122, 460], ["2004", 375931, 470], ["2005", 337994, 458], ["2006", 309811, 489], ["2007", 574098, 457], ["2008", 414174, 498], ["2009", 473528, 432], ["2010", 372344, 490], ["2011", 328866, 501], ["2012", 442209, 518], ["2013", 390097, 439], ["2014", 431064, 509]],
         "five_best": {
-            "sales_men": [["Katherine Dean", 505625], ["Dorothy Meyer", 265819], ["Nancy Gordon", 195524], ["Arthur Boyd", 177939], ["Judy Howell", 47017], ["Other", 392278]],
-            "regions": [["Beaujolais", 564065], ["Ile de France", 560661], ["Loire", 522470], ["Bordeaux", 308615], ["Rhône", 245072], ["Other", 534519]],
-            "products": [["Jean de Saligny", 395049], ["Chateau Saint Nicolas", 305534], ["Gewurztraminer", 245058], ["Comtes de Tastes", 222790], ["Chevalier Lacassan", 216356], ["Other", 518375]]
+            "sales_men": [["Beverly Gutierrez", 505625], ["Douglas Lopez", 265819], ["Billy Oliver", 195524], ["Debra White", 177939], ["Sara Larson", 47017], ["Other", 392278]],
+            "regions": [["Haute-Normandie", 564065, "FR.Q"], ["Picardie", 560661, "FR.S"], ["Loire", 522470, "FR.R"], ["Alsace", 308615, "FR.A"], ["Guadeloupe", 245072, "FR.GP"], ["Other", 534519]],
+            "products": [["Brittany", 395049], ["Champagne", 305534], ["Languedoc-Roussillon", 245058], ["Loire", 222790], ["Beaujolais", 216356], ["Other", 518375]]
         },
         "key_metrics": {
             "revenue": {
@@ -35,9 +35,9 @@ generatedGeneralData = {
     "YTD": {
         "revenue_chart": [["Jan", 371755, 488], ["Feb", 312452, 474], ["Mar", 442523, 484], ["Apr", 340224, 485], ["May", 579636, 446], ["June", 583899, 447], ["July", 407496, 459], ["Aug", 509318, 433], ["Sep", 596425, 509], ["Oct", 319760, 488], ["Nov", 422415, 434], ["Dec", 520126, 476]],
         "five_best": {
-            "sales_men": [["Marilyn Wood", 463615], ["Phillip Weaver", 291194], ["Billy Oliver", 273693], ["Nancy Gordon", 160051], ["Rose Montgomery", 148197], ["Other", 583959]],
-            "regions": [["Rhône", 446058], ["South West France", 442874], ["Beaujolais", 329661], ["Jura", 250939], ["Savoy", 213344], ["Other", 510917]],
-            "products": [["Robert Ampeau et Fils", 459027], ["Belle Arche Rouge", 442637], ["Gewurztraminer", 402257], ["Andre Lurton", 251841], ["Simonnet-Febvre", 131824], ["Other", 525047]]
+            "sales_men": [["Roger Williamson", 463615], ["Harold Sanchez", 291194], ["Beverly Gutierrez", 273693], ["Katherine Bailey", 160051], ["Juan Carpenter", 148197], ["Other", 583959]],
+            "regions": [["Alsace", 446058, "FR.A"], ["Champagne-Ardenne", 442874, "FR.G"], ["Corse", 329661, "FR.H"], ["La Runion", 250939, "FR.RE"], ["Midi-Pyrnes", 213344, "FR.N"], ["Other", 510917]],
+            "products": [["Brittany", 459027], ["Corsica", 442637], ["South West France", 402257], ["Provence", 251841], ["Beaujolais", 131824], ["Other", 525047]]
         },
         "key_metrics": {
             "revenue": {
@@ -64,9 +64,9 @@ generatedGeneralData = {
     "QTD": {
         "revenue_chart": [["Jan", 310802, 446], ["Feb", 343016, 458], ["Mar", 369625, 459], ["Apr", 325947, 470]],
         "five_best": {
-            "sales_men": [["Phillip Weaver", 581762], ["Jimmy Hawkins", 539783], ["Jesse Cooper", 431623], ["Debra White", 351975], ["Frances Henderson", 270728], ["Other", 592926]],
-            "regions": [["Savoy", 538387], ["Jura", 342330], ["Bordeaux", 291301], ["Normandy", 48782], ["Rhône", 11823], ["Other", 526226]],
-            "products": [["Simonnet-Febvre", 324228], ["Chateau Beausejour", 147439], ["Maison Bouey", 117874], ["Perrin et Fils", 18349], ["La Patache, Medoc", 16449], ["Other", 543626]]
+            "sales_men": [["Juan Carpenter", 581762], ["Frances Chapman", 539783], ["Jose Hart", 431623], ["Ralph Butler", 351975], ["Angela Long", 270728], ["Other", 592926]],
+            "regions": [["le-de-France", 538387, "FR.J"], ["Guyane", 342330, "FR.GF"], ["Midi-Pyrnes", 291301, "FR.N"], ["Auvergne", 48782, "FR.C"], ["Corse", 11823, "FR.H"], ["Other", 526226]],
+            "products": [["Burgundy", 324228], ["Jura", 147439], ["Ile de France", 117874], ["Languedoc-Roussillon", 18349], ["Alsace", 16449], ["Other", 543626]]
         },
         "key_metrics": {
             "revenue": {
@@ -93,9 +93,9 @@ generatedGeneralData = {
     "MTD": {
         "revenue_chart": [[1, 379587, 445], [2, 534887, 477], [3, 589062, 486], [4, 457995, 477], [5, 318910, 488], [6, 341971, 470], [7, 312885, 457], [8, 487439, 519], [9, 516618, 498], [10, 331085, 452], [11, 531346, 509], [12, 431230, 520], [13, 570716, 437], [14, 318449, 497], [15, 318742, 478], [16, 594520, 480], [17, 547077, 453], [18, 493411, 520], [19, 451043, 496], [20, 353355, 491], [21, 326432, 494], [22, 446104, 502], [23, 518523, 444], [24, 420079, 485], [25, 455086, 479], [26, 448425, 476], [27, 312098, 520], [28, 453555, 499], [29, 314669, 492], [30, 306057, 445], [31, 597648, 487]],
         "five_best": {
-            "sales_men": [["Elizabeth Hudson", 317056], ["Nancy Gordon", 283404], ["Ralph Butler", 263419], ["Norma Duncan", 157671], ["Arthur Boyd", 125097], ["Other", 503587]],
-            "regions": [["Normandy", 402285], ["Alsace", 374961], ["Burgundy", 372872], ["Ile de France", 333991], ["Languedoc-Roussillon", 46686], ["Other", 303889]],
-            "products": [["\"Chateau Reynon\" Sauvignon", 427989], ["Clos Floridene Rouge", 384196], ["Chateau Sainte Elisabeth", 121510], ["Les Domaines Montariol", 7285], ["Belle Arche", 2064], ["Other", 501580]]
+            "sales_men": [["Dorothy Meyer", 317056], ["Jimmy Hawkins", 283404], ["Beverly Gutierrez", 263419], ["Nancy Gordon", 157671], ["Norma Duncan", 125097], ["Other", 503587]],
+            "regions": [["Provence-Alpes-Côte d'Azur", 402285, "FR.U"], ["Centre", 374961, "FR.F"], ["Nord-Pas-de-Calais", 372872, "FR.O"], ["Bretagne", 333991, "FR.E"], ["Aquitaine", 46686, "FR.B"], ["Other", 303889]],
+            "products": [["Champagne", 427989], ["Normandy", 384196], ["Savoy", 121510], ["Loire", 7285], ["Jura", 2064], ["Other", 501580]]
         },
         "key_metrics": {
             "revenue": {
@@ -126,9 +126,9 @@ generatedGeneralData = {
     "WTD": {
         "revenue_chart": [["Su.", 310080, 509], ["Mo.", 383339, 496], ["Tu.", 346783, 510], ["We.", 546459, 449], ["Th.", 401388, 459], ["Fr.", 592960, 492], ["Sa.", 408125, 468]],
         "five_best": {
-            "sales_men": [["Ann Bradley", 538857], ["Norma Duncan", 483156], ["Juan Carpenter", 331613], ["Marilyn Wood", 207726], ["Arthur Boyd", 89468], ["Other", 472130]],
-            "regions": [["Languedoc-Roussillon", 524336], ["Brittany", 353907], ["Loire", 259807], ["Burgundy", 73009], ["Alsace", 12520], ["Other", 399191]],
-            "products": [["Comtes de Tastes", 350012], ["Simonnet-Febvre", 175705], ["Jean de Saligny", 120024], ["Chateau Reynon", 97154], ["Zind-Humbrecht", 19606], ["Other", 487776]]
+            "sales_men": [["Katherine Dean", 538857], ["Frances Chapman", 483156], ["Norma Duncan", 331613], ["Willie Hansen", 207726], ["Nancy Gordon", 89468], ["Other", 472130]],
+            "regions": [["Champagne-Ardenne", 524336, "FR.G"], ["Rhône-Alpes", 353907, "FR.V"], ["Languedoc-Roussillon", 259807, "FR.K"], ["Mayotte", 73009, "FR.YT"], ["Alsace", 12520, "FR.A"], ["Other", 399191]],
+            "products": [["Alsace", 350012], ["Normandy", 175705], ["Beaujolais", 120024], ["Ile de France", 97154], ["Jura", 19606], ["Other", 487776]]
         },
         "key_metrics": {
             "revenue": {

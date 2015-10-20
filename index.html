@@ -34,7 +34,7 @@
     <div class="menu-wrapper">
         <ul class="list-unstyled">
             <li><a class="general active" onclick="changeTab('general')">General Info <i class="fa fa-bookmark"></i></a></li>
-            <li><a class="products " onclick="changeTab('products')">Sales by Product <i class="fa fa-shopping-cart"></i></a></li>
+            <li><a class="products " onclick="changeTab('products')">Sales by Origin <i class="fa fa-shopping-cart"></i></a></li>
             <li><a class="sales-team " onclick="changeTab('sales-team')">Sales Team Rate <i class="fa fa-user"></i></a></li>
             <li><a class="regions " onclick="changeTab('regions')"> Sales by Region <i class="fa fa-map-marker"></i></a></li>
         </ul>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-md-4 col-sm-6 no-padding">
                     <div class="chart-block">
-                        <h2 class="chart-title">Top 5 Products <span>(<a onclick="changeTab('products')">more</a>)</span></h2>
+                        <h2 class="chart-title">Top 5 Origins <span>(<a onclick="changeTab('products')">more</a>)</span></h2>
                         <div id="top-5-products" data-height="200" class="chart"></div>
                     </div>
                 </div>
@@ -114,10 +114,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane " id="products">
+            <div class="tab-pane" id="products">
                 <div class="col-lg-6 col-sm-6 no-padding">
                     <div class="chart-block">
-                        <h2 class="chart-title"> Regions by Revenue </h2>
+                        <h2 class="chart-title"> Origins by Revenue </h2>
                         <div id="category-chart" class="chart" data-height="213"></div>
                     </div>
                     <div class="chart-block">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 no-padding">
                     <div class="chart-block">
-                        <h2 class="chart-title">Sales in <span class="category-name"></span></h2>
+                        <h2 class="chart-title">Sales of <span class="category-name"></span></h2>
                         <div id="category-products-chart" class="chart" data-height="510"></div>
                     </div>
                 </div>

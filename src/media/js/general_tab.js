@@ -126,16 +126,38 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
         chart.padding(10, 15, 0, 0);
         var series = chart.bar(bar_data);
         series.pointWidth('50%');
+        series.listen('pointClick', function(e) {
+            if (e.iterator.get('x') != 'Other' && e.iterator.getIndex() >= 0){
+                if (name == 'topProducts') {
+                    changeTab('products', e.iterator.getIndex())
+                } else if (name == 'topSales'){
+                    changeTab('sales-team', e.iterator.getIndex());
+                } else if (name == 'topRegions'){
+                    changeTab('regions', data[e.iterator.getIndex()][2]);
+                }
+            }
+        });
         tooltipContentForChart(series, 'with_percent');
     } else {
         chart = anychart.pie(data);
         chart.stroke('3 #fff');
         chart.radius('30%');
         chart.padding(0);
-        chart.explode(5);
+        chart.explode(0);
         chart.hoverStroke(null);
         chart.labels().fontSize(11).position('o');
         chart.labels().textFormatter(function(){return this.x});
+        chart.listen('pointClick', function(e) {
+            if (e.iterator.get('x') != 'Other' && e.iterator.getIndex() >= 0){
+                if (name == 'topProducts') {
+                    changeTab('products', e.iterator.getIndex())
+                } else if (name == 'topSales'){
+                    changeTab('sales-team', e.iterator.getIndex());
+                } else if (name == 'topRegions'){
+                    changeTab('regions', data[e.iterator.getIndex()][2]);
+                }
+            }
+        });
         tooltipContentForChart(chart, 'with_percent');
     }
     var label = chart.label();

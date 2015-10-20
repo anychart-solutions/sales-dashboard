@@ -1,4 +1,4 @@
-var activeRow = null;
+var activeMember;
 var hoverRow = null;
 var mainTableHeight, mainTableRect;
 
@@ -59,6 +59,19 @@ function drawTeamPersonalWinRatioChart(container_id){
 
 
 function setMainTeamChartData(table, data, index){
+    if (activeMember) {
+        table.getRow(activeMember).cellFill(null);
+    }
+
+    function selectChosenRow(row_index){
+        table.getRow(row_index).cellFill("#F7A028 0.3");
+        teamPersonalShareChart.data([data['team_data'][row_index - 1].sales_share, 100]);
+        teamPersonalShareChart.label().text(data['team_data'][row_index - 1].sales_share + '%');
+        teamPersonalWinRatioChart.data([data['team_data'][row_index - 1].win_ratio, 100]);
+        teamPersonalWinRatioChart.label().text(data['team_data'][row_index - 1].win_ratio + '%');
+        setGeneralRevenueData(teamPersonalRevenueChart, data['team_data'][row_index-1].revenue_trend);
+        $('.person-name').html(data['team_data'][row_index-1].name);
+    }
     var content = [
         ['Name', 'Revenue', 'Variance from Avg', 'Avg Or.', 'New Clients']
     ];
@@ -76,60 +89,37 @@ function setMainTeamChartData(table, data, index){
         [null, null, createBulletScale(50, -50, 50, '%'), null, null]
     );
     table.contents(content);
-
     table.getRow(data['team_data'].length + 1).vAlign('top').fontSize(10);
     table.getRow(data['team_data'].length + 1).height(20);
 
-    if (activeRow) {
-        table.getRow(activeRow).cellFill(null);
-        activeRow = null;
-    }
     anychart.graphics.events.listen(mainTableRect, anychart.graphics.events.EventType.CLICK, function(e){
         var h = (mainTableHeight - 50) / data['team_data'].length;
         var row = Math.round(e.offsetY/h)-1;
-
-        if (activeRow) {
-            table.getRow(activeRow).cellFill(null);
+        if (activeMember) {
+            table.getRow(activeMember).cellFill(null);
         }
-        activeRow = row;
-        table.getRow(activeRow).cellFill("#F7A028 0.3");
+        activeMember = row;
+        selectChosenRow(activeMember);
 
-        teamPersonalShareChart.data([data['team_data'][activeRow - 1].sales_share, 100]);
-        teamPersonalShareChart.label().text(data['team_data'][activeRow - 1].sales_share + '%');
-        teamPersonalWinRatioChart.data([data['team_data'][activeRow - 1].win_ratio, 100]);
-        teamPersonalWinRatioChart.label().text(data['team_data'][activeRow - 1].win_ratio + '%');
-        setGeneralRevenueData(teamPersonalRevenueChart, data['team_data'][activeRow-1].revenue_trend);
-
-        $('.person-name').html(data['team_data'][activeRow-1].name);
     });
 
     anychart.graphics.events.listen(mainTableRect, anychart.graphics.events.EventType.MOUSEMOVE, function(e){
         var h = (mainTableHeight - 50) / data['team_data'].length;
         var row = Math.round(e.offsetY/h)-1;
-        if (hoverRow && hoverRow != activeRow){
+        if (hoverRow && hoverRow != activeMember){
             table.getRow(hoverRow).cellFill(null);
         }
         hoverRow = row;
-        if (hoverRow != activeRow && hoverRow != 0) table.getRow(hoverRow).cellFill("#F7A028 0.1");
+        if (hoverRow != activeMember && hoverRow != 0) table.getRow(hoverRow).cellFill("#F7A028 0.1");
     });
 
     anychart.graphics.events.listen(mainTableRect, anychart.graphics.events.EventType.MOUSEOUT, function(e){
-        if (hoverRow && hoverRow != activeRow){
+        if (hoverRow && hoverRow != activeMember){
             table.getRow(hoverRow).cellFill(null);
         }
     });
 
-    if (!index || index == 0) activeRow = 1;
-    else activeRow = index + 1;
-    //console.log(activeRow, index);
-
-    table.getRow(activeRow).cellFill("#F7A028 0.3");
-    teamPersonalShareChart.data([data['team_data'][activeRow-1].sales_share, 100]);
-    teamPersonalShareChart.label().text(data['team_data'][activeRow-1].sales_share + '%');
-    teamPersonalWinRatioChart.data([data['team_data'][activeRow-1].win_ratio, 100]);
-    teamPersonalWinRatioChart.label().text(data['team_data'][activeRow-1].win_ratio + '%');
-    setGeneralRevenueData(teamPersonalRevenueChart, data['team_data'][activeRow-1].revenue_trend);
-
-    $('.person-name').html(data['team_data'][activeRow-1].name);
+    if (!index || index == 0) activeMember = 1;
+    else activeMember = index + 1;
+    selectChosenRow(activeMember);
 }
-

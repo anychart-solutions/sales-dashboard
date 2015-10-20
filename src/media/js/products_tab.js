@@ -139,6 +139,7 @@ var setCategoryMapData = function(map, data){
 };
 
 var setCategoryProductData = function(table, data){
+    table.getRow(table.rowsCount() - 1).height(null);
     var content = [
         ['Product', 'Revenue trend', 'Revenue', 'Variance from<br/>average price', 'Price']
     ];
@@ -156,7 +157,6 @@ var setCategoryProductData = function(table, data){
         [null, null, null, createBulletScale(300, -300, 100, 'x'), null]
     );
     table.contents(content);
-
     if (activeRow) {
         table.getRow(activeRow).cellFill(null);
         activeRow = null;
@@ -177,15 +177,15 @@ var setCategoryProductData = function(table, data){
     anychart.graphics.events.listen(productsTableRect, anychart.graphics.events.EventType.MOUSEMOVE, function(e){
         var h = (productsTableHeight - 50) / data.length;
         var row = Math.round(e.offsetY/h)-1;
-        if (hoverRow && hoverRow != activeRow){
+        if (hoverRow && hoverRow != activeRow && table.getRow(hoverRow)){
             table.getRow(hoverRow).cellFill(null);
         }
         hoverRow = row;
-        if (hoverRow != activeRow && hoverRow != 0) table.getRow(hoverRow).cellFill("#F7A028 0.1");
+        if (hoverRow != activeRow && hoverRow != 0 && table.getRow(hoverRow)) table.getRow(hoverRow).cellFill("#F7A028 0.1");
     });
 
     anychart.graphics.events.listen(productsTableRect, anychart.graphics.events.EventType.MOUSEOUT, function(e){
-        if (hoverRow && hoverRow != activeRow){
+        if (hoverRow && hoverRow != activeRow && table.getRow(hoverRow)){
             table.getRow(hoverRow).cellFill(null);
         }
     });

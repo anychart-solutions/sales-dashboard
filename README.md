@@ -15,7 +15,9 @@ The solution is dedicated to the wines of France - a pleasant topic to think abo
 
 [<img src="http://static.anychart.com/images/github/sales_dashboard_4.png" alt="Sales Dashboard | AnyChart">](http://anychart.com/solutions/sales-dashboard-solution/)
 
-## Further Learning
+## Links
+* [This Sales Dashboard Demo at AnyChart.Com](https://www.anychart.com/solutions/sales-dashboard-solution/)
+* [Other Interactive Dashboard Samples at AnyChart.com](https://www.anychart.com/solutions/)
 * [Documentation](https://docs.anychart.com)
 * [JavaScript API Reference](https://api.anychart.com)
 * [Code Playground](https://playground.anychart.com)

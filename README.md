@@ -24,4 +24,5 @@ The solution is dedicated to the wines of France - a pleasant topic to think abo
 * [Technical Support](https://anychart.com/support)
 
 ## License
-[© AnyChart.com - JavaScript charts](http://www.anychart.com). Released under the [Apache 2.0 License](https://github.com/anychart-solutions/sales-dashboard-solution/blob/master/LICENSE).
+[© AnyChart.com - JavaScript charts](http://www.anychart.com). 
+[![Analytics](https://ga-beacon.appspot.com/UA-228820-4/Solutions/Sales-Dashboard?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)

@@ -100,16 +100,15 @@ function tooltipContentForChart(series, format, data){
     setupBigTooltip(series);
     series.tooltip().title().fontColor(fontColor);
     series.tooltip().separator().margin(0,0,5,0);
-    if (series.getType && series.getType() == 'pie') series.tooltip().content().lineHeight('5px');
-    else series.tooltip().lineHeight('5px');
-    series.tooltip().titleFormatter(function(){
+    series.tooltip().lineHeight('5px');
+    series.tooltip().titleFormat(function(){
         if (format == 'simple_map') {
             return this.name;
         } else {
             return this.x
         }
     });
-    series.tooltip().textFormatter(function(){
+    series.tooltip().format(function(){
         if (format == 'revenue-sold'){
             var values = getDataByX(data, this.x);
             var params = [
@@ -154,11 +153,11 @@ var createRevenueChart = function () {
     series2.yScale(s2);
     series2.name('Units sold');
     chart.title(null);
-    chart.interactivity("byX");
+    chart.interactivity("by-x");
     chart.yAxis().orientation('left').title(null);
     chart.yAxis(1).orientation('right').title(null);
     chart.xAxis().title(null);
-    chart.yAxis().labels().fontSize(11).textFormatter(function () {
+    chart.yAxis().labels().fontSize(11).format(function () {
         return '$' + Math.abs(parseInt(this.value)).formatMoney(0, '.', ',');
     });
     chart.yAxis(1).labels().padding(0, 0, 0, 5).fontSize(11);
@@ -170,16 +169,16 @@ var createRevenueChart = function () {
 
 var createSparkLine = function (data) {
     var sparkLine = anychart.sparkline(data);
-    sparkLine.type('area');
+    sparkLine.seriesType('area');
     var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     sparkLine.tooltip().enabled(true);
     setupBigTooltip(sparkLine);
     sparkLine.tooltip().padding('3px').title().enabled(true).fontColor(fontColor).fontWeight('normal');
     sparkLine.tooltip().fontColor(darkAccentColor);
-    sparkLine.tooltip().titleFormatter(function(){
+    sparkLine.tooltip().titleFormat(function(){
         return MONTHS[this.x]
     });
-    sparkLine.tooltip().textFormatter(function(){
+    sparkLine.tooltip().format(function(){
         return this.value
     });
     sparkLine.padding(0);
@@ -195,8 +194,8 @@ var createBulletChart = function (min, max, actual, target, invert) {
     var value = -(100 - Math.round(actual * 100 / target));
     if (invert) value = 100 - Math.round(actual * 100 / target);
     var bullet = anychart.bullet([
-        {value: value, type: 'bar', gap: 0.6, fill: palette.colorAt(0), stroke: null},
-        {value: 0, 'type': 'line', 'gap': 0.2, fill: palette.colorAt(4), stroke: {thickness: 1.1, color: '#212121'}}
+        {value: value, type: 'bar', gap: 0.6, fill: palette.itemAt(0), stroke: null},
+        {value: 0, 'type': 'line', 'gap': 0.2, fill: palette.itemAt(4), stroke: {thickness: 1.1, color: '#212121'}}
     ]);
     bullet.background(null);
     bullet.axis(null);
@@ -211,7 +210,7 @@ var createBulletChart = function (min, max, actual, target, invert) {
 };
 
 function createBulletScale(max, min, interval, value_str){
-    var axis = anychart.axes.linear();
+    var axis = anychart.standalones.axes.linear();
     axis.title(null);
     var scale = anychart.scales.linear();
     scale.minimum(min).maximum(max).ticks().interval(interval);
@@ -220,7 +219,7 @@ function createBulletScale(max, min, interval, value_str){
     axis.stroke(colorAxisLines);
     axis.ticks().stroke(colorMinorAxisLines).length(4);
     axis.labels().useHtml(true).padding(0,3,0,10).fontColor(colorAxisFont).fontSize(10)
-        .textFormatter(function () {
+        .format(function () {
             if (value_str == 'x') return this.value/100 + value_str;
             else return this.value + value_str;
     });
@@ -229,7 +228,7 @@ function createBulletScale(max, min, interval, value_str){
 }
 
 function createSolidChart(){
-    var gauge = anychart.circularGauge();
+    var gauge = anychart.gauges.circular();
     gauge.background(null);
     gauge.fill(null);
     gauge.stroke(null);
@@ -244,7 +243,7 @@ function createSolidChart(){
     axis.minorTicks().enabled(false);
 
     var stroke = '1 #e5e4e4';
-    gauge.bar(0).dataIndex(0).radius(90).width(50).fill(palette.colorAt(0)).stroke(null).zIndex(5);
+    gauge.bar(0).dataIndex(0).radius(90).width(50).fill(palette.itemAt(0)).stroke(null).zIndex(5);
     gauge.bar(1).dataIndex(1).radius(90).width(50).fill('#F5F4F4').stroke(stroke).zIndex(4);
     gauge.label()
         .text('')
@@ -256,13 +255,13 @@ function createSolidChart(){
 }
 
 function createTable(){
-    var table = anychart.ui.table();
+    var table = anychart.standalones.table();
     table.cellBorder(null);
     table.fontFamily("'Verdana', Helvetica, Arial, sans-serif")
         .fontSize(11)
         .useHtml(true)
         .fontColor(darkAccentColor)
-        .textWrap("noWrap")
+        // .textWrap("noWrap")
         .textOverflow("..")
         .vAlign('middle');
     table.getRow(0).cellBorder().bottom('1px #dedede');
@@ -287,7 +286,7 @@ function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSe
     cr.stroke(null);
     cr.ticks().enabled(true).stroke('2 #fff');
     cr.ticks().position('center').length(10);
-    cr.labels().fontSize(11).padding(0,0,0,5).textFormatter(function(){
+    cr.labels().fontSize(11).padding(0,0,0,5).format(function(){
         var range = this.colorRange;
         var name;
         if (isFinite(range.start + range.end)) {
@@ -307,8 +306,8 @@ function createMapOfFrance(colorRangeOrientation, colorRangeAlign, colorRangesSe
     var ocs = anychart.scales.ordinalColor(colorRangesSegments);
     ocs.colors(colorRangesSegmentsColors);
     s1.colorScale(ocs);
-    s1.hoverFill('#CCCFD2');
-    s1.selectFill(darkAccentColor);
+    s1.hovered().fill('#CCCFD2');
+    s1.selected().fill(darkAccentColor);
     map.padding(15, 0, 5, 0).margin(0);
     return map
 }
@@ -344,4 +343,3 @@ function showBars(flag) {
         $('.global-shadow').fadeOut();
     }
 }
-

@@ -12,7 +12,7 @@ var drawCategoryChart = function(container_id){
     chart.container(container_id);
 
     chart.title(null);
-    chart.interactivity("byX");
+    chart.interactivity("by-x");
     chart.padding(15, 0, 5, 0);
     chart.legend().enabled(false);
     chart.xAxis().labels().fontSize(11);
@@ -33,7 +33,7 @@ var drawCategoryChart = function(container_id){
         .scale(chart.yScale())
         .fontColor(colorAxisFont)
         .align('bottom')
-        .anchor('leftBottom')
+        .anchor('left-bottom')
         .offsetX(5)
         .offsetY(0)
         .text('Average');
@@ -43,7 +43,7 @@ var drawCategoryChart = function(container_id){
 };
 
 var revenueDataSet = anychart.data.set();
-var revenueDataSet_map1 = revenueDataSet.mapAs({value: [1], x: [0]});
+var revenueDataSet_map1 = revenueDataSet.mapAs({'value': 1, 'x': 0});
 var changeCategoryData = function(chart, data, index){
     globalData = data;
     revenueDataSet.data(data);
@@ -75,7 +75,7 @@ function drillDown(x){
     }
     selectedX = x;
     selectedData = getGlobalDataByX(selectedX);
-    selectedData['marker'] = {enabled: true, type: 'star5', fill: palette.colorAt(3), size: 10, hoverSize: 10};
+    selectedData['marker'] = {enabled: true, type: 'star5', fill: palette.itemAt(3), size: 10, hovered: {size: 10}};
     $('.category-name').html(selectedX);
 
     revenueDataSet.data(globalData);
@@ -99,7 +99,7 @@ var drawCategoryProductTable = function(container_id){
     var table = createTable();
     table.contents([['Product', 'Revenue trend', 'Revenue', 'Variance from<br/>average price', 'Price']]);
 
-    anychart.graphics.events.listen(stage, anychart.graphics.vector.Stage.EventType.STAGE_RESIZE, function(e){
+    anychart.graphics.events.listen(stage, "stageresize", function(e){
         var bounds = stage.getBounds();
         bounds.top += 35;
         bounds.height -= 55;
@@ -128,7 +128,7 @@ var drawCategoryMapChart = function(container_id){
         {greater: 550000}],
         ['#ffd54f', '#FDC543', '#F9B033', '#F7A028', '#F28110', '#ef6c00']
     );
-    map.allowPointsSelect(false);
+    map.interactivity().selectionMode('none');
     map.container(container_id);
     map.draw();
     return map
@@ -162,9 +162,11 @@ var setCategoryProductData = function(table, data){
         activeRow = null;
     }
 
-    anychart.graphics.events.listen(productsTableRect, anychart.graphics.events.EventType.CLICK, function(e){
+    anychart.graphics.events.listen(productsTableRect, "click", function(e){
         var h = (productsTableHeight - 50) / data.length;
         var row = Math.round(e.offsetY/h)-1;
+        if (!row)
+            return;
         if (activeRow){
             table.getRow(activeRow).cellFill(null);
         }
@@ -174,7 +176,7 @@ var setCategoryProductData = function(table, data){
         $('.product-name').html(data[activeRow-1].x);
     });
 
-    anychart.graphics.events.listen(productsTableRect, anychart.graphics.events.EventType.MOUSEMOVE, function(e){
+    anychart.graphics.events.listen(productsTableRect, "mousemove", function(e){
         var h = (productsTableHeight - 50) / data.length;
         var row = Math.round(e.offsetY/h)-1;
         if (hoverRow && hoverRow != activeRow && table.getRow(hoverRow)){
@@ -184,7 +186,7 @@ var setCategoryProductData = function(table, data){
         if (hoverRow != activeRow && hoverRow != 0 && table.getRow(hoverRow)) table.getRow(hoverRow).cellFill("#F7A028 0.1");
     });
 
-    anychart.graphics.events.listen(productsTableRect, anychart.graphics.events.EventType.MOUSEOUT, function(e){
+    anychart.graphics.events.listen(productsTableRect, "mouseout", function(e){
         if (hoverRow && hoverRow != activeRow && table.getRow(hoverRow)){
             table.getRow(hoverRow).cellFill(null);
         }

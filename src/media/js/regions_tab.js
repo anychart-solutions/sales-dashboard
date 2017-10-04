@@ -34,7 +34,7 @@ function setRegionsChartData(map, data, region_id){
     map.getSeries(0).data(data.regions_data);
 
     regionsChart.getSeries(0).unselect();
-    map.listen(anychart.enums.EventType.POINTS_SELECT, function(e) {
+    map.listen("pointsselect", function(e) {
         selectedPoint = e.currentPoint;
         if (selectedPoint) {
           drillDownRegion(selectedPoint);

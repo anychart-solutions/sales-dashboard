@@ -7,13 +7,13 @@ Example contains four tabs: The first tab - is a general view - it allows to ass
 
 The solution is dedicated to the wines of France - a pleasant topic to think about. But don't forget that according to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects and that consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.
 
-[<img src="https://static.anychart.com/images/github/sales_dashboard_1.png" alt="Sales Dashboard | AnyChart">](http://anychart.com/solutions/sales-dashboard-solution/)
+[<img src="https://static.anychart.com/images/github/sales_dashboard_1.png" alt="Sales Dashboard | AnyChart">](https://www.anychart.com/solutions/sales-dashboard-solution/)
 
-[<img src="https://static.anychart.com/images/github/sales_dashboard_2.png" alt="Sales Dashboard | AnyChart">](http://anychart.com/solutions/sales-dashboard-solution/)
+[<img src="https://static.anychart.com/images/github/sales_dashboard_2.png" alt="Sales Dashboard | AnyChart">](https://www.anychart.com/solutions/sales-dashboard-solution/)
 
-[<img src="https://static.anychart.com/images/github/sales_dashboard_3.png" alt="Sales Dashboard | AnyChart">](http://anychart.com/solutions/sales-dashboard-solution/)
+[<img src="https://static.anychart.com/images/github/sales_dashboard_3.png" alt="Sales Dashboard | AnyChart">](https://www.anychart.com/solutions/sales-dashboard-solution/)
 
-[<img src="https://static.anychart.com/images/github/sales_dashboard_4.png" alt="Sales Dashboard | AnyChart">](http://anychart.com/solutions/sales-dashboard-solution/)
+[<img src="https://static.anychart.com/images/github/sales_dashboard_4.png" alt="Sales Dashboard | AnyChart">](https://www.anychart.com/solutions/sales-dashboard-solution/)
 
 ## Links
 * [This Sales Dashboard Demo at AnyChart.Com](https://www.anychart.com/solutions/sales-dashboard-solution/)

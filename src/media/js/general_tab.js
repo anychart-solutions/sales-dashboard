@@ -122,7 +122,13 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
         chart.interactivity().selectionMode("none");
         chart.yAxis().enabled(false);
         chart.xAxis().title().enabled(false);
-        chart.xAxis().labels().width('40%').textOverflow('..').hAlign('right').padding(0,5,0,0).fontSize(11);
+        chart.xAxis().labels()
+            .enabled(true)
+            .width(100)
+            .textOverflow('...')
+            .hAlign('right')
+            .padding(0,5,0,0)
+            .fontSize(11);
         chart.padding(10, 15, 0, 0);
         var series = chart.bar(bar_data);
         series.pointWidth('50%');

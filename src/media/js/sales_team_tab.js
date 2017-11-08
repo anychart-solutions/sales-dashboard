@@ -18,7 +18,7 @@ function drawTeamMainChart(container_id){
         ['Name', 'Revenue', 'Variance from Avg', 'Avg Or.', 'New Clients']
     ];
     table.contents(content);
-    anychart.graphics.events.listen(stage, anychart.graphics.vector.Stage.EventType.STAGE_RESIZE, function(e){
+    anychart.graphics.events.listen(stage, "stageresize", function(e){
         var bounds = stage.getBounds();
         bounds.top += 35;
         bounds.height -= 55;
@@ -92,7 +92,7 @@ function setMainTeamChartData(table, data, index){
     table.getRow(data['team_data'].length + 1).vAlign('top').fontSize(10);
     table.getRow(data['team_data'].length + 1).height(20);
 
-    anychart.graphics.events.listen(mainTableRect, anychart.graphics.events.EventType.CLICK, function(e){
+    anychart.graphics.events.listen(mainTableRect, "click", function(e){
         var h = (mainTableHeight - 50) / data['team_data'].length;
         var row = Math.round(e.offsetY/h)-1;
         if (activeMember) {
@@ -103,7 +103,7 @@ function setMainTeamChartData(table, data, index){
 
     });
 
-    anychart.graphics.events.listen(mainTableRect, anychart.graphics.events.EventType.MOUSEMOVE, function(e){
+    anychart.graphics.events.listen(mainTableRect, "mousemove", function(e){
         var h = (mainTableHeight - 50) / data['team_data'].length;
         var row = Math.round(e.offsetY/h)-1;
         if (hoverRow && hoverRow != activeMember){
@@ -113,7 +113,7 @@ function setMainTeamChartData(table, data, index){
         if (hoverRow != activeMember && hoverRow != 0) table.getRow(hoverRow).cellFill("#F7A028 0.1");
     });
 
-    anychart.graphics.events.listen(mainTableRect, anychart.graphics.events.EventType.MOUSEOUT, function(e){
+    anychart.graphics.events.listen(mainTableRect, "mouseout", function(e){
         if (hoverRow && hoverRow != activeMember){
             table.getRow(hoverRow).cellFill(null);
         }

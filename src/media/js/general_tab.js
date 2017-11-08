@@ -9,8 +9,8 @@ var drawGeneralRevenueChart = function(container_id){
 };
 
 var general_data_set = anychart.data.set();
-var general_data_set_map1 = general_data_set.mapAs({value: [1], x: [0]});
-var general_data_set_map2 = general_data_set.mapAs({value: [2], x: [0]});
+var general_data_set_map1 = general_data_set.mapAs({'value': 1, 'x': 0});
+var general_data_set_map2 = general_data_set.mapAs({'value': 2, 'x': 0});
 var setGeneralRevenueData = function(chart, data){
     general_data_set.data(data);
     chart.getSeries(0).data(general_data_set_map1);
@@ -122,7 +122,13 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
         chart.interactivity().selectionMode("none");
         chart.yAxis().enabled(false);
         chart.xAxis().title().enabled(false);
-        chart.xAxis().labels().width('40%').textOverflow('..').hAlign('right').padding(0,5,0,0).fontSize(11);
+        chart.xAxis().labels()
+            .enabled(true)
+            .width(100)
+            .textOverflow('...')
+            .hAlign('right')
+            .padding(0,5,0,0)
+            .fontSize(11);
         chart.padding(10, 15, 0, 0);
         var series = chart.bar(bar_data);
         series.pointWidth('50%');
@@ -144,9 +150,9 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
         chart.radius('30%');
         chart.padding(0);
         chart.explode(0);
-        chart.hoverStroke(null);
-        chart.labels().fontSize(11).position('o');
-        chart.labels().textFormatter(function(){return this.x});
+        chart.hovered().stroke(null);
+        chart.labels().fontSize(11).position('outside');
+        chart.labels().format(function(){return this.x});
         chart.listen('pointClick', function(e) {
             if (e.iterator.get('x') != 'Other' && e.iterator.getIndex() >= 0){
                 if (name == 'topProducts') {
@@ -162,7 +168,7 @@ var changeDataFor5Top = function(stage, data, type, name, old_chart){
     }
     var label = chart.label();
     label.enabled(true)
-        .position('rightTop').anchor('rightTop')
+        .position('right-top').anchor('right-top')
         .offsetY(5)
         .width(25).height(25).text('')
         .background({enabled: true, fill: {src: label_src}, stroke: null});
